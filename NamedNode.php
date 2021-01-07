@@ -52,7 +52,7 @@ class NamedNode implements \rdfInterface\NamedNode {
     }
 
     public function getType(): string {
-        return \rdfInterface\TYPE_IRI;
+        return \rdfInterface\TYPE_NAMED_NODE;
     }
 
     public function equals(\rdfInterface\Term $term): bool {

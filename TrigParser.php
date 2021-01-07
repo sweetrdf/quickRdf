@@ -74,7 +74,6 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
     }
 
     public function current(): \rdfInterface\Quad {
-        echo "current $this->n " . key($this->triplesBuffer) . "\n";
         return current($this->triplesBuffer);
     }
 
@@ -84,10 +83,7 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
 
     public function next(): void {
         $el = next($this->triplesBuffer);
-        if ($el !== false) {
-            echo "next simple\n";
-        } else {
-            echo "next chunk\n";
+        if ($el === false) {
             $this->triplesBuffer = [];
             $this->parser->setTripleCallback(function(?\Exception $e,
                                                       ?array $triple): void {
@@ -95,7 +91,6 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
                     throw $e;
                 }
                 if ($triple) {
-                    echo "  parsed " . $triple['object'] . "\n";
                     $sbj  = Util::isBlank($triple['subject']) ? new BlankNode($triple['subject']) : new NamedNode($triple['subject']);
                     $prop = new NamedNode($triple['predicate']);
                     if (substr($triple['object'], 0, 1) !== '"') {
@@ -113,14 +108,12 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
                 $this->parser->parseChunk(fgets($this->input, self::CHUNK_SIZE));
             }
             $this->parser->parseChunk("\n");
-            echo "  feof: " . (int) feof($this->input) . " bufferCount:" . count($this->triplesBuffer) . "\n";
         }
         $this->n++;
     }
 
     public function rewind(): void {
         $ret = rewind($this->input);
-        echo "rewind $ret\n";
         if ($ret !== true) {
             throw new RdfException("Can't seek in the input stream");
         }

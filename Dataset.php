@@ -236,7 +236,7 @@ class Dataset implements iDataset {
      */
     public function offsetUnset($offset): void {
         $offset      = $this->findOffset($offset);
-        unset($this->quads);
+        unset($this->quads[$offset]);
         $this->quads = array_values($this->quads);
     }
 
@@ -252,7 +252,7 @@ class Dataset implements iDataset {
                     return $n;
                 }
             }
-        } else {
+        } elseif ($offset instanceof iQuad) {
             foreach ($this->quads as $n => $i) {
                 if ($i->equals($offset)) {
                     return $n;

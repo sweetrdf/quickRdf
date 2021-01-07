@@ -91,7 +91,7 @@ class Quad implements iQuad {
         return $this->subject->equals($term->getSubject()) &&
             $this->predicate->equals($term->getPredicate()) &&
             $this->object->equals($term->getObject()) &&
-            $this->graph->equals($term->getGraphIri());
+            $this->graphIri->equals($term->getGraphIri());
     }
 
     public function getValue(): string {
