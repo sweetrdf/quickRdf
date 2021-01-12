@@ -27,6 +27,7 @@
 namespace dumbrdf;
 
 use zozlak\RdfConstants as RDF;
+use dumbrdf\DataFactory as DF;
 
 /**
  * Description of Literal
@@ -41,11 +42,11 @@ class Literal implements \rdfInterface\Literal {
         }
     }
 
-    static private function sanitizeLang(?string $lang): ?string {
+    static public function sanitizeLang(?string $lang): ?string {
         return empty($lang) ? null : $lang;
     }
 
-    static private function sanitizeDatatype(?string $datatype): ?string {
+    static public function sanitizeDatatype(?string $datatype): ?string {
         return empty($datatype) || $datatype === RDF::XSD_STRING ? null : $datatype;
     }
 
@@ -108,23 +109,15 @@ class Literal implements \rdfInterface\Literal {
     }
 
     public function withValue(string $value): \rdfInterface\Literal {
-        $literal        = clone $this;
-        $literal->value = $value;
-        return $literal;
+        return DF::literal($value, $this->lang, $this->datatype);
     }
 
     public function withLang(?string $lang): \rdfInterface\Literal {
-        $literal       = clone $this;
-        $literal->lang = self::sanitizeLang($lang);
-        self::checkLangDatatype($literal->lang, $literal->datatype);
-        return $literal;
+        return DF::literal($this->value, $lang, $this->datatype);
     }
 
     public function withDatatype(?string $datatype): \rdfInterface\Literal {
-        $literal           = clone $this;
-        $literal->datatype = self::sanitizeDatatype($datatype);
-        self::checkLangDatatype($literal->lang, $literal->datatype);
-        return $literal;
+        return DF::literal($this->value, $this->lang, $datatype);
     }
 
 }

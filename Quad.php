@@ -32,6 +32,7 @@ use rdfInterface\Literal as iLiteral;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\Term as iTerm;
 use rdfHelpers\DefaultGraph;
+use dumbrdf\DataFactory as DF;
 
 /**
  * Description of Triple
@@ -67,7 +68,7 @@ class Quad implements iQuad {
     public function __construct(iNamedNode|iBlankNode|iQuad $subject,
                                 iNamedNode $predicate,
                                 iNamedNode|iBlankNode|iLiteral|iQuad $object,
-                                iNamedNode|null $graphIri = null
+                                iNamedNode|iBlankNode|null $graphIri = null
     ) {
         $this->subject   = $subject;
         $this->predicate = $predicate;
@@ -110,32 +111,24 @@ class Quad implements iQuad {
         return $this->object;
     }
 
-    public function getGraphIri(): iNamedNode {
+    public function getGraphIri(): iNamedNode|iBlankNode {
         return $this->graphIri;
     }
 
     public function withSubject(iNamedNode|iBlankNode|iQuad $subject): iQuad {
-        $quad          = clone $this;
-        $quad->subject = $subject;
-        return $quad;
+        return DF::quad($subject, $this->predicate, $this->object, $this->graphIri);
     }
 
     public function withPredicate(iNamedNode $predicate): iQuad {
-        $quad            = clone $this;
-        $quad->predicate = $predicate;
-        return $quad;
+        return DF::quad($this->subject, $predicate, $this->object, $this->graphIri);
     }
 
     public function withObject(iNamedNode|iBlankNode|iLiteral|iQuad $object): iQuad {
-        $quad         = clone $this;
-        $quad->object = $object;
-        return $quad;
+        return DF::quad($this->subject, $this->predicate, $object, $this->graphIri);
     }
 
-    public function withGraphIri(iNamedNode|null $graphIri): iQuad {
-        $quad           = clone $this;
-        $quad->graphIri = $graphIri ?? new DefaultGraph();
-        return $quad;
+    public function withGraphIri(iNamedNode|iBlankNode|null $graphIri): iQuad {
+        return DF::quad($this->subject, $this->predicate, $this->object, $graphIri);
     }
 
 }

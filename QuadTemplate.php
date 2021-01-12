@@ -32,6 +32,7 @@ use rdfInterface\Literal as iLiteral;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\QuadTemplate as iQuadTemplate;
 use rdfHelpers\DefaultGraph;
+use dumbrdf\DataFactory as DF;
 
 /**
  * Description of QuadTemplate
@@ -51,7 +52,7 @@ class QuadTemplate extends Quad implements iQuadTemplate {
     }
 
     public function equals(\rdfInterface\Term $term): bool {
-        /* @var $term iQuad*/
+        /* @var $term iQuad */
         return $term->getType() === \rdfInterface\TYPE_QUAD &&
             ($this->subject === null || $this->subject->equals($term->getSubject())) &&
             ($this->predicate === null || $this->predicate->equals($term->getPredicate())) &&
@@ -63,22 +64,16 @@ class QuadTemplate extends Quad implements iQuadTemplate {
         return \rdfInterface\TYPE_QUAD_TMPL;
     }
 
-    public function withSubject(iNamedNode|iBlankNode|iQuad|null $subject): iQuad {
-        $quad          = clone $this;
-        $quad->subject = $subject;
-        return $quad;        
+    public function withSubject(iNamedNode|iBlankNode|iQuad|null $subject): iQuadTemplate {
+        return DF::quadTemplate($subject, $this->predicate, $this->object, $this->graphIri);
     }
 
-    public function withPredicate(iNamedNode|null $predicate): iQuad {
-        $quad         = clone $this;
-        $quad->object = $object;
-        return $quad;
+    public function withPredicate(iNamedNode|null $predicate): iQuadTemplate {
+        return DF::quadTemplate($this->subject, $predicate, $this->object, $this->graphIri);
     }
 
-    public function withObject(iNamedNode|iBlankNode|iLiteral|iQuad|null $object): iQuad {
-        $quad         = clone $this;
-        $quad->object = $object;
-        return $quad;
+    public function withObject(iNamedNode|iBlankNode|iLiteral|iQuad|null $object): iQuadTemplate {
+        return DF::quadTemplate($this->subject, $this->predicate, $object, $this->graphIri);
     }
 
 }
