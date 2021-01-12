@@ -27,6 +27,7 @@
 namespace dumbrdf;
 
 use OutOfBoundsException;
+use SplObjectStorage;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
@@ -44,9 +45,16 @@ use rdfHelpers\GenericQuadIterator;
 class Dataset implements iDataset {
 
     private $quads = [];
+    private $subjectIdx;
+    private $predicateIdx;
+    private $objectIdx;
+    private $graphIdx;
 
     public function __construct() {
-        
+        $this->subjectIdx   = new SplObjectStorage();
+        $this->predicateIdx = new SplObjectStorage();
+        $this->objectIdx    = new SplObjectStorage();
+        $this->graphIdx     = new SplObjectStorage();
     }
 
     public function __toString(): string {
@@ -84,6 +92,7 @@ class Dataset implements iDataset {
     public function add(iQuadIterator $quads): void {
         foreach ($quads as $i) {
             $this->quads[] = $i;
+            $this->index($i);
         }
     }
 
@@ -227,6 +236,7 @@ class Dataset implements iDataset {
     public function offsetSet($offset, $value): void {
         $offset               = $this->findOffset($offset);
         $this->quads[$offset] = $value;
+        $this->index($value);
     }
 
     /**
@@ -260,6 +270,32 @@ class Dataset implements iDataset {
             }
         }
         throw new OutOfBoundsException();
+    }
+
+    private function index(Quad $quad): void {
+        $obj = $quad->getSubject();
+        if (!$this->subjectIdx->contains($obj)) {
+            $this->subjectIdx->attach($obj, new SplObjectStorage());
+        }
+        $this->subjectIdx->attach($obj, $quad);
+
+        $obj = $quad->getPredicate();
+        if (!$this->predicateIdx->contains($obj)) {
+            $this->predicateIdx->attach($obj, new SplObjectStorage());
+        }
+        $this->predicateIdx->attach($obj, $quad);
+
+        $obj = $quad->getObject();
+        if (!$this->objectIdx->contains($obj)) {
+            $this->objectIdx->attach($obj, new SplObjectStorage());
+        }
+        $this->objectIdx->attach($obj, $quad);
+
+        $obj = $quad->getGraphIri();
+        if (!$this->graphIdx->contains($obj)) {
+            $this->graphIdx->attach($obj, new SplObjectStorage());
+        }
+        $this->graphIdx->attach($obj, $quad);
     }
 
 }
