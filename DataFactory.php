@@ -40,7 +40,7 @@ use rdfInterface\QuadTemplate as iQuadTemplate;
  *
  * @author zozlak
  */
-class DataFactory {
+class DataFactory implements \rdfInterface\DataFactory {
 
     static private $objects;
 
@@ -122,6 +122,10 @@ class DataFactory {
                                         iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
                                         iNamedNode|iBlankNode|null $graphIri = null): iQuadTemplate {
         return new QuadTemplate($subject, $predicate, $object, $graphIri);
+    }
+
+    static public function variable(string|Stringable $name): \rdfInterface\Variable {
+        
     }
 
 }

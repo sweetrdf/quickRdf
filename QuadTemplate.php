@@ -41,10 +41,10 @@ use dumbrdf\DataFactory as DF;
  */
 class QuadTemplate extends Quad implements iQuadTemplate {
 
-    public function __construct(iNamedNode|iBlankNode|iQuad|null $subject,
-                                iNamedNode|null $predicate,
-                                iNamedNode|iBlankNode|iLiteral|iQuad|null $object,
-                                iNamedNode|null $graphIri = null) {
+    public function __construct(iNamedNode|iBlankNode|iQuad|null $subject = null,
+                                iNamedNode|null $predicate = null,
+                                iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
+                                iNamedNode|iBlankNode|null $graphIri = null) {
         $this->subject   = $subject;
         $this->predicate = $predicate;
         $this->object    = $object;
@@ -74,6 +74,10 @@ class QuadTemplate extends Quad implements iQuadTemplate {
 
     public function withObject(iNamedNode|iBlankNode|iLiteral|iQuad|null $object): iQuadTemplate {
         return DF::quadTemplate($this->subject, $this->predicate, $object, $this->graphIri);
+    }
+
+    public function withGraphIri(\rdfInterface\NamedNode|\rdfInterface\BlankNode|null $graphIri): \rdfInterface\QuadTemplate {
+        return DF::quadTemplate($this->subject, $this->predicate, $this->object, $graphIri);
     }
 
 }
