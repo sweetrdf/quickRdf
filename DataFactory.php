@@ -28,7 +28,7 @@ namespace dumbrdf;
 
 use Stringable;
 use WeakReference;
-use rdfHelpers\DefaultGraph;
+use zozlak\RdfConstants as RDF;
 use rdfInterface\Term as iTerm;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\NamedNode as iNamedNode;
@@ -45,6 +45,7 @@ use rdfInterface\QuadTemplate as iQuadTemplate;
 class DataFactory implements \rdfInterface\DataFactory {
 
     static private $objects;
+    static public $enforceConstructor = false;
 
     static private function init(): void {
         if (self::$objects === null) {
@@ -90,7 +91,7 @@ class DataFactory implements \rdfInterface\DataFactory {
         $iri = $iri === null ? $iri : (string) $iri;
         $a   = &self::$objects[\rdfInterface\TYPE_DEFAULT_GRAPH];
         if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
-            $obj     = new \rdfHelpers\DefaultGraph($iri);
+            $obj     = new DefaultGraph($iri);
             $iri     = $obj->getValue();
             $a[$iri] = WeakReference::create($obj);
         }
@@ -98,14 +99,17 @@ class DataFactory implements \rdfInterface\DataFactory {
     }
 
     static public function literal(string|Stringable $value,
-                                   string|Stringable $lang,
-                                   string|Stringable $datatype): iLiteral {
+                                   string|Stringable $lang = null,
+                                   string|Stringable $datatype = null): iLiteral {
         self::init();
+
         $value    = (string) $value;
-        $lang     = Literal::sanitizeLang((string) $lang);
-        $datatype = Literal::sanitizeDatatype((string) $datatype);
-        $a        = &self::$objects[\rdfInterface\TYPE_LITERAL];
-        $hash     = self::hashLiteral($value, $lang, $datatype);
+        $lang     = self::sanitizeLang((string) $lang);
+        $datatype = self::sanitizeDatatype((string) $datatype);
+        self::checkLangDatatype($lang, $datatype);
+
+        $hash = self::hashLiteral($value, $lang, $datatype);
+        $a    = &self::$objects[\rdfInterface\TYPE_LITERAL];
         if (!isset($a[$hash]) || $a[$hash]->get() === null) {
             $obj      = new Literal($value, $lang, $datatype);
             $a[$hash] = WeakReference::create($obj);
@@ -146,6 +150,13 @@ class DataFactory implements \rdfInterface\DataFactory {
         throw new RdfException('Variables are not implemented');
     }
 
+    static public function checkCall(): void {
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
+        if (count($trace) < 3 || ($trace[2]['class'] ?? '') !== self::class) {
+            throw new RdfException(($trace[1]['class'] ?? '') . " constructor can't be called directly. Use the " . self::class . " class instead.");
+        }
+    }
+
     static private function hashTerm(iTerm|null $t): string|null {
         if ($t === null) {
             return null;
@@ -179,6 +190,20 @@ class DataFactory implements \rdfInterface\DataFactory {
                                      iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
                                      iNamedNode|iBlankNode|null $graphIri = null): string {
         return self::hashTerm($subject) . "\n" . self::hashTerm($predicate) . "\n" . self::hashTerm($object) . "\n" . self::hashTerm($graphIri);
+    }
+
+    static private function checkLangDatatype(?string $lang, ?string $datatype): void {
+        if ($lang !== null && $datatype !== null) {
+            throw new \RdfException('Literal with both lang and type');
+        }
+    }
+
+    static private function sanitizeLang(?string $lang): ?string {
+        return empty($lang) ? null : $lang;
+    }
+
+    static private function sanitizeDatatype(?string $datatype): ?string {
+        return empty($datatype) || $datatype === RDF::XSD_STRING ? null : $datatype;
     }
 
 }

@@ -29,46 +29,33 @@ namespace dumbrdf;
 use dumbrdf\DataFactory as DF;
 
 /**
- * Description of BlankNode
+ * Description of DefaultGraph
  *
  * @author zozlak
  */
-class BlankNode implements \rdfInterface\BlankNode {
+class DefaultGraph implements \rdfInterface\DefaultGraph {
 
-    static private $n = 0;
+    private $iri;
 
-    /**
-     * 
-     * @var string
-     */
-    private $id;
-
-    public function __construct(?string $id = null) {
+    public function __construct(?string $iri = null) {
         (!DF::$enforceConstructor) || DF::checkCall();
-        if (empty($id)) {
-            $id = "_:genid" . self::$n;
-            self::$n++;
-        }
-        if (!str_starts_with($id, '_:')) {
-            $id = '_:' . $id;
-        }
-        $this->id = $id;
+        $this->iri = $iri;
     }
 
     public function __toString(): string {
-        return $this->id;
+        return $this->getValue();
     }
 
     public function equals(\rdfInterface\Term $term): bool {
-        return $this->getType() === $term->getType() && $this->id === $term->getValue();
+        return $term->getType() === $this->getType();
     }
 
     public function getType(): string {
-        return \rdfInterface\TYPE_BLANK_NODE;
+        return \rdfInterface\TYPE_DEFAULT_GRAPH;
     }
 
     public function getValue(): string {
-        return $this->id;
+        return $this->iri ?? \rdfInterface\TYPE_DEFAULT_GRAPH;
     }
 
 }

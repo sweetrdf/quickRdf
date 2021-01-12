@@ -26,6 +26,8 @@
 
 namespace dumbrdf;
 
+use dumbrdf\DataFactory as DF;
+
 /**
  * Description of Iri
  *
@@ -40,6 +42,7 @@ class NamedNode implements \rdfInterface\NamedNode {
     private $iri;
 
     public function __construct(string $iri) {
+        (!DF::$enforceConstructor) || DF::checkCall();
         $this->iri = $iri;
     }
 

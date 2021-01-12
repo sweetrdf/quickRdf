@@ -36,20 +36,6 @@ use dumbrdf\DataFactory as DF;
  */
 class Literal implements \rdfInterface\Literal {
 
-    static private function checkLangDatatype(?string $lang, ?string $datatype): void {
-        if ($lang !== null && $datatype !== null) {
-            throw new \RdfException('Literal with both lang and type');
-        }
-    }
-
-    static public function sanitizeLang(?string $lang): ?string {
-        return empty($lang) ? null : $lang;
-    }
-
-    static public function sanitizeDatatype(?string $datatype): ?string {
-        return empty($datatype) || $datatype === RDF::XSD_STRING ? null : $datatype;
-    }
-
     /**
      *
      * @var string
@@ -70,10 +56,10 @@ class Literal implements \rdfInterface\Literal {
 
     public function __construct(string $value, ?string $lang = null,
                                 ?string $datatype = null) {
+        (!DF::$enforceConstructor) || DF::checkCall();
         $this->value    = $value;
-        $this->lang     = $this->sanitizeLang($lang);
-        $this->datatype = $this->sanitizeDatatype($datatype);
-        self::checkLangDatatype($this->lang, $this->datatype);
+        $this->lang     = $lang;
+        $this->datatype = $datatype;
     }
 
     public function __toString(): string {
@@ -94,7 +80,7 @@ class Literal implements \rdfInterface\Literal {
     }
 
     public function getDatatype(): \rdfInterface\NamedNode {
-        return new NamedNode($this->datatype ?? RDF::XSD_STRING);
+        return DF::namedNode($this->datatype ?? RDF::XSD_STRING);
     }
 
     public function getType(): string {

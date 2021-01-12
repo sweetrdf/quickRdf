@@ -109,7 +109,7 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
                         $obj      = DF::Literal($value, $lang, $datatype);
                     }
                     $graph                 = !empty($quad['graph']) ? DF::namedNode($quad['graph']) : DF::defaultGraph();
-                    $this->triplesBuffer[] = new Quad($sbj, $prop, $obj);
+                    $this->triplesBuffer[] = DF::quad($sbj, $prop, $obj, $graph);
                 }
             });
             while (!feof($this->input) && count($this->triplesBuffer) === 0) {

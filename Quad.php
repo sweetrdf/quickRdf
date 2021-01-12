@@ -31,7 +31,6 @@ use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\Term as iTerm;
-use rdfHelpers\DefaultGraph;
 use dumbrdf\DataFactory as DF;
 
 /**
@@ -70,10 +69,11 @@ class Quad implements iQuad {
                                 iNamedNode|iBlankNode|iLiteral|iQuad $object,
                                 iNamedNode|iBlankNode|null $graphIri = null
     ) {
+        (!DF::$enforceConstructor) || DF::checkCall();
         $this->subject   = $subject;
         $this->predicate = $predicate;
         $this->object    = $object;
-        $this->graphIri  = $graphIri ?? new DefaultGraph();
+        $this->graphIri  = $graphIri ?? DF::defaultGraph();
     }
 
     public function __toString(): string {

@@ -31,7 +31,6 @@ use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\QuadTemplate as iQuadTemplate;
-use rdfHelpers\DefaultGraph;
 use dumbrdf\DataFactory as DF;
 
 /**
@@ -45,10 +44,11 @@ class QuadTemplate extends Quad implements iQuadTemplate {
                                 iNamedNode|null $predicate = null,
                                 iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
                                 iNamedNode|iBlankNode|null $graphIri = null) {
+        (!DF::$enforceConstructor) || DF::checkCall();
         $this->subject   = $subject;
         $this->predicate = $predicate;
         $this->object    = $object;
-        $this->graphIri  = $graphIri ?? new DefaultGraph();
+        $this->graphIri  = $graphIri ?? DF::defaultGraph();
     }
 
     public function equals(\rdfInterface\Term $term): bool {
