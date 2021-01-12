@@ -26,38 +26,102 @@
 
 namespace dumbrdf;
 
+use Stringable;
+use WeakReference;
+use rdfInterface\BlankNode as iBlankNode;
+use rdfInterface\NamedNode as iNamedNode;
+use rdfInterface\Literal as iLiteral;
+use rdfInterface\DefaultGraph as iDefaultGraph;
+use rdfInterface\Quad as iQuad;
+use rdfInterface\QuadTemplate as iQuadTemplate;
+
 /**
  * Description of DataFactory
  *
  * @author zozlak
  */
-class DataFactory implements \rdfInterface\DataFactory {
+class DataFactory {
 
-    public function blankNode(?string $iri = null): \rdfInterface\Term {
-        
+    static private $objects;
+
+    static private function init(): void {
+        if (self::$objects === null) {
+            self::$objects = [];
+            $types         = [
+                \rdfInterface\TYPE_NAMED_NODE,
+                \rdfInterface\TYPE_BLANK_NODE,
+                \rdfInterface\TYPE_LITERAL,
+                \rdfInterface\TYPE_DEFAULT_GRAPH,
+            ];
+            foreach ($types as $i) {
+                self::$objects = [];
+            }
+        }
     }
 
-    public function defaultGraph(): \rdfInterface\Term {
-        
+    static public function blankNode(string|Stringable|null $iri = null): iBlankNode {
+        self::init();
+        $a   = &self::$objects[\rdfInterface\TYPE_BLANK_NODE];
+        $iri = $iri === null ? $iri : (string) $iri;
+        if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
+            $obj     = new BlankNode($iri);
+            $iri     = $obj->getValue();
+            $a[$iri] = WeakReference::create($obj);
+        }
+        return $a[$iri]->get();
     }
 
-    public function literal(string $value, string $langOrDatatype): \rdfInterface\Literal {
-        
+    static public function namedNode(string|Stringable $iri): iNamedNode {
+        self::init();
+        $iri = (string) $iri;
+        $a   = &self::$objects[\rdfInterface\TYPE_NAMED_NODE];
+        if (!isset($a[$iri]) || $a[$iri]->get() === null) {
+            $obj     = new NamedNode($iri);
+            $a[$iri] = WeakReference::create($obj);
+        }
+        return $a[$iri]->get();
     }
 
-    public function namedNode(string $iri): \rdfInterface\Term {
-        
+    static public function defaultGraph(string|Stringable|null $iri = null): iDefaultGraph {
+        self::init();
+        $iri = $iri === null ? $iri : (string) $iri;
+        $a   = &self::$objects[\rdfInterface\TYPE_DEFAULT_GRAPH];
+        if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
+            $obj     = new \rdfHelpers\DefaultGraph($iri);
+            $iri     = $obj->getValue();
+            $a[$iri] = WeakReference::create($obj);
+        }
+        return $a[$iri]->get();
     }
 
-    public function quad(\rdfInterface\Term $subject,
-                         \rdfInterface\Term $predicate,
-                         \rdfInterface\Term $object,
-                         ?\rdfInterface\Term $graph = null): \rdfInterface\Quad {
-        
+    static public function literal(string|Stringable $value,
+                                   string|Stringable $lang,
+                                   string|Stringable $datatype): iLiteral {
+        self::init();
+        $value    = (string) $value;
+        $lang     = Literal::sanitizeLang((string) $lang);
+        $datatype = Literal::sanitizeDatatype((string) $datatype);
+        $a        = &self::$objects[\rdfInterface\TYPE_LITERAL];
+        $hash     = $lang . $datatype . "\n" . str_replace("\n", "\\n", $value);
+        if (!isset($a[$hash]) || $a[$hash]->get() === null) {
+            $obj      = new Literal($value, $lang, $datatype);
+            $a[$hash] = WeakReference::create($obj);
+        }
+        return $a[$hash]->get();
     }
 
-    public function variable(string $name): \rdfInterface\Term {
-        
+    static public function quad(iNamedNode|iBlankNode|iQuad $subject,
+                                iNamedNode $predicate,
+                                iNamedNode|iBlankNode|iLiteral|iQuad $object,
+                                iNamedNode|iBlankNode|null $graphIri = null): iQuad {
+        return new Quad($subject, $predicate, $object, $graphIri);
+    }
+
+    static public function quadTemplate(iNamedNode|iBlankNode|iQuad|null $subject = null,
+                                        iNamedNode|null $predicate = null,
+                                        iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
+                                        iNamedNode|iBlankNode|null $graphIri = null): iQuadTemplate {
+        return new QuadTemplate($subject, $predicate, $object, $graphIri);
     }
 
 }
