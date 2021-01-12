@@ -28,6 +28,8 @@ namespace dumbrdf;
 
 use Stringable;
 use WeakReference;
+use rdfHelpers\DefaultGraph;
+use rdfInterface\Term as iTerm;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\Literal as iLiteral;
@@ -52,6 +54,7 @@ class DataFactory implements \rdfInterface\DataFactory {
                 \rdfInterface\TYPE_BLANK_NODE,
                 \rdfInterface\TYPE_LITERAL,
                 \rdfInterface\TYPE_DEFAULT_GRAPH,
+                \rdfInterface\TYPE_QUAD,
             ];
             foreach ($types as $i) {
                 self::$objects = [];
@@ -102,7 +105,7 @@ class DataFactory implements \rdfInterface\DataFactory {
         $lang     = Literal::sanitizeLang((string) $lang);
         $datatype = Literal::sanitizeDatatype((string) $datatype);
         $a        = &self::$objects[\rdfInterface\TYPE_LITERAL];
-        $hash     = $lang . $datatype . "\n" . str_replace("\n", "\\n", $value);
+        $hash     = self::hashLiteral($value, $lang, $datatype);
         if (!isset($a[$hash]) || $a[$hash]->get() === null) {
             $obj      = new Literal($value, $lang, $datatype);
             $a[$hash] = WeakReference::create($obj);
@@ -114,18 +117,68 @@ class DataFactory implements \rdfInterface\DataFactory {
                                 iNamedNode $predicate,
                                 iNamedNode|iBlankNode|iLiteral|iQuad $object,
                                 iNamedNode|iBlankNode|null $graphIri = null): iQuad {
-        return new Quad($subject, $predicate, $object, $graphIri);
+        self::init();
+        $graphIri ??= new DefaultGraph();
+        $hash     = self::hashQuad($subject, $predicate, $object, $graphIri);
+        $a        = &self::$objects[\rdfInterface\TYPE_QUAD];
+        if (!isset($a[$hash]) || $a[$hash]->get() === null) {
+            $obj      = new Quad($subject, $predicate, $object, $graphIri);
+            $a[$hash] = WeakReference::create($obj);
+        }
+        return $a[$hash]->get();
     }
 
     static public function quadTemplate(iNamedNode|iBlankNode|iQuad|null $subject = null,
                                         iNamedNode|null $predicate = null,
                                         iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
                                         iNamedNode|iBlankNode|null $graphIri = null): iQuadTemplate {
-        return new QuadTemplate($subject, $predicate, $object, $graphIri);
+        self::init();
+        $hash = self::hashQuad($subject, $predicate, $object, $graphIri);
+        $a    = &self::$objects[\rdfInterface\TYPE_QUAD_TMPL];
+        if (!isset($a[$hash]) || $a[$hash]->get() === null) {
+            $obj      = new QuadTemplate($subject, $predicate, $object, $graphIri);
+            $a[$hash] = WeakReference::create($obj);
+        }
+        return $a[$hash]->get();
     }
 
     static public function variable(string|Stringable $name): \rdfInterface\Variable {
-        
+        throw new RdfException('Variables are not implemented');
+    }
+
+    static private function hashTerm(iTerm|null $t): string|null {
+        if ($t === null) {
+            return null;
+        }
+        switch ($t->getType()) {
+            case \rdfInterface\TYPE_BLANK_NODE:
+            case \rdfInterface\TYPE_NAMED_NODE:
+            case \rdfInterface\TYPE_DEFAULT_GRAPH:
+                return $t->getValue();
+            case \rdfInterface\TYPE_LITERAL:
+                return self::hashLiteral($t->getValue(), $t->getLang(), $t->getDatatype());
+            case \rdfInterface\TYPE_QUAD:
+            case \rdfInterface\TYPE_QUAD_TMPL:
+                $sbj   = self::hashTerm($t->getSubject());
+                $pred  = self::hashTerm($t->getPredicate());
+                $obj   = self::hashTerm($t->getObject());
+                $graph = self::hashTerm($t->getGraph());
+                return "$sbj\n$pred\n$obj\n$graph";
+            default:
+                throw new RdfException("Can't hash Term of type " . $t->getType());
+        }
+    }
+
+    static private function hashLiteral(string $value, string|null $lang,
+                                        string|null $datatype): string {
+        return $lang . $datatype . "\n" . str_replace("\n", "\\n", $value);
+    }
+
+    static private function hashQuad(iNamedNode|iBlankNode|iQuad|null $subject = null,
+                                     iNamedNode|null $predicate = null,
+                                     iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
+                                     iNamedNode|iBlankNode|null $graphIri = null): string {
+        return self::hashTerm($subject) . "\n" . self::hashTerm($predicate) . "\n" . self::hashTerm($object) . "\n" . self::hashTerm($graphIri);
     }
 
 }
