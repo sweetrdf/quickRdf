@@ -45,7 +45,9 @@ class NquadsSerializer implements \rdfInterface\Serializer {
         $this->serialiseStream($stream, $graph, $nmsp);
         $len    = ftell($stream);
         rewind($stream);
-        return fread($stream, $len);
+        $output = fread($stream, $len);
+        fclose($stream);
+        return $output;
     }
 
     public function serialiseStream($output, \rdfInterface\QuadIterator $graph,

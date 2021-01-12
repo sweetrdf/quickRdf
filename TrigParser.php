@@ -27,6 +27,7 @@
 namespace dumbrdf;
 
 use pietercolpaert\hardf\Util;
+use dumbrdf\DataFactory as DF;
 
 /**
  * Description of Parser
@@ -50,16 +51,22 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
      */
     private $triplesBuffer;
     private $n;
+    private $tmpStream;
 
     public function __construct() {
         $this->parser = new \pietercolpaert\hardf\TriGParser();
     }
 
+    public function __destruct() {
+        $this->closeTmpStream();
+    }
+
     public function parse(string $input): \rdfInterface\QuadIterator {
-        $stream = fopen('php://memory', 'r+');
-        fwrite($stream, $input);
-        rewind($stream);
-        return $this->parseStream($stream);
+        $this->closeTmpStream();
+        $this->tmpStream = fopen('php://memory', 'r+');
+        fwrite($this->tmpStream, $input);
+        rewind($this->tmpStream);
+        return $this->parseStream($this->tmpStream);
     }
 
     public function parseStream($input): \rdfInterface\QuadIterator {
@@ -86,21 +93,22 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
         if ($el === false) {
             $this->triplesBuffer = [];
             $this->parser->setTripleCallback(function(?\Exception $e,
-                                                      ?array $triple): void {
+                                                      ?array $quad): void {
                 if ($e) {
                     throw $e;
                 }
-                if ($triple) {
-                    $sbj  = Util::isBlank($triple['subject']) ? new BlankNode($triple['subject']) : new NamedNode($triple['subject']);
-                    $prop = new NamedNode($triple['predicate']);
-                    if (substr($triple['object'], 0, 1) !== '"') {
-                        $obj = Util::isBlank($triple['object']) ? new BlankNode($triple['object']) : new NamedNode($triple['object']);
+                if ($quad) {
+                    $sbj  = Util::isBlank($quad['subject']) ? DF::BlankNode($quad['subject']) : DF::NamedNode($quad['subject']);
+                    $prop = DF::NamedNode($quad['predicate']);
+                    if (substr($quad['object'], 0, 1) !== '"') {
+                        $obj = Util::isBlank($quad['object']) ? DF::BlankNode($quad['object']) : DF::NamedNode($quad['object']);
                     } else {
-                        $value    = substr($triple['object'], 1, strrpos($triple['object'], '"') - 1); // as Util::getLiteralValue() doesn't work for multiline values
-                        $lang     = Util::getLiteralLanguage($triple['object']);
-                        $datatype = empty($lang) ? Util::getLiteralType($triple['object']) : '';
-                        $obj      = new Literal($value, $lang, $datatype);
+                        $value    = substr($quad['object'], 1, strrpos($quad['object'], '"') - 1); // as Util::getLiteralValue() doesn't work for multiline values
+                        $lang     = Util::getLiteralLanguage($quad['object']);
+                        $datatype = empty($lang) ? Util::getLiteralType($quad['object']) : '';
+                        $obj      = DF::Literal($value, $lang, $datatype);
                     }
+                    $graph                 = !empty($quad['graph']) ? DF::namedNode($quad['graph']) : DF::defaultGraph();
                     $this->triplesBuffer[] = new Quad($sbj, $prop, $obj);
                 }
             });
@@ -122,6 +130,13 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
 
     public function valid(): bool {
         return current($this->triplesBuffer) !== false;
+    }
+
+    private function closeTmpStream(): void {
+        if (is_resource($this->tmpStream)) {
+            fclose($this->tmpStream);
+            $this->tmpStream = null;
+        }
     }
 
 }
