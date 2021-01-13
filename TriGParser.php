@@ -27,6 +27,10 @@
 namespace dumbrdf;
 
 use pietercolpaert\hardf\Util;
+use pietercolpaert\hardf\TriGParser as Parser;
+use rdfInterface\QuadIterator as iQuadIterator;
+use rdfInterface\Parser as iParser;
+use rdfInterface\Quad as iQuad;
 use dumbrdf\DataFactory as DF;
 
 /**
@@ -34,35 +38,59 @@ use dumbrdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator
+class TriGParser implements iParser, iQuadIterator
 {
 
     private const CHUNK_SIZE = 8192;
 
     /**
      *
-     * @var array
+     * @var array<mixed>
      */
-    private $options;
+    private array $options;
 
     /**
      *
      * @var \pietercolpaert\hardf\TriGParser
      */
-    private $parser;
+    private Parser $parser;
+
+    /**
+     *
+     * @var resource
+     */
     private $input;
 
     /**
      *
      * @var \rdfInterface\Quad[]
      */
-    private $triplesBuffer;
-    private $n;
+    private array $triplesBuffer;
+    private int $n;
+
+    /**
+     *
+     * @var resource|null
+     */
     private $tmpStream;
 
-    public function __construct(array $options = [])
-    {
-        $this->options = $options;
+    /**
+     *
+     * @var callable|null
+     */
+    private $prefixCallback;
+
+    /**
+     *
+     * @param array<mixed> $options
+     * @param callable|null $prefixCallback
+     */
+    public function __construct(
+        array $options = [],
+        callable | null $prefixCallback = null
+    ) {
+        $this->options        = $options;
+        $this->prefixCallback = $prefixCallback;
     }
 
     public function __destruct()
@@ -70,16 +98,20 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator
         $this->closeTmpStream();
     }
 
-    public function parse(string $input): \rdfInterface\QuadIterator
+    public function parse(string $input): iQuadIterator
     {
         $this->closeTmpStream();
-        $this->tmpStream = fopen('php://memory', 'r+');
+        $tmp = fopen('php://memory', 'r+');
+        if ($tmp === false) {
+            throw new RdfException('Failed to convert input to stream');
+        }
+        $this->tmpStream = $tmp;
         fwrite($this->tmpStream, $input);
         rewind($this->tmpStream);
         return $this->parseStream($this->tmpStream);
     }
 
-    public function parseStream($input): \rdfInterface\QuadIterator
+    public function parseStream($input): iQuadIterator
     {
         if (!is_resource($input)) {
             throw new RdfException("Input has to be a resource");
@@ -88,11 +120,11 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator
         $this->input         = $input;
         $this->n             = -1;
         $this->triplesBuffer = [];
-        $this->parser        = new \pietercolpaert\hardf\TriGParser($this->options);
+        $this->parser        = new Parser($this->options, null, $this->prefixCallback);
         return $this;
     }
 
-    public function current(): \rdfInterface\Quad
+    public function current(): iQuad
     {
         return current($this->triplesBuffer);
     }

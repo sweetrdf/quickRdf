@@ -44,11 +44,21 @@ class TurtleSerializer implements \rdfInterface\Serializer
         \rdfInterface\QuadIterator $graph,
         ?\rdfInterface\RdfNamespace $nmsp = null
     ): string {
+        $output = '';
         $stream = fopen('php://memory', 'r+');
+        if ($stream === false) {
+            throw new RdfException('Failed to convert input to stream');
+        }
         $this->serialiseStream($stream, $graph, $nmsp);
-        $len    = ftell($stream);
+        $len = ftell($stream);
+        if ($len === false) {
+            throw new RdfException('Failed to seek in output streem');
+        }
         rewind($stream);
         $output = fread($stream, $len);
+        if ($output === false) {
+            throw new RdfException('Failed to read from output streem');
+        }
         fclose($stream);
         return $output;
     }
@@ -82,9 +92,11 @@ class TurtleSerializer implements \rdfInterface\Serializer
             } else {
                 $object = $object->getValue();
             }
-            $serializer->addTriple($subject, $predicate, $object, $graph);
+            $graphIri = $i->getGraphIri();
+            $fraphIti = $graphIri->getValue() === $graphIri->getType() ? null : $graphIri->getValue();
+            $serializer->addTriple($subject, $predicate, $object, $graphIri);
             fwrite($output, $serializer->read());
         }
-        fwrite($output, $serializer->end());
+        fwrite($output, $serializer->end() ?? '');
     }
 }

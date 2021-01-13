@@ -26,6 +26,7 @@
 
 namespace dumbrdf;
 
+use BadMethodCallException;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;

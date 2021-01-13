@@ -36,7 +36,7 @@ use dumbrdf\DataFactory as DF;
 class BlankNode implements \rdfInterface\BlankNode
 {
 
-    private static $n = 0;
+    private static int $n = 0;
 
     /**
      *

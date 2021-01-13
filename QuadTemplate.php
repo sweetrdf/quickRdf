@@ -45,34 +45,34 @@ class QuadTemplate implements iQuadTemplate
 
     /**
      *
-     * @var iTerm
+     * @var iTerm|null
      */
-    private iTerm $subject;
+    private iTerm | null $subject;
 
     /**
      *
-     * @var iNamedNode
+     * @var iNamedNode|null
      */
-    private iNamedNode $predicate;
+    private iNamedNode | null $predicate;
 
     /**
      *
-     * @var iTerm
+     * @var iTerm|null
      */
-    private iTerm $object;
+    private iTerm | null $object;
 
     /**
      *
-     * @var iNamedNode|iBlankNode
+     * @var iNamedNode|iBlankNode|null
      */
-    private iNamedNode | iBlankNode $graphIri;
+    private iNamedNode | iBlankNode | null $graphIri;
 
     public function __construct(
-        iTerm | null $subject = null,
-        iNamedNode | null $predicate = null,
+        iTerm | null $subject = null, iNamedNode | null $predicate = null,
         iTerm | null $object = null,
         iNamedNode | iBlankNode | null $graphIri = null
-    ) {
+    )
+    {
         if ($subject === null && $predicate === null && $object === null && $graphIri === null) {
             throw new BadMethodCallException("At least one part of the quad has to be specified");
         }
@@ -85,19 +85,37 @@ class QuadTemplate implements iQuadTemplate
         $this->graphIri  = $graphIri;
     }
 
-    public function equals(\rdfInterface\Term $term): bool
+    public function __toString(): string
     {
-        /* @var $term iQuad */
-        return $term->getType() === \rdfInterface\TYPE_QUAD &&
-            ($this->subject === null || $this->subject->equals($term->getSubject())) &&
-            ($this->predicate === null || $this->predicate->equals($term->getPredicate())) &&
-            ($this->object === null || $this->object->equals($term->getObject())) &&
-            ($this->graphIri === null || $this->graphIri->equals($term->getGraphIri()));
+        return rtrim("$this->subject $this->predicate $this->object $this->graphIri");
     }
 
     public function getType(): string
     {
         return \rdfInterface\TYPE_QUAD_TMPL;
+    }
+
+    public function equals(\rdfInterface\Term $term): bool
+    {
+        if ($term instanceof iQuadTemplate) {
+            /* @var $term iQuad */
+            return $this->subject === $term->getSubject() &&
+                $this->predicate === $term->getPredicate() &&
+                $this->object === $term->getObject() &&
+                $this->graphIri === $term->getGraphIri();
+        } else if ($term instanceof iQuad) {
+            /* @var $term iQuad */
+            return ($this->subject === null || $this->subject->equals($term->getSubject())) &&
+                ($this->predicate === null || $this->predicate->equals($term->getPredicate())) &&
+                ($this->object === null || $this->object->equals($term->getObject())) &&
+                ($this->graphIri === null || $this->graphIri->equals($term->getGraphIri()));
+        }
+        return false;
+    }
+
+    public function getValue(): string
+    {
+        throw new \BadMethodCallException();
     }
 
     public function getSubject(): iTerm | null

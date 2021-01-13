@@ -36,7 +36,11 @@ use dumbrdf\DataFactory as DF;
 class DefaultGraph implements \rdfInterface\DefaultGraph
 {
 
-    private $iri;
+    /**
+     *
+     * @var string|null
+     */
+    private string | null $iri;
 
     public function __construct(?string $iri = null)
     {

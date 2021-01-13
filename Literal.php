@@ -45,13 +45,13 @@ class Literal implements \rdfInterface\Literal
 
     /**
      *
-     * @var string
+     * @var string|null
      */
     private $lang;
 
     /**
      *
-     * @var string
+     * @var string|null
      */
     private $datatype;
 
@@ -68,6 +68,7 @@ class Literal implements \rdfInterface\Literal
 
     public function __toString(): string
     {
+        $langtype = '';
         if (!empty($this->lang)) {
             $langtype = "@" . $this->lang;
         } elseif (!empty($this->datatype)) {
@@ -86,9 +87,9 @@ class Literal implements \rdfInterface\Literal
         return $this->lang;
     }
 
-    public function getDatatype(): \rdfInterface\NamedNode
+    public function getDatatype(): string
     {
-        return DF::namedNode($this->datatype ?? RDF::XSD_STRING);
+        return $this->datatype ?? RDF::XSD_STRING;
     }
 
     public function getType(): string

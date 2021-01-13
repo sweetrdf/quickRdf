@@ -27,6 +27,7 @@
 namespace dumbrdf;
 
 use rdfInterface\NamedNode;
+use dumbrdf\DataFactory as DF;
 
 /**
  * Description of RdfNamespace
@@ -36,8 +37,12 @@ use rdfInterface\NamedNode;
 class RdfNamespace implements \rdfInterface\RdfNamespace
 {
 
-    private $n          = 0;
-    private $namespaces = [];
+    private int $n          = 0;
+    /**
+     *
+     * @var array<string, string>
+     */
+    private array $namespaces = [];
 
     public function add(string $uri, ?string $prefix = null): string
     {
@@ -70,9 +75,12 @@ class RdfNamespace implements \rdfInterface\RdfNamespace
     public function expand(string $shortIri): NamedNode
     {
         $pos   = strpos($shortIri, ':');
+        if ($pos === false) {
+            throw new RdfException("parameter is not a shortened IRI");
+        }
         $alias = substr($shortIri, 0, $pos);
         if (isset($this->namespaces[$alias])) {
-            return $this->namespaces[$alias] . substr($shortIri, $pos + 1);
+            return DF::namedNode($this->namespaces[$alias] . substr($shortIri, $pos + 1));
         }
         throw new RdfException('Unknown alias');
     }
