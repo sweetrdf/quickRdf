@@ -29,8 +29,8 @@ namespace dumbrdf;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
-use rdfInterface\Quad as iQuad;
 use rdfInterface\Term as iTerm;
+use rdfInterface\Quad as iQuad;
 use dumbrdf\DataFactory as DF;
 
 /**
@@ -43,35 +43,38 @@ class Quad implements iQuad
 
     /**
      *
-     * @var iNamedNode|iBlankNode|iQuad
+     * @var iTerm
      */
-    protected $subject;
+    private iTerm $subject;
 
     /**
      *
      * @var iNamedNode
      */
-    protected $predicate;
+    private iNamedNode $predicate;
 
     /**
      *
-     * @var iNamedNode|iBlankNode|iLiteral|iQuad
+     * @var iTerm
      */
-    protected $object;
+    private iTerm $object;
 
     /**
      *
-     * @var iNamedNode|null
+     * @var iNamedNode|iBlankNode
      */
-    protected $graphIri;
+    private iNamedNode | iBlankNode $graphIri;
 
     public function __construct(
-        iNamedNode | iBlankNode | iQuad $subject,
+        iTerm $subject,
         iNamedNode $predicate,
-        iNamedNode | iBlankNode | iLiteral | iQuad $object,
+        iTerm $object,
         iNamedNode | iBlankNode | null $graphIri = null
     ) {
         (!DF::$enforceConstructor) || DF::checkCall();
+        if ($subject instanceof iLiteral) {
+            throw new BadMethodCallException("subject can't be a literal");
+        }
         $this->subject   = $subject;
         $this->predicate = $predicate;
         $this->object    = $object;
@@ -106,27 +109,27 @@ class Quad implements iQuad
         throw new \BadMethodCallException();
     }
 
-    public function getSubject(): iNamedNode | iBlankNode | iQuad | null
+    public function getSubject(): iTerm
     {
         return $this->subject;
     }
 
-    public function getPredicate(): iNamedNode | null
+    public function getPredicate(): iNamedNode
     {
         return $this->predicate;
     }
 
-    public function getObject(): iNamedNode | iBlankNode | iLiteral | iQuad | null
+    public function getObject(): iTerm
     {
         return $this->object;
     }
 
-    public function getGraphIri(): iNamedNode | iBlankNode | null
+    public function getGraphIri(): iNamedNode | iBlankNode
     {
         return $this->graphIri;
     }
 
-    public function withSubject(iNamedNode | iBlankNode | iQuad $subject): iQuad
+    public function withSubject(iTerm $subject): iQuad
     {
         return DF::quad($subject, $this->predicate, $this->object, $this->graphIri);
     }
@@ -136,12 +139,12 @@ class Quad implements iQuad
         return DF::quad($this->subject, $predicate, $this->object, $this->graphIri);
     }
 
-    public function withObject(iNamedNode | iBlankNode | iLiteral | iQuad $object): iQuad
+    public function withObject(iTerm $object): iQuad
     {
         return DF::quad($this->subject, $this->predicate, $object, $this->graphIri);
     }
 
-    public function withGraphIri(iNamedNode | iBlankNode | null $graphIri): iQuad
+    public function withGraphIri(iNamedNode | iBlankNode $graphIri): iQuad
     {
         return DF::quad($this->subject, $this->predicate, $this->object, $graphIri);
     }

@@ -30,6 +30,7 @@ use BadMethodCallException;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
+use rdfInterface\Term as iTerm;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\QuadTemplate as iQuadTemplate;
 use dumbrdf\DataFactory as DF;
@@ -39,17 +40,44 @@ use dumbrdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class QuadTemplate extends Quad implements iQuadTemplate
+class QuadTemplate implements iQuadTemplate
 {
 
+    /**
+     *
+     * @var iTerm
+     */
+    private iTerm $subject;
+
+    /**
+     *
+     * @var iNamedNode
+     */
+    private iNamedNode $predicate;
+
+    /**
+     *
+     * @var iTerm
+     */
+    private iTerm $object;
+
+    /**
+     *
+     * @var iNamedNode|iBlankNode
+     */
+    private iNamedNode | iBlankNode $graphIri;
+
     public function __construct(
-        iNamedNode | iBlankNode | iQuad | null $subject = null,
+        iTerm | null $subject = null,
         iNamedNode | null $predicate = null,
-        iNamedNode | iBlankNode | iLiteral | iQuad | null $object = null,
+        iTerm | null $object = null,
         iNamedNode | iBlankNode | null $graphIri = null
     ) {
         if ($subject === null && $predicate === null && $object === null && $graphIri === null) {
             throw new BadMethodCallException("At least one part of the quad has to be specified");
+        }
+        if ($subject instanceof iLiteral) {
+            throw new BadMethodCallException("subject can't be a literal");
         }
         $this->subject   = $subject;
         $this->predicate = $predicate;
@@ -72,7 +100,27 @@ class QuadTemplate extends Quad implements iQuadTemplate
         return \rdfInterface\TYPE_QUAD_TMPL;
     }
 
-    public function withSubject(iNamedNode | iBlankNode | iQuad | null $subject): iQuadTemplate
+    public function getSubject(): iTerm | null
+    {
+        return $this->subject;
+    }
+
+    public function getPredicate(): iNamedNode | null
+    {
+        return $this->predicate;
+    }
+
+    public function getObject(): iTerm | null
+    {
+        return $this->object;
+    }
+
+    public function getGraphIri(): iNamedNode | iBlankNode | null
+    {
+        return $this->graphIri;
+    }
+
+    public function withSubject(iTerm | null $subject): iQuadTemplate
     {
         return DF::quadTemplate($subject, $this->predicate, $this->object, $this->graphIri);
     }
@@ -82,7 +130,7 @@ class QuadTemplate extends Quad implements iQuadTemplate
         return DF::quadTemplate($this->subject, $predicate, $this->object, $this->graphIri);
     }
 
-    public function withObject(iNamedNode | iBlankNode | iLiteral | iQuad | null $object): iQuadTemplate
+    public function withObject(iTerm | null $object): iQuadTemplate
     {
         return DF::quadTemplate($this->subject, $this->predicate, $object, $this->graphIri);
     }

@@ -121,9 +121,9 @@ class DataFactory implements \rdfInterface\DataFactory
     }
 
     public static function quad(
-        iNamedNode | iBlankNode | iQuad $subject,
+        iTerm $subject,
         iNamedNode $predicate,
-        iNamedNode | iBlankNode | iLiteral | iQuad $object,
+        iTerm $object,
         iNamedNode | iBlankNode | null $graphIri = null
     ): iQuad {
         $graphIri ??= new DefaultGraph();
@@ -137,9 +137,9 @@ class DataFactory implements \rdfInterface\DataFactory
     }
 
     public static function quadTemplate(
-        iNamedNode | iBlankNode | iQuad | null $subject = null,
+        iTerm | null $subject = null,
         iNamedNode | null $predicate = null,
-        iNamedNode | iBlankNode | iLiteral | iQuad | null $object = null,
+        iTerm | null $object = null,
         iNamedNode | iBlankNode | null $graphIri = null
     ): iQuadTemplate {
         return new QuadTemplate($subject, $predicate, $object, $graphIri);
