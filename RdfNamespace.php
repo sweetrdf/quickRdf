@@ -33,12 +33,14 @@ use rdfInterface\NamedNode;
  *
  * @author zozlak
  */
-class RdfNamespace implements \rdfInterface\RdfNamespace {
+class RdfNamespace implements \rdfInterface\RdfNamespace
+{
 
     private $n          = 0;
     private $namespaces = [];
 
-    public function add(string $uri, ?string $prefix = null): string {
+    public function add(string $uri, ?string $prefix = null): string
+    {
         if (empty($prefix)) {
             $prefix = 'n' . $this->n;
             $this->n++;
@@ -47,22 +49,26 @@ class RdfNamespace implements \rdfInterface\RdfNamespace {
         return $prefix;
     }
 
-    public function remove(string $prefix): void {
+    public function remove(string $prefix): void
+    {
         unset($this->namespaces[$prefix]);
     }
 
-    public function get(string $prefix): string {
+    public function get(string $prefix): string
+    {
         if (isset($this->namespaces[$prefix])) {
             return $this->namespaces[$prefix];
         }
         throw new RdfException('Unknown prefix');
     }
 
-    public function getAll(): array {
+    public function getAll(): array
+    {
         return $this->namespaces;
     }
 
-    public function expand(string $shortIri): NamedNode {
+    public function expand(string $shortIri): NamedNode
+    {
         $pos   = strpos($shortIri, ':');
         $alias = substr($shortIri, 0, $pos);
         if (isset($this->namespaces[$alias])) {
@@ -71,7 +77,8 @@ class RdfNamespace implements \rdfInterface\RdfNamespace {
         throw new RdfException('Unknown alias');
     }
 
-    public function shorten(NamedNode $iri, bool $create): string {
+    public function shorten(NamedNode $iri, bool $create): string
+    {
         $iri = $iri->getValue();
         $n   = strlen($iri);
         $p   = max(strrpos($iri, '/'), strrpos($iri, '#'));
@@ -91,5 +98,4 @@ class RdfNamespace implements \rdfInterface\RdfNamespace {
         }
         return $prefix . ':' . substr($iri, $p + 1);
     }
-
 }

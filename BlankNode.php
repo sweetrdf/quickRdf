@@ -33,17 +33,19 @@ use dumbrdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class BlankNode implements \rdfInterface\BlankNode {
+class BlankNode implements \rdfInterface\BlankNode
+{
 
-    static private $n = 0;
+    private static $n = 0;
 
     /**
-     * 
+     *
      * @var string
      */
     private $id;
 
-    public function __construct(?string $id = null) {
+    public function __construct(?string $id = null)
+    {
         (!DF::$enforceConstructor) || DF::checkCall();
         if (empty($id)) {
             $id = "_:genid" . self::$n;
@@ -55,20 +57,23 @@ class BlankNode implements \rdfInterface\BlankNode {
         $this->id = $id;
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->id;
     }
 
-    public function equals(\rdfInterface\Term $term): bool {
-        return $this->getType() === $term->getType() && $this->id === $term->getValue();
+    public function equals(\rdfInterface\Term $term): bool
+    {
+        return $this === $term;
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return \rdfInterface\TYPE_BLANK_NODE;
     }
 
-    public function getValue(): string {
+    public function getValue(): string
+    {
         return $this->id;
     }
-
 }

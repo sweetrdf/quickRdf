@@ -42,12 +42,14 @@ use rdfInterface\QuadTemplate as iQuadTemplate;
  *
  * @author zozlak
  */
-class DataFactory implements \rdfInterface\DataFactory {
+class DataFactory implements \rdfInterface\DataFactory
+{
 
-    static private $objects;
-    static public $enforceConstructor = false;
+    private static $objects;
+    public static $enforceConstructor = true;
 
-    static private function init(): void {
+    public static function init(): void
+    {
         if (self::$objects === null) {
             self::$objects = [];
             $types         = [
@@ -58,13 +60,13 @@ class DataFactory implements \rdfInterface\DataFactory {
                 \rdfInterface\TYPE_QUAD,
             ];
             foreach ($types as $i) {
-                self::$objects = [];
+                self::$objects[$i] = [];
             }
         }
     }
 
-    static public function blankNode(string|Stringable|null $iri = null): iBlankNode {
-        self::init();
+    public static function blankNode(string | Stringable | null $iri = null): iBlankNode
+    {
         $a   = &self::$objects[\rdfInterface\TYPE_BLANK_NODE];
         $iri = $iri === null ? $iri : (string) $iri;
         if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
@@ -75,8 +77,8 @@ class DataFactory implements \rdfInterface\DataFactory {
         return $a[$iri]->get();
     }
 
-    static public function namedNode(string|Stringable $iri): iNamedNode {
-        self::init();
+    public static function namedNode(string | Stringable $iri): iNamedNode
+    {
         $iri = (string) $iri;
         $a   = &self::$objects[\rdfInterface\TYPE_NAMED_NODE];
         if (!isset($a[$iri]) || $a[$iri]->get() === null) {
@@ -86,8 +88,8 @@ class DataFactory implements \rdfInterface\DataFactory {
         return $a[$iri]->get();
     }
 
-    static public function defaultGraph(string|Stringable|null $iri = null): iDefaultGraph {
-        self::init();
+    public static function defaultGraph(string | Stringable | null $iri = null): iDefaultGraph
+    {
         $iri = $iri === null ? $iri : (string) $iri;
         $a   = &self::$objects[\rdfInterface\TYPE_DEFAULT_GRAPH];
         if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
@@ -98,10 +100,11 @@ class DataFactory implements \rdfInterface\DataFactory {
         return $a[$iri]->get();
     }
 
-    static public function literal(string|Stringable $value,
-                                   string|Stringable $lang = null,
-                                   string|Stringable $datatype = null): iLiteral {
-        self::init();
+    public static function literal(
+        string | Stringable $value,
+        string | Stringable $lang = null,
+        string | Stringable $datatype = null
+    ): iLiteral {
 
         $value    = (string) $value;
         $lang     = self::sanitizeLang((string) $lang);
@@ -117,11 +120,12 @@ class DataFactory implements \rdfInterface\DataFactory {
         return $a[$hash]->get();
     }
 
-    static public function quad(iNamedNode|iBlankNode|iQuad $subject,
-                                iNamedNode $predicate,
-                                iNamedNode|iBlankNode|iLiteral|iQuad $object,
-                                iNamedNode|iBlankNode|null $graphIri = null): iQuad {
-        self::init();
+    public static function quad(
+        iNamedNode | iBlankNode | iQuad $subject,
+        iNamedNode $predicate,
+        iNamedNode | iBlankNode | iLiteral | iQuad $object,
+        iNamedNode | iBlankNode | null $graphIri = null
+    ): iQuad {
         $graphIri ??= new DefaultGraph();
         $hash     = self::hashQuad($subject, $predicate, $object, $graphIri);
         $a        = &self::$objects[\rdfInterface\TYPE_QUAD];
@@ -132,32 +136,32 @@ class DataFactory implements \rdfInterface\DataFactory {
         return $a[$hash]->get();
     }
 
-    static public function quadTemplate(iNamedNode|iBlankNode|iQuad|null $subject = null,
-                                        iNamedNode|null $predicate = null,
-                                        iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
-                                        iNamedNode|iBlankNode|null $graphIri = null): iQuadTemplate {
-        self::init();
-        $hash = self::hashQuad($subject, $predicate, $object, $graphIri);
-        $a    = &self::$objects[\rdfInterface\TYPE_QUAD_TMPL];
-        if (!isset($a[$hash]) || $a[$hash]->get() === null) {
-            $obj      = new QuadTemplate($subject, $predicate, $object, $graphIri);
-            $a[$hash] = WeakReference::create($obj);
-        }
-        return $a[$hash]->get();
+    public static function quadTemplate(
+        iNamedNode | iBlankNode | iQuad | null $subject = null,
+        iNamedNode | null $predicate = null,
+        iNamedNode | iBlankNode | iLiteral | iQuad | null $object = null,
+        iNamedNode | iBlankNode | null $graphIri = null
+    ): iQuadTemplate {
+        return new QuadTemplate($subject, $predicate, $object, $graphIri);
     }
 
-    static public function variable(string|Stringable $name): \rdfInterface\Variable {
+    public static function variable(string | Stringable $name): \rdfInterface\Variable
+    {
         throw new RdfException('Variables are not implemented');
     }
 
-    static public function checkCall(): void {
+    public static function checkCall(): void
+    {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
         if (count($trace) < 3 || ($trace[2]['class'] ?? '') !== self::class) {
-            throw new RdfException(($trace[1]['class'] ?? '') . " constructor can't be called directly. Use the " . self::class . " class instead.");
+            $c1 = $trace[1]['class'] ?? '';
+            $c2 = self::class;
+            throw new RdfException("$c constructor can't be called directly. Use the $c2 class instead.");
         }
     }
 
-    static private function hashTerm(iTerm|null $t): string|null {
+    private static function hashTerm(iTerm | null $t): string | null
+    {
         if ($t === null) {
             return null;
         }
@@ -180,30 +184,54 @@ class DataFactory implements \rdfInterface\DataFactory {
         }
     }
 
-    static private function hashLiteral(string $value, string|null $lang,
-                                        string|null $datatype): string {
+    private static function hashLiteral(
+        string $value,
+        string | null $lang,
+        string | null $datatype
+    ): string {
         return $lang . $datatype . "\n" . str_replace("\n", "\\n", $value);
     }
 
-    static private function hashQuad(iNamedNode|iBlankNode|iQuad|null $subject = null,
-                                     iNamedNode|null $predicate = null,
-                                     iNamedNode|iBlankNode|iLiteral|iQuad|null $object = null,
-                                     iNamedNode|iBlankNode|null $graphIri = null): string {
-        return self::hashTerm($subject) . "\n" . self::hashTerm($predicate) . "\n" . self::hashTerm($object) . "\n" . self::hashTerm($graphIri);
+    private static function hashQuad(
+        iNamedNode | iBlankNode | iQuad | null $subject = null,
+        iNamedNode | null $predicate = null,
+        iNamedNode | iBlankNode | iLiteral | iQuad | null $object = null,
+        iNamedNode | iBlankNode | null $graphIri = null
+    ): string {
+        return self::hashTerm($subject) . "\n" . self::hashTerm($predicate) . "\n" .
+            self::hashTerm($object) . "\n" . self::hashTerm($graphIri);
     }
 
-    static private function checkLangDatatype(?string $lang, ?string $datatype): void {
+    private static function checkLangDatatype(?string $lang, ?string $datatype): void
+    {
         if ($lang !== null && $datatype !== null) {
-            throw new \RdfException('Literal with both lang and type');
+            throw new RdfException('Literal with both lang and type');
         }
     }
 
-    static private function sanitizeLang(?string $lang): ?string {
+    private static function sanitizeLang(?string $lang): ?string
+    {
         return empty($lang) ? null : $lang;
     }
 
-    static private function sanitizeDatatype(?string $datatype): ?string {
+    private static function sanitizeDatatype(?string $datatype): ?string
+    {
         return empty($datatype) || $datatype === RDF::XSD_STRING ? null : $datatype;
     }
 
+    /**
+     *
+     * @return array
+     */
+    public static function getCacheCounts(): array
+    {
+        $ret = [];
+        foreach (self::$objects as $k => &$v) {
+            $ret[$k] = (object) ['total' => count($v), 'valid' => 0];
+            foreach ($v as $i) {
+                $ret[$k]->valid += $i->get() !== null;
+            }
+        }
+        return $ret;
+    }
 }

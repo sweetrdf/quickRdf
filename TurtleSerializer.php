@@ -33,14 +33,17 @@ use zozlak\RdfConstants as RDF;
  *
  * @author zozlak
  */
-class TurtleSerializer implements \rdfInterface\Serializer {
+class TurtleSerializer implements \rdfInterface\Serializer
+{
 
-    public function __construct() {
-        
+    public function __construct()
+    {
     }
 
-    public function serialise(\rdfInterface\QuadIterator $graph,
-                              ?\rdfInterface\RdfNamespace $nmsp = null): string {
+    public function serialise(
+        \rdfInterface\QuadIterator $graph,
+        ?\rdfInterface\RdfNamespace $nmsp = null
+    ): string {
         $stream = fopen('php://memory', 'r+');
         $this->serialiseStream($stream, $graph, $nmsp);
         $len    = ftell($stream);
@@ -50,8 +53,11 @@ class TurtleSerializer implements \rdfInterface\Serializer {
         return $output;
     }
 
-    public function serialiseStream($output, \rdfInterface\QuadIterator $graph,
-                                    ?\rdfInterface\RdfNamespace $nmsp = null): void {
+    public function serialiseStream(
+        $output,
+        \rdfInterface\QuadIterator $graph,
+        ?\rdfInterface\RdfNamespace $nmsp = null
+    ): void {
         $nmsp       = $nmsp ?? new RdfNamespace();
         $serializer = new \pietercolpaert\hardf\TriGWriter(['format' => 'turtle']);
         if ($nmsp !== null) {
@@ -81,5 +87,4 @@ class TurtleSerializer implements \rdfInterface\Serializer {
         }
         fwrite($output, $serializer->end());
     }
-
 }

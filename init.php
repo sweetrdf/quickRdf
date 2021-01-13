@@ -26,45 +26,4 @@
 
 namespace dumbrdf;
 
-use dumbrdf\DataFactory as DF;
-
-/**
- * Description of Iri
- *
- * @author zozlak
- */
-class NamedNode implements \rdfInterface\NamedNode
-{
-
-    /**
-     *
-     * @var string
-     */
-    private $iri;
-
-    public function __construct(string $iri)
-    {
-        (!DF::$enforceConstructor) || DF::checkCall();
-        $this->iri = $iri;
-    }
-
-    public function __toString(): string
-    {
-        return '<' . $this->iri . '>';
-    }
-
-    public function getValue(): string
-    {
-        return $this->iri;
-    }
-
-    public function getType(): string
-    {
-        return \rdfInterface\TYPE_NAMED_NODE;
-    }
-
-    public function equals(\rdfInterface\Term $term): bool
-    {
-        return $this === $term;
-    }
-}
+DataFactory::init();

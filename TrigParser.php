@@ -34,9 +34,16 @@ use dumbrdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
+class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator
+{
 
-    const CHUNK_SIZE = 8192;
+    private const CHUNK_SIZE = 8192;
+
+    /**
+     *
+     * @var array
+     */
+    private $options;
 
     /**
      *
@@ -53,15 +60,18 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
     private $n;
     private $tmpStream;
 
-    public function __construct() {
-        $this->parser = new \pietercolpaert\hardf\TriGParser();
+    public function __construct(array $options = [])
+    {
+        $this->options = $options;
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->closeTmpStream();
     }
 
-    public function parse(string $input): \rdfInterface\QuadIterator {
+    public function parse(string $input): \rdfInterface\QuadIterator
+    {
         $this->closeTmpStream();
         $this->tmpStream = fopen('php://memory', 'r+');
         fwrite($this->tmpStream, $input);
@@ -69,7 +79,8 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
         return $this->parseStream($this->tmpStream);
     }
 
-    public function parseStream($input): \rdfInterface\QuadIterator {
+    public function parseStream($input): \rdfInterface\QuadIterator
+    {
         if (!is_resource($input)) {
             throw new RdfException("Input has to be a resource");
         }
@@ -77,50 +88,63 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
         $this->input         = $input;
         $this->n             = -1;
         $this->triplesBuffer = [];
+        $this->parser        = new \pietercolpaert\hardf\TriGParser($this->options);
         return $this;
     }
 
-    public function current(): \rdfInterface\Quad {
+    public function current(): \rdfInterface\Quad
+    {
         return current($this->triplesBuffer);
     }
 
-    public function key(): \scalar {
+    public function key()
+    {
         return $this->n;
     }
 
-    public function next(): void {
+    public function next(): void
+    {
         $el = next($this->triplesBuffer);
         if ($el === false) {
             $this->triplesBuffer = [];
-            $this->parser->setTripleCallback(function(?\Exception $e,
-                                                      ?array $quad): void {
+            $this->parser->setTripleCallback(function (
+                ?\Exception $e,
+                ?array $quad
+            ): void {
                 if ($e) {
                     throw $e;
                 }
                 if ($quad) {
-                    $sbj  = Util::isBlank($quad['subject']) ? DF::BlankNode($quad['subject']) : DF::NamedNode($quad['subject']);
+                    $sbj  = Util::isBlank($quad['subject']) ?
+                        DF::BlankNode($quad['subject']) : DF::NamedNode($quad['subject']);
                     $prop = DF::NamedNode($quad['predicate']);
                     if (substr($quad['object'], 0, 1) !== '"') {
-                        $obj = Util::isBlank($quad['object']) ? DF::BlankNode($quad['object']) : DF::NamedNode($quad['object']);
+                        $obj = Util::isBlank($quad['object']) ?
+                            DF::BlankNode($quad['object']) : DF::NamedNode($quad['object']);
                     } else {
-                        $value    = substr($quad['object'], 1, strrpos($quad['object'], '"') - 1); // as Util::getLiteralValue() doesn't work for multiline values
+                        // as Util::getLiteralValue() doesn't work for multiline values
+                        $value    = substr($quad['object'], 1, strrpos($quad['object'], '"') - 1);
                         $lang     = Util::getLiteralLanguage($quad['object']);
                         $datatype = empty($lang) ? Util::getLiteralType($quad['object']) : '';
                         $obj      = DF::Literal($value, $lang, $datatype);
                     }
-                    $graph                 = !empty($quad['graph']) ? DF::namedNode($quad['graph']) : DF::defaultGraph();
+                    $graph                 = !empty($quad['graph']) ?
+                        DF::namedNode($quad['graph']) : DF::defaultGraph();
                     $this->triplesBuffer[] = DF::quad($sbj, $prop, $obj, $graph);
                 }
             });
             while (!feof($this->input) && count($this->triplesBuffer) === 0) {
                 $this->parser->parseChunk(fgets($this->input, self::CHUNK_SIZE));
             }
-            $this->parser->parseChunk("\n");
+            if (feof($this->input)) {
+                $this->parser->end();
+            }
         }
         $this->n++;
     }
 
-    public function rewind(): void {
+    public function rewind(): void
+    {
         $ret = rewind($this->input);
         if ($ret !== true) {
             throw new RdfException("Can't seek in the input stream");
@@ -128,15 +152,16 @@ class TrigParser implements \rdfInterface\Parser, \rdfInterface\QuadIterator {
         $this->next();
     }
 
-    public function valid(): bool {
+    public function valid(): bool
+    {
         return current($this->triplesBuffer) !== false;
     }
 
-    private function closeTmpStream(): void {
+    private function closeTmpStream(): void
+    {
         if (is_resource($this->tmpStream)) {
             fclose($this->tmpStream);
             $this->tmpStream = null;
         }
     }
-
 }

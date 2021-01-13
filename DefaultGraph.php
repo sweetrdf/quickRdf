@@ -33,29 +33,34 @@ use dumbrdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class DefaultGraph implements \rdfInterface\DefaultGraph {
+class DefaultGraph implements \rdfInterface\DefaultGraph
+{
 
     private $iri;
 
-    public function __construct(?string $iri = null) {
+    public function __construct(?string $iri = null)
+    {
         (!DF::$enforceConstructor) || DF::checkCall();
         $this->iri = $iri;
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->getValue();
     }
 
-    public function equals(\rdfInterface\Term $term): bool {
-        return $term->getType() === $this->getType();
+    public function equals(\rdfInterface\Term $term): bool
+    {
+        return $this === $term;
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return \rdfInterface\TYPE_DEFAULT_GRAPH;
     }
 
-    public function getValue(): string {
+    public function getValue(): string
+    {
         return $this->iri ?? \rdfInterface\TYPE_DEFAULT_GRAPH;
     }
-
 }

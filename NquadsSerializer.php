@@ -33,14 +33,17 @@ use rdfHelpers\NtriplesUtil;
  *
  * @author zozlak
  */
-class NquadsSerializer implements \rdfInterface\Serializer {
+class NquadsSerializer implements \rdfInterface\Serializer
+{
 
-    public function __construct() {
-        
+    public function __construct()
+    {
     }
 
-    public function serialise(\rdfInterface\QuadIterator $graph,
-                              ?\rdfInterface\RdfNamespace $nmsp = null): string {
+    public function serialise(
+        \rdfInterface\QuadIterator $graph,
+        ?\rdfInterface\RdfNamespace $nmsp = null
+    ): string {
         $stream = fopen('php://memory', 'r+');
         $this->serialiseStream($stream, $graph, $nmsp);
         $len    = ftell($stream);
@@ -50,8 +53,11 @@ class NquadsSerializer implements \rdfInterface\Serializer {
         return $output;
     }
 
-    public function serialiseStream($output, \rdfInterface\QuadIterator $graph,
-                                    ?\rdfInterface\RdfNamespace $nmsp = null): void {
+    public function serialiseStream(
+        $output,
+        \rdfInterface\QuadIterator $graph,
+        ?\rdfInterface\RdfNamespace $nmsp = null
+    ): void {
         if (!is_resource($output)) {
             throw new RdfException("output has to be a resource");
         }
@@ -60,7 +66,7 @@ class NquadsSerializer implements \rdfInterface\Serializer {
             $subject   = NtriplesUtil::serialiseIri($i->getSubject());
             $predicate = '<' . NtriplesUtil::escapeIri($i->getPredicate()->getValue()) . '>';
             $object    = NtriplesUtil::serialise($i->getObject());
-            $graph = $i->getGraphIri();
+            $graph     = $i->getGraphIri();
             if ($graph !== null) {
                 $graph = NtriplesUtil::serialiseIri($graph);
             }
@@ -68,5 +74,4 @@ class NquadsSerializer implements \rdfInterface\Serializer {
             fwrite($output, "$subject $predicate $object $graph .\n");
         }
     }
-
 }

@@ -31,6 +31,7 @@ namespace dumbrdf;
  *
  * @author zozlak
  */
-class RdfException extends \Exception {
+class RdfException extends \Exception
+{
     //put your code here
 }
