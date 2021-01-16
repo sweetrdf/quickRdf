@@ -24,11 +24,11 @@
  * THE SOFTWARE.
  */
 
-namespace dumbrdf;
+namespace quickRdf;
 
 use Stringable;
 use zozlak\RdfConstants as RDF;
-use dumbrdf\DataFactory as DF;
+use quickRdf\DataFactory as DF;
 
 /**
  * Description of Literal

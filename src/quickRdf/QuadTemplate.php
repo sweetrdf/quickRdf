@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-namespace dumbrdf;
+namespace quickRdf;
 
 use BadMethodCallException;
 use rdfInterface\NamedNode as iNamedNode;
@@ -34,7 +34,7 @@ use rdfInterface\DefaultGraph as iDefaultGraph;
 use rdfInterface\Term as iTerm;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\QuadTemplate as iQuadTemplate;
-use dumbrdf\DataFactory as DF;
+use quickRdf\DataFactory as DF;
 
 /**
  * Description of QuadTemplate

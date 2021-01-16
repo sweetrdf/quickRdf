@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-namespace dumbrdf;
+namespace quickRdf;
 
 /**
  * Description of RdfException

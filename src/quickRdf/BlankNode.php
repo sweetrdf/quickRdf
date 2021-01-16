@@ -24,9 +24,9 @@
  * THE SOFTWARE.
  */
 
-namespace dumbrdf;
+namespace quickRdf;
 
-use dumbrdf\DataFactory as DF;
+use quickRdf\DataFactory as DF;
 
 /**
  * Description of BlankNode

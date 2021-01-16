@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-namespace dumbrdf;
+namespace quickRdf;
 
 use BadMethodCallException;
 use rdfInterface\NamedNode as iNamedNode;
@@ -32,7 +32,7 @@ use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
 use rdfInterface\Term as iTerm;
 use rdfInterface\Quad as iQuad;
-use dumbrdf\DataFactory as DF;
+use quickRdf\DataFactory as DF;
 
 /**
  * Description of Triple

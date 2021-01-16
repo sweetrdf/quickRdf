@@ -32,5 +32,10 @@
         "phpstan/phpstan": "*",
         "squizlabs/php_codesniffer": "*",
         "zozlak/quick-rdf-io": "*"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "quickRdf\\": "tests"
+        }
     }
 }

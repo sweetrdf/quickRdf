@@ -24,10 +24,10 @@
  * THE SOFTWARE.
  */
 
-namespace dumbrdf;
+namespace quickRdf;
 
 use rdfInterface\NamedNode;
-use dumbrdf\DataFactory as DF;
+use quickRdf\DataFactory as DF;
 
 /**
  * Description of RdfNamespace
