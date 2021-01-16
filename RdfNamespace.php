@@ -87,7 +87,7 @@ class RdfNamespace implements \rdfInterface\RdfNamespace
 
     public function shorten(NamedNode $iri, bool $create): string
     {
-        $iri = $iri->getValue();
+        $iri = (string) $iri->getValue();
         $n   = strlen($iri);
         $p   = max(strrpos($iri, '/'), strrpos($iri, '#'));
         if ($p + 1 >= $n) {

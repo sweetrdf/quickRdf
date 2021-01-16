@@ -108,16 +108,15 @@ class DataFactory implements \rdfInterface\DataFactory {
     }
 
     public static function literal(
-        string | Stringable $value, string | Stringable $lang = null,
-        string | Stringable $datatype = null
+        int | float | string | bool | Stringable $value,
+        string | Stringable $lang = null, string | Stringable $datatype = null
     ): iLiteral {
 
-        $value    = (string) $value;
         $lang     = self::sanitizeLang((string) $lang);
         $datatype = self::sanitizeDatatype((string) $datatype);
         self::checkLangDatatype($lang, $datatype);
 
-        $hash = self::hashLiteral($value, $lang, $datatype);
+        $hash = self::hashLiteral((string) $value, $lang, $datatype);
         $a    = &self::$literals;
         if (!isset($a[$hash]) || $a[$hash]->get() === null) {
             $obj      = new Literal($value, $lang, $datatype);
@@ -167,9 +166,9 @@ class DataFactory implements \rdfInterface\DataFactory {
             return null;
         }
         if ($t instanceof iBlankNode || $t instanceof iNamedNode || $t instanceof iDefaultGraph) {
-            return $t->getValue();
+            return (string) $t->getValue();
         } elseif ($t instanceof iLiteral) {
-            return self::hashLiteral($t->getValue(), $t->getLang(), $t->getDatatype());
+            return self::hashLiteral((string) $t->getValue(), $t->getLang(), $t->getDatatype());
         } elseif ($t instanceof iQuad || $t instanceof iQuadTemplate) {
             $sbj   = self::hashTerm($t->getSubject());
             $pred  = self::hashTerm($t->getPredicate());

@@ -33,11 +33,10 @@ use zozlak\RdfConstants as RDF;
  *
  * @author zozlak
  */
-class TurtleSerializer implements \rdfInterface\Serializer
-{
+class TurtleSerializer implements \rdfInterface\Serializer {
 
-    public function __construct()
-    {
+    public function __construct() {
+        
     }
 
     public function serialise(
@@ -64,8 +63,7 @@ class TurtleSerializer implements \rdfInterface\Serializer
     }
 
     public function serialiseStream(
-        $output,
-        \rdfInterface\QuadIterator $graph,
+        $output, \rdfInterface\QuadIterator $graph,
         ?\rdfInterface\RdfNamespace $nmsp = null
     ): void {
         $nmsp       = $nmsp ?? new RdfNamespace();
@@ -77,8 +75,8 @@ class TurtleSerializer implements \rdfInterface\Serializer
         }
         foreach ($graph as $i) {
             /* @var $i \rdfInterface\Quad */
-            $subject   = $i->getSubject()->getValue();
-            $predicate = $i->getPredicate()->getValue();
+            $subject   = (string) $i->getSubject()->getValue();
+            $predicate = (string) $i->getPredicate()->getValue();
             $object    = $i->getObject();
             if ($object instanceof \rdfInterface\Literal) {
                 $langtype = $object->getLang();
@@ -88,12 +86,12 @@ class TurtleSerializer implements \rdfInterface\Serializer
                         $langtype = '';
                     }
                 }
-                $object = \pietercolpaert\hardf\Util::createLiteral($object->getValue(), $langtype);
+                $object = \pietercolpaert\hardf\Util::createLiteral((string) $object->getValue(), $langtype);
             } else {
-                $object = $object->getValue();
+                $object = (string) $object->getValue();
             }
             $graphIri = $i->getGraphIri();
-            $fraphIti = $graphIri->getValue() === $graphIri->getType() ? null : $graphIri->getValue();
+            $graphIri = $graphIri->getValue() === $graphIri->getType() ? null : (string) $graphIri->getValue();
             $serializer->addTriple($subject, $predicate, $object, $graphIri);
             fwrite($output, $serializer->read());
         }

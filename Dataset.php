@@ -39,6 +39,8 @@ use rdfInterface\Quad as iQuad;
 use rdfInterface\QuadTemplate as iQuadTemplate;
 use rdfInterface\QuadIterator as iQuadIterator;
 use rdfInterface\Dataset as iDataset;
+use rdfInterface\DatasetMapReduce as iDatasetMapReduce;
+use rdfInterface\DatasetCompare as iDatasetCompare;
 use rdfHelpers\GenericQuadIterator;
 
 /**
@@ -46,7 +48,7 @@ use rdfHelpers\GenericQuadIterator;
  *
  * @author zozlak
  */
-class Dataset implements iDataset {
+class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
 
     /**
      *
@@ -132,7 +134,11 @@ class Dataset implements iDataset {
         iQuad | iQuadTemplate | iQuadIterator | callable | null $filter = null
     ): iDataset {
         $dataset = new Dataset();
-        $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
+        try {
+            $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
+        } catch (OutOfBoundsException) {
+            
+        }
         return $dataset;
     }
 
@@ -183,7 +189,7 @@ class Dataset implements iDataset {
 
     public function forEach(callable $fn): void {
         foreach (clone $this->quads as $i) {
-            $this[$i] = $fn($this->quads[$i], $this);
+            $this[$i] = $fn($i, $this);
         }
     }
 
@@ -307,10 +313,6 @@ class Dataset implements iDataset {
     ): Generator {
         if ($offset === null) {
             yield from $this->quads;
-        } elseif ($offset instanceof iQuadIterator) {
-            foreach ($offset as $i) {
-                yield from $this->findMatchingQuads($i);
-            }
         } elseif ($offset instanceof iQuad) {
             if (!isset($this->quads[$offset])) {
                 throw new OutOfBoundsException();
@@ -336,6 +338,21 @@ class Dataset implements iDataset {
             if ($n === 0) {
                 throw new OutOfBoundsException();
             }
+        } elseif ($offset instanceof iQuadIterator) {
+            $n = 0;
+            foreach ($offset as $i) {
+                try {
+                    foreach ($this->findMatchingQuads($i) as $j) {
+                        $n++;
+                        yield $j;
+                    }
+                } catch (OutOfBoundsException) {
+                    
+                }
+            }
+            if ($n == 0) {
+                throw new OutOfBoundsException();
+            }
         }
     }
 
@@ -355,17 +372,22 @@ class Dataset implements iDataset {
         ];
 
         /* @var $ret  \SplObjectStorage */
-        $ret = null;
+        $ret = $match ? null : clone $this->quads;
         for ($i = 0; $i < count($terms); $i++) {
             $term = $terms[$i];
             if ($term !== null && !($term instanceof iDefaultGraph)) {
-                $idx = $indices[$i][$term] ?? throw new OutOfBoundsException();
-                if ($ret === null) {
-                    $ret = $idx;
-                } else {
-                    $ret->removeAllExcept($idx);
+                $idx = $indices[$i][$term] ?? null;
+                if ($idx === null && $match) {
+                    throw new OutOfBoundsException();
                 }
-                if ($ret->count() === 0) {
+                if ($ret === null) {
+                    $ret = clone $idx;
+                } elseif ($match) {
+                    $ret->removeAllExcept($idx);
+                } else {
+                    $ret->removeAll($idx);
+                }
+                if ($ret->count() === 0 && $match) {
                     throw new OutOfBoundsException();
                 }
             }
@@ -383,10 +405,6 @@ class Dataset implements iDataset {
     ): Generator {
         if ($offset === null) {
             yield from $this->quads;
-        } elseif ($offset instanceof iQuadIterator) {
-            foreach ($offset as $i) {
-                yield from $this->findNotMatchingQuads($i);
-            }
         } elseif ($offset instanceof iQuad) {
             $tmp = clone $this->quads;
             $tmp->detach($offset);
@@ -398,14 +416,20 @@ class Dataset implements iDataset {
                 $fn = $offset;
             } else {
                 $fn = function(iQuad $x) use($offset): bool {
-                    return !$offset->equals($x);
+                    return $offset->equals($x);
                 };
             }
             foreach ($this->quads as $i) {
-                if ($fn($i, $this)) {
+                if (!$fn($i, $this)) {
                     yield $i;
                 }
             }
+        } elseif ($offset instanceof iQuadIterator) {
+            $tmp = clone $this->quads;
+            foreach ($offset as $i) {
+                $tmp->detach($i);
+            }
+            yield from $tmp;
         }
     }
 
@@ -474,6 +498,53 @@ class Dataset implements iDataset {
         $i->next();
         if ($i->key() !== null) {
             throw new OutOfBoundsException("More than one quad matched");
+        }
+    }
+
+    public function map(callable $fn): iDataset {
+        $ret = new Dataset();
+        foreach ($this as $i) {
+            $ret->add($fn($i, $this));
+        }
+        return $ret;
+    }
+
+    public function reduce(callable $fn, $initialValue = null): mixed {
+        foreach ($this as $i) {
+            $initialValue = $fn($initialValue, $i, $this);
+        }
+        return $initialValue;
+    }
+
+    public function any(iQuad | iQuadTemplate | iQuadIterator | callable $filter): bool {
+        try {
+            $iter = $this->findMatchingQuads($filter);
+            $iter = $iter->current(); // so PHP doesn't optimize previous line out
+            return true;
+        } catch (OutOfBoundsException) {
+            return false;
+        }
+    }
+
+    public function every(iQuad | iQuadTemplate | callable $filter): bool {
+        try {
+            $n = 0;
+            foreach ($this->findMatchingQuads($filter) as $i) {
+                $n++;
+            }
+            return $n === $this->count();
+        } catch (OutOfBoundsException) {
+            return false;
+        }
+    }
+
+    public function none(iQuad | iQuadTemplate | iQuadIterator | callable $filter): bool {
+        try {
+            $iter = $this->findMatchingQuads($filter);
+            $iter = $iter->current(); // so PHP doesn't optimize previous line out
+            return false;
+        } catch (OutOfBoundsException) {
+            return true;
         }
     }
 }

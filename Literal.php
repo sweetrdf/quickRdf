@@ -26,6 +26,7 @@
 
 namespace dumbrdf;
 
+use Stringable;
 use zozlak\RdfConstants as RDF;
 use dumbrdf\DataFactory as DF;
 
@@ -39,7 +40,7 @@ class Literal implements \rdfInterface\Literal
 
     /**
      *
-     * @var string
+     * @var int | float | string | bool | Stringable
      */
     private $value;
 
@@ -56,7 +57,7 @@ class Literal implements \rdfInterface\Literal
     private $datatype;
 
     public function __construct(
-        string $value,
+        int | float | string | bool | Stringable $value,
         ?string $lang = null,
         ?string $datatype = null
     ) {
@@ -77,7 +78,7 @@ class Literal implements \rdfInterface\Literal
         return '"' . $this->value . '"' . $langtype;
     }
 
-    public function getValue(): string
+    public function getValue(): int | float | string | bool | Stringable
     {
         return $this->value;
     }
@@ -102,7 +103,7 @@ class Literal implements \rdfInterface\Literal
         return $this === $term;
     }
 
-    public function withValue(string $value): \rdfInterface\Literal
+    public function withValue(int | float | string | bool | Stringable $value): \rdfInterface\Literal
     {
         return DF::literal($value, $this->lang, $this->datatype);
     }
