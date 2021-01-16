@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "quickRdf\\": "src/quickRdf",
+            "quickRdf\\": "src/quickRdf"
         }
     },
     "require-dev": {
