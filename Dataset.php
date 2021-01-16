@@ -26,16 +26,16 @@
 
 namespace dumbrdf;
 
-use BadMethodCallException;
 use Generator;
 use Iterator;
 use OutOfBoundsException;
 use SplObjectStorage;
+use rdfInterface\Term as iTerm;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
+use rdfInterface\DefaultGraph as iDefaultGraph;
 use rdfInterface\Quad as iQuad;
-use rdfInterface\Term as iTerm;
 use rdfInterface\QuadTemplate as iQuadTemplate;
 use rdfInterface\QuadIterator as iQuadIterator;
 use rdfInterface\Dataset as iDataset;
@@ -46,42 +46,40 @@ use rdfHelpers\GenericQuadIterator;
  *
  * @author zozlak
  */
-class Dataset implements iDataset
-{
+class Dataset implements iDataset {
 
     /**
      *
-     * @var SplObjectStorage<object, iQuad>
+     * @var SplObjectStorage<iQuad, mixed>
      */
     private SplObjectStorage $quads;
 
     /**
      *
-     * @var SplObjectStorage<object, mixed>
+     * @var SplObjectStorage<iTerm, mixed>
      */
     private SplObjectStorage $subjectIdx;
 
     /**
      *
-     * @var SplObjectStorage<object, mixed>
+     * @var SplObjectStorage<iTerm, mixed>
      */
     private SplObjectStorage $predicateIdx;
 
     /**
      *
-     * @var SplObjectStorage<object, mixed>
+     * @var SplObjectStorage<iTerm, mixed>
      */
     private SplObjectStorage $objectIdx;
 
     /**
      *
-     * @var SplObjectStorage<object, mixed>
+     * @var SplObjectStorage<iTerm, mixed>
      */
     private SplObjectStorage $graphIdx;
     private bool $indexed;
 
-    public function __construct(bool $indexed = true)
-    {
+    public function __construct(bool $indexed = true) {
         $this->quads   = new SplObjectStorage();
         $this->indexed = $indexed;
         if ($this->indexed) {
@@ -92,8 +90,7 @@ class Dataset implements iDataset
         }
     }
 
-    public function __toString(): string
-    {
+    public function __toString(): string {
         $ret = '';
         foreach ($this->quads as $i) {
             $ret .= $i . "\n";
@@ -101,12 +98,11 @@ class Dataset implements iDataset
         return $ret;
     }
 
-    public function equals(iDataset $other): bool
-    {
+    public function equals(iDataset $other): bool {
         $n = 0;
         // $other contained in $this
         foreach ($other as $i) {
-            if (!($i instanceof iBlankNode)) {
+            if (!($i->getSubject() instanceof iBlankNode)) {
                 if (!isset($this->quads[$i])) {
                     return false;
                 }
@@ -114,16 +110,15 @@ class Dataset implements iDataset
             }
         }
         // $this contained in $other
-        foreach ($this->quads as $i) {
-            if (!$i instanceof iBlankNode) {
+        foreach ($this as $i) {
+            if (!($i->getSubject() instanceof iBlankNode)) {
                 $n--;
             }
         }
         return $n === 0;
     }
 
-    public function add(iQuad | iQuadIterator $quads): void
-    {
+    public function add(iQuad | iQuadIterator $quads): void {
         if ($quads instanceof iQuad) {
             $quads = [$quads];
         }
@@ -134,121 +129,103 @@ class Dataset implements iDataset
     }
 
     public function copy(
-        iQuad | iQuadIterator | callable | null $filter = null,
-        bool $match = true
-    ): iDataset
-    {
+        iQuad | iQuadTemplate | iQuadIterator | callable | null $filter = null
+    ): iDataset {
         $dataset = new Dataset();
-        if ($filter === null) {
-            $dataset->quads->addAll($this->quads);
-            foreach ($dataset->quads as $i) {
-                $dataset->index($i);
-            }
-        } else {
-            $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
-        }
+        $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
         return $dataset;
     }
 
-    public function delete(
-        iQuad | iQuadIterator | callable $filter, bool $match = true
-    ): iDataset
-    {
-        return new Dataset();
-//        if ($filter instanceof iQuad) {
-//            $filter = new GenericQuadIterator($filter);
-//        }
-//        if ($filter instanceof iQuadIterator) {
-//            $filter = function(iQuad $q, iDataset $d) use ($filter): bool {
-//                foreach ($filter as $i) {
-//                    if ($i->equals($q)) {
-//                        return true;
-//                    }
-//                }
-//                return false;
-//            };
-//        }
-//
-//        $removed = new Dataset();
-//        $n       = count($this->quads);
-//        for ($i = 0; $i < $n; $i++) {
-//            if ($filter($this->quads[$i], $this)) {
-//                $removed[] = $this->quads[$i];
-//                unset($this->quads[$i]);
-//            }
-//        }
-//        if (count($removed) > 0) {
-//            $this->quads = array_values($this->quads);
-//        }
-//        return $removed;
+    public function copyExcept(
+        iQuad | iQuadTemplate | iQuadIterator | callable | null $filter = null
+    ): iDataset {
+        $dataset = new Dataset();
+        $dataset->add(new GenericQuadIterator($this->findNotMatchingQuads($filter)));
+        return $dataset;
     }
 
-    public function forEach(callable $fn, iQuad | callable | null $filter = null): void
-    {
-//        $filter ??= function(): bool {
-//            return true;
-//        };
-//        if ($filter instanceof iQuad) {
-//            $template = $filter;
-//            $filter   = function(iQuad $x) use($template): bool {
-//                return $x->equals($template);
-//            };
-//        }
-//        $N = count($this->quads);
-//        for ($i = 0; $i < $N; $i++) {
-//            if ($filter($this->quads[$i])) {
-//                $this->quads[$i] = $fn($this->quads[$i], $this);
-//            }
-//        }
+    public function union(iQuad | iQuadIterator $other): iDataset {
+        $ret = new Dataset();
+        $ret->add($this);
+        $ret->add($other);
+        return $ret;
+    }
+
+    public function xor(iQuad | iQuadIterator $other): iDataset {
+        $ret = $this->union($other);
+        $ret->delete($this->copy($other));
+        return $ret;
+    }
+
+    public function delete(iQuad | iQuadTemplate | iQuadIterator | callable $filter): iDataset {
+        $deleted = new Dataset();
+        try {
+            foreach ($this->findMatchingQuads($filter) as $i) {
+                $this->quads->detach($i);
+                $this->unindex($i);
+                $deleted->add($i);
+            }
+        } catch (OutOfBoundsException) {
+            
+        }
+        return $deleted;
+    }
+
+    public function deleteExcept(iQuad | iQuadTemplate | iQuadIterator | callable $filter): iDataset {
+        $deleted = new Dataset();
+        foreach ($this->findNotMatchingQuads($filter) as $i) {
+            $this->quads->detach($i);
+            $this->unindex($i);
+            $deleted->add($i);
+        }
+        return $deleted;
+    }
+
+    public function forEach(callable $fn): void {
+        foreach (clone $this->quads as $i) {
+            $this[$i] = $fn($this->quads[$i], $this);
+        }
     }
 
     // QuadIterator
 
-    public function current(): iQuad
-    {
+    public function current(): iQuad {
         return $this->quads->current();
     }
 
-    public function key()
-    {
+    public function key() {
         return $this->quads->key();
     }
 
-    public function next(): void
-    {
+    public function next(): void {
         $this->quads->next();
     }
 
-    public function rewind(): void
-    {
+    public function rewind(): void {
         $this->quads->rewind();
     }
 
-    public function valid(): bool
-    {
+    public function valid(): bool {
         return $this->quads->valid();
     }
 
     // Countable
 
-    public function count(): int
-    {
+    public function count(): int {
         return $this->quads->count();
     }
     // ArrayAccess
 
     /**
      *
-     * @param int|iQuad|iQuadTemplate|callable $offset
+     * @param iQuad|iQuadTemplate|callable $offset
      * @return bool
      */
-    public function offsetExists($offset): bool
-    {
+    public function offsetExists($offset): bool {
         return $this->exists($offset);
     }
 
-    private function exists(int | iQuad | iQuadTemplate | callable $offset): bool
-    {
+    private function exists(iQuad | iQuadTemplate | callable $offset): bool {
         try {
             $iter = $this->findMatchingQuads($offset);
             $this->checkIteratorEnd($iter);
@@ -260,16 +237,14 @@ class Dataset implements iDataset
 
     /**
      *
-     * @param int|iQuad|iQuadTemplate|callable $offset
+     * @param iQuad|iQuadTemplate|callable $offset
      * @return iQuad
      */
-    public function offsetGet($offset): iQuad
-    {
+    public function offsetGet($offset): iQuad {
         return $this->get($offset);
     }
 
-    private function get(int | iQuad | iQuadTemplate | callable $offset): iQuad
-    {
+    private function get(iQuad | iQuadTemplate | callable $offset): iQuad {
         $iter = $this->findMatchingQuads($offset);
         $ret  = $iter->current();
         $this->checkIteratorEnd($iter);
@@ -278,12 +253,11 @@ class Dataset implements iDataset
 
     /**
      *
-     * @param int|iQuad|iQuadTemplate|callable|null $offset
+     * @param iQuad|iQuadTemplate|callable|null $offset
      * @param iQuad $value
      * @return void
      */
-    public function offsetSet($offset, $value): void
-    {
+    public function offsetSet($offset, $value): void {
         if ($offset === null) {
             $this->add($value);
         } else {
@@ -291,30 +265,27 @@ class Dataset implements iDataset
         }
     }
 
-    private function set(
-        int | iQuad | iQuadTemplate | callable $offset,
-        iQuad $value
-    ): void
-    {
+    private function set(iQuad | iQuadTemplate | callable $offset, iQuad $value): void {
         $iter  = $this->findMatchingQuads($offset);
         $match = $iter->current();
         $this->checkIteratorEnd($iter);
-        $this->delete($match);
-        $this->add($value);
+        if ($match !== $value) {
+            $this->quads->detach($match);
+            $this->unindex($match);
+            $this->add($value);
+        }
     }
 
     /**
      *
-     * @param int|iQuad|iQuadTemplate|callable $offset
+     * @param iQuad|iQuadTemplate|callable $offset
      * @return void
      */
-    public function offsetUnset($offset): void
-    {
+    public function offsetUnset($offset): void {
         $this->unset($offset);
     }
 
-    private function unset(int | iQuad | iQuadTemplate | callable $offset): void
-    {
+    private function unset(iQuad | iQuadTemplate | callable $offset): void {
         try {
             foreach ($this->findMatchingQuads($offset) as $quad) {
                 $this->quads->detach($quad);
@@ -324,94 +295,47 @@ class Dataset implements iDataset
             
         }
     }
-//    /**
-//     * Checks if $idx contains $term. If not, throws an OutOfBoundsException.
-//     * If yes, computes intersection of $valid and $idx content for a given
-//     * $term.
-//     *
-//     * If $term is null, returns $valid.
-//     *
-//     * If $term is not null and $valid is null returns $idx content for a given
-//     * $term.
-//     *
-//     * @param iTerm|null $term
-//     * @param SplObjectStorage $idx
-//     * @param SplObjectStorage|null $valid
-//     * @return SplObjectStorage|null
-//     * @throws OutOfBoundsException
-//     */
-//    private function searchIndex(
-//        iTerm | null $term,
-//        SplObjectStorage $idx,
-//        SplObjectStorage | null $valid
-//    ): SplObjectStorage | null {
-//        if ($term === null) {
-//            return $valid;
-//        }
-//        $matches = $idx[$term] ?? throw new OutOfBoundsException();
-//        if ($valid === null) {
-//            return $matches;
-//        }
-//        $ret = new SplObjectStorage();
-//        foreach ($valid as $i) {
-//            if ($matches->contains($i)) {
-//                $ret->attach($i);
-//            }
-//        }
-//        if ($ret->count() === 0) {
-//            throw new OutOfBoundsException();
-//        }
-//        return $ret;
-//    }
 
     /**
      *
-     * @param int|iQuad|iQuadTemplate|iQuadIterator|callable|null $offset
+     * @param iQuad|iQuadTemplate|iQuadIterator|callable|null $offset
      * @return Generator<iQuad>
      * @throws OutOfBoundsException
      */
     private function findMatchingQuads(
-        int | iQuad | iQuadTemplate | iQuadIterator | callable | null $offset
-    ): Generator
-    {
+        iQuad | iQuadTemplate | iQuadIterator | callable | null $offset
+    ): Generator {
         if ($offset === null) {
             yield from $this->quads;
-        } elseif (is_callable($offset)) {
-            foreach ($this->quads as $i) {
-                if ($offset($i, $this)) {
-                    yield $i;
-                }
-            }
         } elseif ($offset instanceof iQuadIterator) {
             foreach ($offset as $i) {
                 yield from $this->findMatchingQuads($i);
-            }
-        } elseif ($offset instanceof iQuadTemplate) {
-            if ($this->indexed) {
-                yield from $this->findByIndices($offset);
-            } else {
-                foreach ($this->quads as $i) {
-                    if ($offset->equals($i)) {
-                        yield $i;
-                    }
-                }
             }
         } elseif ($offset instanceof iQuad) {
             if (!isset($this->quads[$offset])) {
                 throw new OutOfBoundsException();
             }
             yield $offset;
-        } elseif (is_numeric($offset)) {
-            $offset = (int) $offset;
-            if ($offset >= $this->quads->count()) {
+        } elseif ($offset instanceof iQuadTemplate && $this->indexed) {
+            yield from $this->findByIndices($offset);
+        } elseif ($offset instanceof iQuadTemplate && !$this->indexed || is_callable($offset)) {
+            if (is_callable($offset)) {
+                $fn = $offset;
+            } else {
+                $fn = function(iQuad $x) use($offset): bool {
+                    return $offset->equals($x);
+                };
+            }
+            $n = 0;
+            foreach ($this->quads as $i) {
+                if ($fn($i, $this)) {
+                    $n++;
+                    yield $i;
+                }
+            }
+            if ($n === 0) {
                 throw new OutOfBoundsException();
             }
-            $this->quads->rewind();
-            while ($offset > 0) {
-                $this->quads->next();
-                $offset--;
-            }
-            yield $this->quads->current();
         }
     }
 
@@ -420,17 +344,72 @@ class Dataset implements iDataset
      * @param iQuadTemplate $template
      * @return Generator<iQuad>
      */
-    private function findByIndices(iQuadTemplate $template): Generator
-    {
-//        $matches = $this->searchIndex($offset->getSubject(), $this->subjectIdx, null);
-//        $matches = $this->searchIndex($offset->getPredicate(), $this->predicateIdx, $matches);
-//        $matches = $this->searchIndex($offset->getObject(), $this->objectIdx, $matches);
-//        $matches = $this->searchIndex($offset->getGraphIri(), $this->graphIdx, $matches);
-        yield from $this->quads;
+    private function findByIndices(iQuadTemplate $template, bool $match = true): Generator {
+        $terms   = [
+            $template->getSubject(), $template->getPredicate(),
+            $template->getObject(), $template->getGraphIri(),
+        ];
+        $indices = [
+            $this->subjectIdx, $this->predicateIdx,
+            $this->objectIdx, $this->graphIdx,
+        ];
+
+        /* @var $ret  \SplObjectStorage */
+        $ret = null;
+        for ($i = 0; $i < count($terms); $i++) {
+            $term = $terms[$i];
+            if ($term !== null && !($term instanceof iDefaultGraph)) {
+                $idx = $indices[$i][$term] ?? throw new OutOfBoundsException();
+                if ($ret === null) {
+                    $ret = $idx;
+                } else {
+                    $ret->removeAllExcept($idx);
+                }
+                if ($ret->count() === 0) {
+                    throw new OutOfBoundsException();
+                }
+            }
+        }
+        yield from $ret;
     }
 
-    private function index(iQuad $quad): void
-    {
+    /**
+     *
+     * @param iQuad|iQuadTemplate|iQuadIterator|callable|null $offset
+     * @return Generator<iQuad>
+     */
+    private function findNotMatchingQuads(
+        iQuad | iQuadTemplate | iQuadIterator | callable | null $offset
+    ): Generator {
+        if ($offset === null) {
+            yield from $this->quads;
+        } elseif ($offset instanceof iQuadIterator) {
+            foreach ($offset as $i) {
+                yield from $this->findNotMatchingQuads($i);
+            }
+        } elseif ($offset instanceof iQuad) {
+            $tmp = clone $this->quads;
+            $tmp->detach($offset);
+            yield from $tmp;
+        } elseif ($offset instanceof iQuadTemplate && $this->indexed) {
+            yield from $this->findByIndices($offset, false);
+        } elseif ($offset instanceof iQuadTemplate && !$this->indexed || is_callable($offset)) {
+            if (is_callable($offset)) {
+                $fn = $offset;
+            } else {
+                $fn = function(iQuad $x) use($offset): bool {
+                    return !$offset->equals($x);
+                };
+            }
+            foreach ($this->quads as $i) {
+                if ($fn($i, $this)) {
+                    yield $i;
+                }
+            }
+        }
+    }
+
+    private function index(iQuad $quad): void {
         if ($this->indexed) {
             $obj = $quad->getSubject();
             if (!isset($this->subjectIdx[$obj])) {
@@ -451,15 +430,17 @@ class Dataset implements iDataset
             $this->objectIdx[$obj]->attach($quad);
 
             $obj = $quad->getGraphIri();
-            if (!isset($this->graphIdx[$obj])) {
-                $this->graphIdx[$obj] = new SplObjectStorage();
+            // makes no sense to index default graph - all quads belong there
+            if (!$obj instanceof iDefaultGraph) {
+                if (!isset($this->graphIdx[$obj])) {
+                    $this->graphIdx[$obj] = new SplObjectStorage();
+                }
+                $this->graphIdx[$obj]->attach($quad);
             }
-            $this->graphIdx[$obj]->attach($quad);
         }
     }
 
-    private function unindex(iQuad $quad): void
-    {
+    private function unindex(iQuad $quad): void {
         if ($this->indexed) {
             $obj = $quad->getSubject();
             if (isset($this->subjectIdx[$obj])) {
@@ -468,29 +449,18 @@ class Dataset implements iDataset
 
             $obj = $quad->getPredicate();
             if (isset($this->predicateIdx[$obj])) {
-                $this->predicateIdx[$obj]->dettach($quad);
+                $this->predicateIdx[$obj]->detach($quad);
             }
 
             $obj = $quad->getObject();
             if (isset($this->objectIdx[$obj])) {
-                $this->objectIdx[$obj]->dettach($quad);
+                $this->objectIdx[$obj]->detach($quad);
             }
 
             $obj = $quad->getGraphIri();
             if (isset($this->graphIdx[$obj])) {
-                $this->graphIdx[$obj]->dettach($quad);
+                $this->graphIdx[$obj]->detach($quad);
             }
-        }
-    }
-
-    private function sanitizeFilterFn(mixed $fn, bool $match): mixed
-    {
-        if (!is_callable($fn) || $match) {
-            return $fn;
-        } else {
-            return function ($x, $y) use ($fn) {
-                return !$fn($x, $y);
-            };
         }
     }
 
@@ -500,8 +470,7 @@ class Dataset implements iDataset
      * @return void
      * @throws OutOfBoundsException
      */
-    private function checkIteratorEnd(Iterator $i): void
-    {
+    private function checkIteratorEnd(Iterator $i): void {
         $i->next();
         if ($i->key() !== null) {
             throw new OutOfBoundsException("More than one quad matched");

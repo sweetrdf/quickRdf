@@ -30,6 +30,7 @@ use BadMethodCallException;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
+use rdfInterface\DefaultGraph as iDefaultGraph;
 use rdfInterface\Term as iTerm;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\QuadTemplate as iQuadTemplate;
@@ -78,6 +79,10 @@ class QuadTemplate implements iQuadTemplate
         }
         if ($subject instanceof iLiteral) {
             throw new BadMethodCallException("subject can't be a literal");
+        }
+        if ($graphIri instanceof iDefaultGraph) {
+            // all triples belong to the default graph, so nothing to search for
+            $graphIri = null;
         }
         $this->subject   = $subject;
         $this->predicate = $predicate;

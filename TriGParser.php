@@ -26,6 +26,7 @@
 
 namespace dumbrdf;
 
+use ArrayIterator;
 use pietercolpaert\hardf\Util;
 use pietercolpaert\hardf\TriGParser as Parser;
 use rdfInterface\QuadIterator as iQuadIterator;
@@ -38,8 +39,7 @@ use dumbrdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class TriGParser implements iParser, iQuadIterator
-{
+class TriGParser implements iParser, iQuadIterator {
 
     private const CHUNK_SIZE = 8192;
 
@@ -63,9 +63,9 @@ class TriGParser implements iParser, iQuadIterator
 
     /**
      *
-     * @var \rdfInterface\Quad[]
+     * @var ArrayIterator<int, iQuad>
      */
-    private array $triplesBuffer;
+    private ArrayIterator $quadsBuffer;
     private int $n;
 
     /**
@@ -86,20 +86,17 @@ class TriGParser implements iParser, iQuadIterator
      * @param callable|null $prefixCallback
      */
     public function __construct(
-        array $options = [],
-        callable | null $prefixCallback = null
+        array $options = [], callable | null $prefixCallback = null
     ) {
         $this->options        = $options;
         $this->prefixCallback = $prefixCallback;
     }
 
-    public function __destruct()
-    {
+    public function __destruct() {
         $this->closeTmpStream();
     }
 
-    public function parse(string $input): iQuadIterator
-    {
+    public function parse(string $input): iQuadIterator {
         $this->closeTmpStream();
         $tmp = fopen('php://memory', 'r+');
         if ($tmp === false) {
@@ -111,37 +108,32 @@ class TriGParser implements iParser, iQuadIterator
         return $this->parseStream($this->tmpStream);
     }
 
-    public function parseStream($input): iQuadIterator
-    {
+    public function parseStream($input): iQuadIterator {
         if (!is_resource($input)) {
             throw new RdfException("Input has to be a resource");
         }
 
-        $this->input         = $input;
-        $this->n             = -1;
-        $this->triplesBuffer = [];
-        $this->parser        = new Parser($this->options, null, $this->prefixCallback);
+        $this->input       = $input;
+        $this->n           = -1;
+        $this->quadsBuffer = new ArrayIterator();
+        $this->parser      = new Parser($this->options, null, $this->prefixCallback);
         return $this;
     }
 
-    public function current(): iQuad
-    {
-        return current($this->triplesBuffer);
+    public function current(): iQuad {
+        return $this->quadsBuffer->current();
     }
 
-    public function key()
-    {
+    public function key() {
         return $this->n;
     }
 
-    public function next(): void
-    {
-        $el = next($this->triplesBuffer);
-        if ($el === false) {
-            $this->triplesBuffer = [];
+    public function next(): void {
+        $this->quadsBuffer->next();
+        if (!$this->quadsBuffer->valid()) {
+            $this->quadsBuffer = new ArrayIterator();
             $this->parser->setTripleCallback(function (
-                ?\Exception $e,
-                ?array $quad
+                ?\Exception $e, ?array $quad
             ): void {
                 if ($e) {
                     throw $e;
@@ -160,12 +152,12 @@ class TriGParser implements iParser, iQuadIterator
                         $datatype = empty($lang) ? Util::getLiteralType($quad['object']) : '';
                         $obj      = DF::Literal($value, $lang, $datatype);
                     }
-                    $graph                 = !empty($quad['graph']) ?
+                    $graph               = !empty($quad['graph']) ?
                         DF::namedNode($quad['graph']) : DF::defaultGraph();
-                    $this->triplesBuffer[] = DF::quad($sbj, $prop, $obj, $graph);
+                    $this->quadsBuffer[] = DF::quad($sbj, $prop, $obj, $graph);
                 }
             });
-            while (!feof($this->input) && count($this->triplesBuffer) === 0) {
+            while (!feof($this->input) && $this->quadsBuffer->count() === 0) {
                 $this->parser->parseChunk(fgets($this->input, self::CHUNK_SIZE));
             }
             if (feof($this->input)) {
@@ -175,8 +167,7 @@ class TriGParser implements iParser, iQuadIterator
         $this->n++;
     }
 
-    public function rewind(): void
-    {
+    public function rewind(): void {
         $ret = rewind($this->input);
         if ($ret !== true) {
             throw new RdfException("Can't seek in the input stream");
@@ -184,13 +175,11 @@ class TriGParser implements iParser, iQuadIterator
         $this->next();
     }
 
-    public function valid(): bool
-    {
-        return current($this->triplesBuffer) !== false;
+    public function valid(): bool {
+        return $this->quadsBuffer->valid();
     }
 
-    private function closeTmpStream(): void
-    {
+    private function closeTmpStream(): void {
         if (is_resource($this->tmpStream)) {
             fclose($this->tmpStream);
             $this->tmpStream = null;

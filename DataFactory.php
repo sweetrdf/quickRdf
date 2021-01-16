@@ -42,32 +42,31 @@ use rdfInterface\QuadTemplate as iQuadTemplate;
  *
  * @author zozlak
  */
-class DataFactory implements \rdfInterface\DataFactory
-{
+class DataFactory implements \rdfInterface\DataFactory {
 
     /**
      *
      * @var array<string, WeakReference<BlankNode>>
      */
-    private static array $blankNodes        = [];
+    private static array $blankNodes = [];
 
     /**
      *
      * @var array<string, WeakReference<NamedNode>>
      */
-    private static array $namedNodes        = [];
+    private static array $namedNodes = [];
 
     /**
      *
      * @var array<string, WeakReference<Literal>>
      */
-    private static array $literals          = [];
+    private static array $literals = [];
 
     /**
      *
      * @var array<string, WeakReference<DefaultGraph>>
      */
-    private static array $defaultGraphs     = [];
+    private static array $defaultGraphs = [];
 
     /**
      *
@@ -76,8 +75,7 @@ class DataFactory implements \rdfInterface\DataFactory
     private static array $quads             = [];
     public static bool $enforceConstructor = true;
 
-    public static function blankNode(string | Stringable | null $iri = null): iBlankNode
-    {
+    public static function blankNode(string | Stringable | null $iri = null): iBlankNode {
         $a   = &self::$blankNodes;
         $iri = $iri === null ? $iri : (string) $iri;
         if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
@@ -85,22 +83,20 @@ class DataFactory implements \rdfInterface\DataFactory
             $iri     = $obj->getValue();
             $a[$iri] = WeakReference::create($obj);
         }
-        return $a[$iri]->get();
+        return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
-    public static function namedNode(string | Stringable $iri): iNamedNode
-    {
+    public static function namedNode(string | Stringable $iri): iNamedNode {
         $iri = (string) $iri;
         $a   = &self::$namedNodes;
         if (!isset($a[$iri]) || $a[$iri]->get() === null) {
             $obj     = new NamedNode($iri);
             $a[$iri] = WeakReference::create($obj);
         }
-        return $a[$iri]->get();
+        return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
-    public static function defaultGraph(string | Stringable | null $iri = null): iDefaultGraph
-    {
+    public static function defaultGraph(string | Stringable | null $iri = null): iDefaultGraph {
         $iri = $iri === null ? $iri : (string) $iri;
         $a   = &self::$defaultGraphs;
         if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
@@ -108,14 +104,13 @@ class DataFactory implements \rdfInterface\DataFactory
             $iri     = $obj->getValue();
             $a[$iri] = WeakReference::create($obj);
         }
-        return $a[$iri]->get();
+        return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
     public static function literal(
         string | Stringable $value, string | Stringable $lang = null,
         string | Stringable $datatype = null
-    ): iLiteral
-    {
+    ): iLiteral {
 
         $value    = (string) $value;
         $lang     = self::sanitizeLang((string) $lang);
@@ -128,14 +123,13 @@ class DataFactory implements \rdfInterface\DataFactory
             $obj      = new Literal($value, $lang, $datatype);
             $a[$hash] = WeakReference::create($obj);
         }
-        return $a[$hash]->get();
+        return $a[$hash]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
     public static function quad(
         iTerm $subject, iNamedNode $predicate, iTerm $object,
         iNamedNode | iBlankNode | null $graphIri = null
-    ): iQuad
-    {
+    ): iQuad {
         $graphIri ??= new DefaultGraph();
         $hash     = self::hashQuad($subject, $predicate, $object, $graphIri);
         $a        = &self::$quads;
@@ -143,25 +137,22 @@ class DataFactory implements \rdfInterface\DataFactory
             $obj      = new Quad($subject, $predicate, $object, $graphIri);
             $a[$hash] = WeakReference::create($obj);
         }
-        return $a[$hash]->get();
+        return $a[$hash]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
     public static function quadTemplate(
         iTerm | null $subject = null, iNamedNode | null $predicate = null,
         iTerm | null $object = null,
         iNamedNode | iBlankNode | null $graphIri = null
-    ): iQuadTemplate
-    {
+    ): iQuadTemplate {
         return new QuadTemplate($subject, $predicate, $object, $graphIri);
     }
 
-    public static function variable(string | Stringable $name): \rdfInterface\Variable
-    {
+    public static function variable(string | Stringable $name): \rdfInterface\Variable {
         throw new RdfException('Variables are not implemented');
     }
 
-    public static function checkCall(): bool
-    {
+    public static function checkCall(): bool {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3);
         if (count($trace) < 3 || ($trace[2]['class'] ?? '') !== self::class) {
             $c1 = $trace[1]['class'] ?? '';
@@ -171,8 +162,7 @@ class DataFactory implements \rdfInterface\DataFactory
         return true;
     }
 
-    private static function hashTerm(iTerm | null $t): string | null
-    {
+    private static function hashTerm(iTerm | null $t): string | null {
         if ($t === null) {
             return null;
         }
@@ -193,8 +183,7 @@ class DataFactory implements \rdfInterface\DataFactory
 
     private static function hashLiteral(
         string $value, string | null $lang, string | null $datatype
-    ): string
-    {
+    ): string {
         return $lang . $datatype . "\n" . str_replace("\n", "\\n", $value);
     }
 
@@ -202,26 +191,22 @@ class DataFactory implements \rdfInterface\DataFactory
         iTerm | null $subject = null, iNamedNode | null $predicate = null,
         iTerm | null $object = null,
         iNamedNode | iBlankNode | null $graphIri = null
-    ): string
-    {
+    ): string {
         return self::hashTerm($subject) . "\n" . self::hashTerm($predicate) . "\n" .
             self::hashTerm($object) . "\n" . self::hashTerm($graphIri);
     }
 
-    private static function checkLangDatatype(?string $lang, ?string $datatype): void
-    {
+    private static function checkLangDatatype(?string $lang, ?string $datatype): void {
         if ($lang !== null && $datatype !== null) {
             throw new RdfException('Literal with both lang and type');
         }
     }
 
-    private static function sanitizeLang(?string $lang): ?string
-    {
+    private static function sanitizeLang(?string $lang): ?string {
         return empty($lang) ? null : $lang;
     }
 
-    private static function sanitizeDatatype(?string $datatype): ?string
-    {
+    private static function sanitizeDatatype(?string $datatype): ?string {
         return empty($datatype) || $datatype === RDF::XSD_STRING ? null : $datatype;
     }
 
@@ -229,8 +214,7 @@ class DataFactory implements \rdfInterface\DataFactory
      *
      * @return array<\stdClass>
      */
-    public static function getCacheCounts(): array
-    {
+    public static function getCacheCounts(): array {
         $ret = [];
         $map = [
             \rdfInterface\TYPE_BLANK_NODE    => 'blankNodes',
