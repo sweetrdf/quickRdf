@@ -1,5 +1,10 @@
 # quickRdf
 
+[![Latest Stable Version](https://poser.pugx.org/zozlak/quick-rdf/v/stable)](https://packagist.org/packages/zozlak/quick-rdf)
+![Build status](https://github.com/zozlak/quickRdf/workflows/phpunit/badge.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/zozlak/quickRdf/badge.svg?branch=master)](https://coveralls.io/github/zozlak/quickRdf?branch=master)
+[![License](https://poser.pugx.org/zozlak/quicki-rdf/license)](https://packagist.org/packages/zozlak/quick-rdf)
+
 An RDF library for PHP implementing the https://github.com/zozlak/rdfInterface interface.
 
 ## Installation
