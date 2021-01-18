@@ -10,7 +10,9 @@ jobs:
     - name: composer
       run: composer update
     - name: phpunit
-      run: vendor/bin/phpunit
+      run: |
+        mkdir -p build/logs
+        vendor/bin/phpunit phpunit.xml
     - name: coveralls
       run: |
         export COVERALLS_RUN_LOCALLY=1
