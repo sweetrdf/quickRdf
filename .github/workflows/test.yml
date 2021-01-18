@@ -12,7 +12,7 @@ jobs:
     - name: phpunit
       run: |
         mkdir -p build/logs
-        vendor/bin/phpunit phpunit.xml
+        XDEBUG_MODE=coverage vendor/bin/phpunit
     - name: coveralls
       run: |
         export COVERALLS_RUN_LOCALLY=1
