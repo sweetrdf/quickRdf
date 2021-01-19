@@ -5,7 +5,7 @@
 require_once 'vendor/autoload.php';
 
 use EasyRdf\Graph;
-use quickRdf\TriGParser;
+use quickRdfIo\TriGParser;
 use quickRdf\Dataset;
 use quickRdf\DataFactory as DF;
 
