@@ -31,7 +31,8 @@
         "phpunit/php-code-coverage": "^9.2",
         "phpstan/phpstan": "*",
         "squizlabs/php_codesniffer": "*",
-        "zozlak/quick-rdf-io": "*"
+        "zozlak/quick-rdf-io": "*",
+        "php-coveralls/php-coveralls": "^2.4"
     },
     "autoload-dev": {
         "psr-4": {
