@@ -61,6 +61,6 @@ $graph->delete($otherGraph); // in-place
 
 $serializer = new quickRdfIo\TurtleSerializer();
 $stream = fopen('pathToOutputTurtleFile', 'w');
-$serializer->serialiseStream($stream, $graph);
+$serializer->serializeStream($stream, $graph);
 fclose($stream);
 ```

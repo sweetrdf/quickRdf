@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Yet another RDF library",
     "keywords": [],
-    "homepage": "https://github.com/zozlak/quickRdf",
+    "homepage": "https://github.com/sweetrdf/quickRdf",
     "license": "MIT",
     "authors": [
         {
