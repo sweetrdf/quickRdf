@@ -33,8 +33,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class BlankNode implements \rdfInterface\BlankNode
-{
+class BlankNode implements \rdfInterface\BlankNode, HashableTerm {
 
     private static int $n = 0;
 

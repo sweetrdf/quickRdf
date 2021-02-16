@@ -1,5 +1,5 @@
 {
-    "name": "zozlak/quick-rdf",
+    "name": "sweetrdf/quick-rdf",
     "type": "library",
     "description": "Yet another RDF library",
     "keywords": [],
@@ -15,8 +15,8 @@
     "require": {
         "php": ">=8.0",
         "zozlak/rdf-constants": "^1.1",
-        "zozlak/rdf-helpers": "*",
-        "zozlak/rdf-interface": "*"
+        "sweetrdf/rdf-helpers": "*",
+        "sweetrdf/rdf-interface": "*"
     },
     "suggest": {
         "zozlak/quick-rdf-io": "*"
@@ -31,8 +31,9 @@
         "phpunit/php-code-coverage": "^9.2",
         "phpstan/phpstan": "*",
         "squizlabs/php_codesniffer": "*",
-        "zozlak/quick-rdf-io": "*",
-        "php-coveralls/php-coveralls": "^2.4"
+        "sweetrdf/quick-rdf-io": "*",
+        "php-coveralls/php-coveralls": "^2.4",
+        "easyrdf/easyrdf": "^1.1"
     },
     "autoload-dev": {
         "psr-4": {

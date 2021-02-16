@@ -109,7 +109,8 @@ class DataFactory implements \rdfInterface\DataFactory {
 
     public static function literal(
         int | float | string | bool | Stringable $value,
-        string | Stringable $lang = null, string | Stringable $datatype = null
+        string | Stringable | null $lang = null,
+        string | Stringable | null $datatype = null
     ): iLiteral {
 
         $lang     = self::sanitizeLang((string) $lang);

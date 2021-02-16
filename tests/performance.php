@@ -1,80 +1,79 @@
 #!/usr/bin/php
 <?php
-# run with XDEBUG_CONFIG=mode=off ./aaa.php 
+# run with XDEBUG_CONFIG=mode=off ./performance.php 
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use EasyRdf\Graph;
-use quickRdfIo\TriGParser;
+use quickRdfIo\NQuadsParser;
 use quickRdf\Dataset;
 use quickRdf\DataFactory as DF;
 
-$t = microtime(true);
-$g = new Graph();
-$g->parseFile(__DIR__ . '/tests/quickRdf/puzzle4d_100k.ntriples', 'application/n-triples');
-$t = microtime(true) - $t;
-echo "\nParsing time\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . $g->countTriples() . " quads\n";
+$testFile = __DIR__ . '/puzzle4d_100k.ntriples';
+$testSbj  = 'https://id.acdh.oeaw.ac.at/td-archiv/MobileObjects_Funde_E19/Inventarbuecher_Datenbanken_Tabellen_Fundzettel/Inventarbuecher/Keramik_07217-07349A/TD_Inv_4DPuzzle1936__TD_7230.tif';
+$testPred = 'https://vocabs.acdh.oeaw.ac.at/schema#hasCurator';
+$testObj  = 'https://id.acdh.oeaw.ac.at/sstuhec';
 
-$t = microtime(true);
-$d = $g->resource('https://id.acdh.oeaw.ac.at/td-archiv/MobileObjects_Funde_E19/Inventarbuecher_Datenbanken_Tabellen_Fundzettel/Inventarbuecher/Keramik_07217-07349A/TD_Inv_4DPuzzle1936__TD_7230.tif');
-$t = microtime(true) - $t;
-echo "\nEasyRdf subject search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    ? quads\n";
-
-$t = microtime(true);
-$d = $g->resourcesMatching('https://vocabs.acdh.oeaw.ac.at/schema#hasCurator');
-$t = microtime(true) - $t;
-echo "\nEasyRdf predicate search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
-
-$t = microtime(true);
-$d = [];
-foreach($g->reversePropertyUris('https://id.acdh.oeaw.ac.at/sstuhec') as $prop) {
-    $d = array_merge($d, $g->resourcesMatching($prop, $g->resource('https://id.acdh.oeaw.ac.at/sstuhec')));
+function printlog(int $n, string $solution, string $test, float $time, ?int $tripCount): void {
+    printf("%d\t%.6f\t%d\t%d\t%d\t%s\t%s\n", $n, $time, memory_get_peak_usage(true) / 1024 / 1024, memory_get_usage(true) / 1024 / 1024, $tripCount, $solution, $test);
 }
-$t = microtime(true) - $t;
-echo "\nEasyRdf object search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
+$testCount = (int) ($argv[2] ?? 1);
+$test = $argv[1] ?? '';
+if ($test == 'easyrdf') {
+    for ($i = 0; $i < $testCount; $i++) {
+        $t = microtime(true);
+        $g = new Graph();
+        $g->parseFile($testFile, 'application/n-triples');
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "parsing", $t, $g->countTriples());
 
-unset($g);
+        $t = microtime(true);
+        $d = $g->resource($testSbj);
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "subject search", $t, null);
 
-$t = microtime(true);
-$p = new TriGParser();
-$g = new Dataset();
-$g->add($p->parseStream(fopen(__DIR__ . '/tests/quickRdf/puzzle4d_100k.ntriples', 'r')));
-$t = microtime(true) - $t;
-echo "\nParsing time\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($g) . " quads\n";
+        $t = microtime(true);
+        $d = $g->resourcesMatching($testPred);
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "predicate search", $t, count($d));
 
-$t = microtime(true);
-$d = $g->copy(DF::quadTemplate(subject: DF::namedNode('https://id.acdh.oeaw.ac.at/td-archiv/MobileObjects_Funde_E19/Inventarbuecher_Datenbanken_Tabellen_Fundzettel/Inventarbuecher/Keramik_07217-07349A/TD_Inv_4DPuzzle1936__TD_7230.tif')));
-$t = microtime(true) - $t;
-echo "\nIndexed subject search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
-echo $d;
+        $t = microtime(true);
+        $d = [];
+        foreach ($g->reversePropertyUris($testObj) as $prop) {
+            $d = array_merge($d, $g->resourcesMatching($prop, $g->resource($testObj)));
+        }
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "object search", $t, count($d));
 
-$t = microtime(true);
-$d = $g->copy(DF::quadTemplate(predicate: DF::namedNode('https://vocabs.acdh.oeaw.ac.at/schema#hasCurator')));
-$t = microtime(true) - $t;
-echo "\nIndexed predicate search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
+        unset($g);
+    }
+} else if (in_array($test, ['idxsafe', 'idxunsafe', 'safe', 'unsafe'])) {
+    DF::$enforceConstructor = in_array($argv[1], ['idxsafe', 'safe']);
+    for ($i = 0; $i < $testCount; $i++) {
+        $t = microtime(true);
+        $p = new NQuadsParser(false, true);
+        $g = new Dataset(in_array($argv[1], ['idxsafe', 'idxunsafe']));
+        $f = fopen($testFile, 'r');
+        $g->add($p->parseStream($f));
+        fclose($f);
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "parsing", $t, count($g));
 
-$t = microtime(true);
-$d = $g->copy(DF::quadTemplate(object: DF::namedNode('https://id.acdh.oeaw.ac.at/sstuhec')));
-$t = microtime(true) - $t;
-echo "\nIndexed object search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
+        $t = microtime(true);
+        $d = $g->copy(DF::quadTemplate(DF::namedNode($testSbj)));
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "subject search", $t, count($d));
 
-$t  = microtime(true);
-$gg = new Dataset(false);
-$gg->add($g);
-$t  = microtime(true) - $t;
-echo "\nCopying to unindexed graph\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($gg) . " quads\n";
+        $t = microtime(true);
+        $d = $g->copy(DF::quadTemplate(null, DF::namedNode($testPred)));
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "predicate search", $t, count($d));
 
-$t = microtime(true);
-$d = $gg->copy(DF::quadTemplate(subject: DF::namedNode('https://id.acdh.oeaw.ac.at/td-archiv/MobileObjects_Funde_E19/Inventarbuecher_Datenbanken_Tabellen_Fundzettel/Inventarbuecher/Keramik_07217-07349A/TD_Inv_4DPuzzle1936__TD_7230.tif')));
-$t = microtime(true) - $t;
-echo "\nUnindexed subject search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
-
-$t = microtime(true);
-$d = $gg->copy(DF::quadTemplate(predicate: DF::namedNode('https://vocabs.acdh.oeaw.ac.at/schema#hasCurator')));
-$t = microtime(true) - $t;
-echo "\nUnidexed predicate search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
-
-$t = microtime(true);
-$d = $gg->copy(DF::quadTemplate(object: DF::namedNode('https://id.acdh.oeaw.ac.at/sstuhec')));
-$t = microtime(true) - $t;
-echo "\nUnidexed object search\n$t s    " . (int) (memory_get_peak_usage(true) / 1024 / 1024) . " MB    " . (int) (memory_get_usage(true) / 1024 / 1024) . " MB    " . count($d) . " quads\n";
+        $t = microtime(true);
+        $d = $g->copy(DF::quadTemplate(null, null, DF::namedNode($testObj)));
+        $t = microtime(true) - $t;
+        printlog($i, $argv[1], "object search", $t, count($d));
+    }
+} else {
+    exit("Usage: $argv[0] easyrdf/idxsafe/idxunsafe/safe/unsafe [count=1]\n");
+}

@@ -571,7 +571,7 @@ class DatasetTest extends \PHPUnit\Framework\TestCase {
         $d1[] = self::$quads[0];
         $d1[] = self::$quads[3];
         $this->assertTrue($d1->every(DF::quadTemplate(DF::namedNode('foo'))));
-        $this->assertFalse($d1->none(DF::quadTemplate(object: DF::literal('baz', 'en'))));
+        $this->assertFalse($d1->none(DF::quadTemplate(null, null, DF::literal('baz', 'en'))));
 
         // callable
         $d1   = new Dataset();
@@ -587,4 +587,5 @@ class DatasetTest extends \PHPUnit\Framework\TestCase {
         };
         $this->assertFalse($d1->every($fn));
     }
+    
 }

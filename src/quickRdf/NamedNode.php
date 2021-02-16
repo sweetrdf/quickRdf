@@ -33,8 +33,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class NamedNode implements \rdfInterface\NamedNode
-{
+class NamedNode implements \rdfInterface\NamedNode, HashableTerm {
 
     /**
      *
@@ -42,29 +41,24 @@ class NamedNode implements \rdfInterface\NamedNode
      */
     private $iri;
 
-    public function __construct(string $iri)
-    {
+    public function __construct(string $iri) {
         (!DF::$enforceConstructor) || DF::checkCall();
         $this->iri = $iri;
     }
 
-    public function __toString(): string
-    {
+    public function __toString(): string {
         return '<' . $this->iri . '>';
     }
 
-    public function getValue(): string
-    {
+    public function getValue(): string {
         return $this->iri;
     }
 
-    public function getType(): string
-    {
+    public function getType(): string {
         return \rdfInterface\TYPE_NAMED_NODE;
     }
 
-    public function equals(\rdfInterface\Term $term): bool
-    {
+    public function equals(\rdfInterface\Term $term): bool {
         return $this === $term;
     }
 }

@@ -35,8 +35,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class Literal implements \rdfInterface\Literal
-{
+class Literal implements \rdfInterface\Literal, HashableTerm {
 
     /**
      *
@@ -57,8 +56,7 @@ class Literal implements \rdfInterface\Literal
     private $datatype;
 
     public function __construct(
-        int | float | string | bool | Stringable $value,
-        ?string $lang = null,
+        int | float | string | bool | Stringable $value, ?string $lang = null,
         ?string $datatype = null
     ) {
         (!DF::$enforceConstructor) || DF::checkCall();
@@ -67,8 +65,7 @@ class Literal implements \rdfInterface\Literal
         $this->datatype = $datatype;
     }
 
-    public function __toString(): string
-    {
+    public function __toString(): string {
         $langtype = '';
         if (!empty($this->lang)) {
             $langtype = "@" . $this->lang;
@@ -78,43 +75,35 @@ class Literal implements \rdfInterface\Literal
         return '"' . $this->value . '"' . $langtype;
     }
 
-    public function getValue(): int | float | string | bool | Stringable
-    {
+    public function getValue(): int | float | string | bool | Stringable {
         return $this->value;
     }
 
-    public function getLang(): ?string
-    {
+    public function getLang(): ?string {
         return $this->lang;
     }
 
-    public function getDatatype(): string
-    {
+    public function getDatatype(): string {
         return $this->datatype ?? RDF::XSD_STRING;
     }
 
-    public function getType(): string
-    {
+    public function getType(): string {
         return \rdfInterface\TYPE_LITERAL;
     }
 
-    public function equals(\rdfInterface\Term $term): bool
-    {
+    public function equals(\rdfInterface\Term $term): bool {
         return $this === $term;
     }
 
-    public function withValue(int | float | string | bool | Stringable $value): \rdfInterface\Literal
-    {
+    public function withValue(int | float | string | bool | Stringable $value): \rdfInterface\Literal {
         return DF::literal($value, $this->lang, $this->datatype);
     }
 
-    public function withLang(?string $lang): \rdfInterface\Literal
-    {
+    public function withLang(?string $lang): \rdfInterface\Literal {
         return DF::literal($this->value, $lang, $this->datatype);
     }
 
-    public function withDatatype(?string $datatype): \rdfInterface\Literal
-    {
+    public function withDatatype(?string $datatype): \rdfInterface\Literal {
         return DF::literal($this->value, $this->lang, $datatype);
     }
 }

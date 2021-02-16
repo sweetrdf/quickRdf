@@ -39,8 +39,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class Quad implements iQuad
-{
+class Quad implements iQuad, HashableTerm {
 
     /**
      *
@@ -67,9 +66,7 @@ class Quad implements iQuad
     private iNamedNode | iBlankNode $graphIri;
 
     public function __construct(
-        iTerm $subject,
-        iNamedNode $predicate,
-        iTerm $object,
+        iTerm $subject, iNamedNode $predicate, iTerm $object,
         iNamedNode | iBlankNode | null $graphIri = null
     ) {
         (!DF::$enforceConstructor) || DF::checkCall();
@@ -82,18 +79,15 @@ class Quad implements iQuad
         $this->graphIri  = $graphIri ?? DF::defaultGraph();
     }
 
-    public function __toString(): string
-    {
+    public function __toString(): string {
         return rtrim("$this->subject $this->predicate $this->object $this->graphIri");
     }
 
-    public function getType(): string
-    {
+    public function getType(): string {
         return \rdfInterface\TYPE_QUAD;
     }
 
-    public function equals(iTerm $term): bool
-    {
+    public function equals(iTerm $term): bool {
         return $this === $term;
 //        if ($term->getType() !== $this->getType()) {
 //            return false;
@@ -105,48 +99,39 @@ class Quad implements iQuad
 //            $this->graphIri->equals($term->getGraphIri());
     }
 
-    public function getValue(): string
-    {
+    public function getValue(): string {
         throw new \BadMethodCallException();
     }
 
-    public function getSubject(): iTerm
-    {
+    public function getSubject(): iTerm {
         return $this->subject;
     }
 
-    public function getPredicate(): iNamedNode
-    {
+    public function getPredicate(): iNamedNode {
         return $this->predicate;
     }
 
-    public function getObject(): iTerm
-    {
+    public function getObject(): iTerm {
         return $this->object;
     }
 
-    public function getGraphIri(): iNamedNode | iBlankNode
-    {
+    public function getGraphIri(): iNamedNode | iBlankNode {
         return $this->graphIri;
     }
 
-    public function withSubject(iTerm $subject): iQuad
-    {
+    public function withSubject(iTerm $subject): iQuad {
         return DF::quad($subject, $this->predicate, $this->object, $this->graphIri);
     }
 
-    public function withPredicate(iNamedNode $predicate): iQuad
-    {
+    public function withPredicate(iNamedNode $predicate): iQuad {
         return DF::quad($this->subject, $predicate, $this->object, $this->graphIri);
     }
 
-    public function withObject(iTerm $object): iQuad
-    {
+    public function withObject(iTerm $object): iQuad {
         return DF::quad($this->subject, $this->predicate, $object, $this->graphIri);
     }
 
-    public function withGraphIri(iNamedNode | iBlankNode $graphIri): iQuad
-    {
+    public function withGraphIri(iNamedNode | iBlankNode $graphIri): iQuad {
         return DF::quad($this->subject, $this->predicate, $this->object, $graphIri);
     }
 }

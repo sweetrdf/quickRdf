@@ -131,9 +131,10 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
     }
 
     public function copy(
-        iQuad | iQuadTemplate | iQuadIterator | callable | null $filter = null
+        iQuad | iQuadTemplate | iQuadIterator | callable | null $filter = null,
+        bool $indexed = false
     ): iDataset {
-        $dataset = new Dataset();
+        $dataset = new Dataset($indexed);
         try {
             $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
         } catch (OutOfBoundsException) {
@@ -143,15 +144,16 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
     }
 
     public function copyExcept(
-        iQuad | iQuadTemplate | iQuadIterator | callable | null $filter = null
+        iQuad | iQuadTemplate | iQuadIterator | callable | null $filter = null,
+        bool $indexed = false
     ): iDataset {
-        $dataset = new Dataset();
+        $dataset = new Dataset($indexed);
         $dataset->add(new GenericQuadIterator($this->findNotMatchingQuads($filter)));
         return $dataset;
     }
 
-    public function union(iQuad | iQuadIterator $other): iDataset {
-        $ret = new Dataset();
+    public function union(iQuad | iQuadIterator $other, bool $indexed = false): iDataset {
+        $ret = new Dataset($indexed);
         $ret->add($this);
         $ret->add($other);
         return $ret;
@@ -163,8 +165,9 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         return $ret;
     }
 
-    public function delete(iQuad | iQuadTemplate | iQuadIterator | callable $filter): iDataset {
-        $deleted = new Dataset();
+    public function delete(iQuad | iQuadTemplate | iQuadIterator | callable $filter,
+                           bool $indexed = false): iDataset {
+        $deleted = new Dataset($indexed);
         try {
             foreach ($this->findMatchingQuads($filter) as $i) {
                 $this->quads->detach($i);
@@ -177,8 +180,9 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         return $deleted;
     }
 
-    public function deleteExcept(iQuad | iQuadTemplate | iQuadIterator | callable $filter): iDataset {
-        $deleted = new Dataset();
+    public function deleteExcept(iQuad | iQuadTemplate | iQuadIterator | callable $filter,
+                                 bool $indexed = false): iDataset {
+        $deleted = new Dataset($indexed);
         foreach ($this->findNotMatchingQuads($filter) as $i) {
             $this->quads->detach($i);
             $this->unindex($i);
@@ -501,8 +505,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         }
     }
 
-    public function map(callable $fn): iDataset {
-        $ret = new Dataset();
+    public function map(callable $fn, bool $indexed = false): iDataset {
+        $ret = new Dataset($indexed);
         foreach ($this as $i) {
             $ret->add($fn($i, $this));
         }
