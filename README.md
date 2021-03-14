@@ -1,17 +1,17 @@
 # quickRdf
 
-[![Latest Stable Version](https://poser.pugx.org/zozlak/quick-rdf/v/stable)](https://packagist.org/packages/zozlak/quick-rdf)
-![Build status](https://github.com/zozlak/quickRdf/workflows/phpunit/badge.svg?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/zozlak/quickRdf/badge.svg?branch=master)](https://coveralls.io/github/zozlak/quickRdf?branch=master)
-[![License](https://poser.pugx.org/zozlak/quicki-rdf/license)](https://packagist.org/packages/zozlak/quick-rdf)
+[![Latest Stable Version](https://poser.pugx.org/sweetrdf/quick-rdf/v/stable)](https://packagist.org/packages/sweetrdf/quick-rdf)
+![Build status](https://github.com/sweetrdf/quickRdf/workflows/phpunit/badge.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/sweetrdf/quickRdf/badge.svg?branch=master)](https://coveralls.io/github/sweetrdf/quickRdf?branch=master)
+[![License](https://poser.pugx.org/sweetrdf/quicki-rdf/license)](https://packagist.org/packages/sweetrdf/quick-rdf)
 
-An RDF library for PHP implementing the https://github.com/zozlak/rdfInterface interface.
+An RDF library for PHP implementing the https://github.com/sweetrdf/rdfInterface interface.
 
 ## Installation
 
 * Obtain the [Composer](https://getcomposer.org)
-* Run `composer require zozlak/quick-rdf`
-* Run `composer require zozlak/quick-rdf-io` to install parsers and serializers.
+* Run `composer require sweetrdf/quick-rdf`
+* Run `composer require sweetrdf/quick-rdf-io` to install parsers and serializers.
 
 ## Usage
 

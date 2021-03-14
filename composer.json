@@ -19,7 +19,7 @@
         "sweetrdf/rdf-interface": "*"
     },
     "suggest": {
-        "zozlak/quick-rdf-io": "*"
+        "sweetrdf/quick-rdf-io": "*"
     },
     "autoload": {
         "psr-4": {
