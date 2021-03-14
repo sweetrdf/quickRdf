@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/sweetrdf/quick-rdf/v/stable)](https://packagist.org/packages/sweetrdf/quick-rdf)
 ![Build status](https://github.com/sweetrdf/quickRdf/workflows/phpunit/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/sweetrdf/quickRdf/badge.svg?branch=master)](https://coveralls.io/github/sweetrdf/quickRdf?branch=master)
-[![License](https://poser.pugx.org/sweetrdf/quicki-rdf/license)](https://packagist.org/packages/sweetrdf/quick-rdf)
+[![License](https://poser.pugx.org/sweetrdf/quick-rdf/license)](https://packagist.org/packages/sweetrdf/quick-rdf)
 
 An RDF library for PHP implementing the https://github.com/sweetrdf/rdfInterface interface.
 
