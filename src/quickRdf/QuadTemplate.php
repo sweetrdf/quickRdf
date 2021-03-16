@@ -41,8 +41,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class QuadTemplate implements iQuadTemplate
-{
+class QuadTemplate implements iQuadTemplate {
 
     /**
      *
@@ -72,8 +71,7 @@ class QuadTemplate implements iQuadTemplate
         iTerm | null $subject = null, iNamedNode | null $predicate = null,
         iTerm | null $object = null,
         iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
-    )
-    {
+    ) {
         if ($subject === null && $predicate === null && $object === null && $graphIri === null) {
             throw new BadMethodCallException("At least one part of the quad has to be specified");
         }
@@ -90,18 +88,15 @@ class QuadTemplate implements iQuadTemplate
         $this->graphIri  = $graphIri;
     }
 
-    public function __toString(): string
-    {
+    public function __toString(): string {
         return rtrim("$this->subject $this->predicate $this->object $this->graphIri");
     }
 
-    public function getType(): string
-    {
+    public function getType(): string {
         return \rdfInterface\TYPE_QUAD_TMPL;
     }
 
-    public function equals(\rdfInterface\Term $term): bool
-    {
+    public function equals(iTerm $term): bool {
         if ($term instanceof iQuadTemplate) {
             /* @var $term iQuad */
             return $this->subject === $term->getSubject() &&
@@ -118,48 +113,39 @@ class QuadTemplate implements iQuadTemplate
         return false;
     }
 
-    public function getValue(): string
-    {
+    public function getValue(): string {
         throw new \BadMethodCallException();
     }
 
-    public function getSubject(): iTerm | null
-    {
+    public function getSubject(): iTerm | null {
         return $this->subject;
     }
 
-    public function getPredicate(): iNamedNode | null
-    {
+    public function getPredicate(): iNamedNode | null {
         return $this->predicate;
     }
 
-    public function getObject(): iTerm | null
-    {
+    public function getObject(): iTerm | null {
         return $this->object;
     }
 
-    public function getGraphIri(): iNamedNode | iBlankNode | null
-    {
+    public function getGraphIri(): iNamedNode | iBlankNode | null {
         return $this->graphIri;
     }
 
-    public function withSubject(iTerm | null $subject): iQuadTemplate
-    {
+    public function withSubject(iTerm | null $subject): iQuadTemplate {
         return DF::quadTemplate($subject, $this->predicate, $this->object, $this->graphIri);
     }
 
-    public function withPredicate(iNamedNode | null $predicate): iQuadTemplate
-    {
+    public function withPredicate(iNamedNode | null $predicate): iQuadTemplate {
         return DF::quadTemplate($this->subject, $predicate, $this->object, $this->graphIri);
     }
 
-    public function withObject(iTerm | null $object): iQuadTemplate
-    {
+    public function withObject(iTerm | null $object): iQuadTemplate {
         return DF::quadTemplate($this->subject, $this->predicate, $object, $this->graphIri);
     }
 
-    public function withGraphIri(iNamedNode | iBlankNode | iDefaultGraph | null $graphIri): iQuadTemplate
-    {
+    public function withGraphIri(iNamedNode | iBlankNode | iDefaultGraph | null $graphIri): iQuadTemplate {
         return DF::quadTemplate($this->subject, $this->predicate, $this->object, $graphIri);
     }
 }
