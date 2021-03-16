@@ -30,6 +30,7 @@ use BadMethodCallException;
 use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\Literal as iLiteral;
+use rdfInterface\DefaultGraph as iDefaultGraph;
 use rdfInterface\Term as iTerm;
 use rdfInterface\Quad as iQuad;
 use quickRdf\DataFactory as DF;
@@ -41,33 +42,14 @@ use quickRdf\DataFactory as DF;
  */
 class Quad implements iQuad, HashableTerm {
 
-    /**
-     *
-     * @var iTerm
-     */
     private iTerm $subject;
-
-    /**
-     *
-     * @var iNamedNode
-     */
     private iNamedNode $predicate;
-
-    /**
-     *
-     * @var iTerm
-     */
     private iTerm $object;
-
-    /**
-     *
-     * @var iNamedNode|iBlankNode
-     */
-    private iNamedNode | iBlankNode $graphIri;
+    private iNamedNode | iBlankNode | iDefaultGraph $graphIri;
 
     public function __construct(
         iTerm $subject, iNamedNode $predicate, iTerm $object,
-        iNamedNode | iBlankNode | null $graphIri = null
+        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
     ) {
         (!DF::$enforceConstructor) || DF::checkCall();
         if ($subject instanceof iLiteral) {
@@ -115,7 +97,7 @@ class Quad implements iQuad, HashableTerm {
         return $this->object;
     }
 
-    public function getGraphIri(): iNamedNode | iBlankNode {
+    public function getGraphIri(): iNamedNode | iBlankNode | iDefaultGraph {
         return $this->graphIri;
     }
 
@@ -131,7 +113,7 @@ class Quad implements iQuad, HashableTerm {
         return DF::quad($this->subject, $this->predicate, $object, $this->graphIri);
     }
 
-    public function withGraphIri(iNamedNode | iBlankNode $graphIri): iQuad {
+    public function withGraphIri(iNamedNode | iBlankNode | iDefaultGraph | null $graphIri): iQuad {
         return DF::quad($this->subject, $this->predicate, $this->object, $graphIri);
     }
 }

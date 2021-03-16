@@ -14,11 +14,12 @@ $testSbj  = 'https://id.acdh.oeaw.ac.at/td-archiv/MobileObjects_Funde_E19/Invent
 $testPred = 'https://vocabs.acdh.oeaw.ac.at/schema#hasCurator';
 $testObj  = 'https://id.acdh.oeaw.ac.at/sstuhec';
 
-function printlog(int $n, string $solution, string $test, float $time, ?int $tripCount): void {
+function printlog(int $n, string $solution, string $test, float $time,
+                  ?int $tripCount): void {
     printf("%d\t%.6f\t%d\t%d\t%d\t%s\t%s\n", $n, $time, memory_get_peak_usage(true) / 1024 / 1024, memory_get_usage(true) / 1024 / 1024, $tripCount, $solution, $test);
 }
 $testCount = (int) ($argv[2] ?? 1);
-$test = $argv[1] ?? '';
+$test      = $argv[1] ?? '';
 if ($test == 'easyrdf') {
     for ($i = 0; $i < $testCount; $i++) {
         $t = microtime(true);
@@ -51,13 +52,15 @@ if ($test == 'easyrdf') {
     DF::$enforceConstructor = in_array($argv[1], ['idxsafe', 'safe']);
     for ($i = 0; $i < $testCount; $i++) {
         $t = microtime(true);
-        $p = new NQuadsParser(false, true);
+        $p = new NQuadsParser(new DF(), false, true);
         $g = new Dataset(in_array($argv[1], ['idxsafe', 'idxunsafe']));
         $f = fopen($testFile, 'r');
-        $g->add($p->parseStream($f));
-        fclose($f);
-        $t = microtime(true) - $t;
-        printlog($i, $argv[1], "parsing", $t, count($g));
+        if ($f !== false) {
+            $g->add($p->parseStream($f));
+            fclose($f);
+            $t = microtime(true) - $t;
+            printlog($i, $argv[1], "parsing", $t, count($g));
+        }
 
         $t = microtime(true);
         $d = $g->copy(DF::quadTemplate(DF::namedNode($testSbj)));

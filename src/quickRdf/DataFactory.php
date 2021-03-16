@@ -36,6 +36,7 @@ use rdfInterface\Literal as iLiteral;
 use rdfInterface\DefaultGraph as iDefaultGraph;
 use rdfInterface\Quad as iQuad;
 use rdfInterface\QuadTemplate as iQuadTemplate;
+use rdfHelpers\DefaultGraph;
 
 /**
  * Description of DataFactory
@@ -60,13 +61,8 @@ class DataFactory implements \rdfInterface\DataFactory {
      *
      * @var array<string, WeakReference<Literal>>
      */
-    private static array $literals = [];
-
-    /**
-     *
-     * @var array<string, WeakReference<DefaultGraph>>
-     */
-    private static array $defaultGraphs = [];
+    private static array $literals     = [];
+    private static iDefaultGraph | null $defaultGraph = null;
 
     /**
      *
@@ -96,15 +92,11 @@ class DataFactory implements \rdfInterface\DataFactory {
         return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
-    public static function defaultGraph(string | Stringable | null $iri = null): iDefaultGraph {
-        $iri = $iri === null ? $iri : (string) $iri;
-        $a   = &self::$defaultGraphs;
-        if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
-            $obj     = new DefaultGraph($iri);
-            $iri     = $obj->getValue();
-            $a[$iri] = WeakReference::create($obj);
+    public static function defaultGraph(): iDefaultGraph {
+        if (self::$defaultGraph === null) {
+            self::$defaultGraph = new DefaultGraph();
         }
-        return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
+        return self::$defaultGraph;
     }
 
     public static function literal(
@@ -128,9 +120,9 @@ class DataFactory implements \rdfInterface\DataFactory {
 
     public static function quad(
         iTerm $subject, iNamedNode $predicate, iTerm $object,
-        iNamedNode | iBlankNode | null $graphIri = null
+        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
     ): iQuad {
-        $graphIri ??= new DefaultGraph();
+        $graphIri ??= self::defaultGraph();
         $hash     = self::hashQuad($subject, $predicate, $object, $graphIri);
         $a        = &self::$quads;
         if (!isset($a[$hash]) || $a[$hash]->get() === null) {
@@ -143,7 +135,7 @@ class DataFactory implements \rdfInterface\DataFactory {
     public static function quadTemplate(
         iTerm | null $subject = null, iNamedNode | null $predicate = null,
         iTerm | null $object = null,
-        iNamedNode | iBlankNode | null $graphIri = null
+        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
     ): iQuadTemplate {
         return new QuadTemplate($subject, $predicate, $object, $graphIri);
     }
@@ -166,7 +158,9 @@ class DataFactory implements \rdfInterface\DataFactory {
         if ($t === null) {
             return null;
         }
-        if ($t instanceof iBlankNode || $t instanceof iNamedNode || $t instanceof iDefaultGraph) {
+        if ($t instanceof iDefaultGraph) {
+            return '';
+        } elseif ($t instanceof iBlankNode || $t instanceof iNamedNode) {
             return (string) $t->getValue();
         } elseif ($t instanceof iLiteral) {
             return self::hashLiteral((string) $t->getValue(), $t->getLang(), $t->getDatatype());
@@ -190,7 +184,7 @@ class DataFactory implements \rdfInterface\DataFactory {
     private static function hashQuad(
         iTerm | null $subject = null, iNamedNode | null $predicate = null,
         iTerm | null $object = null,
-        iNamedNode | iBlankNode | null $graphIri = null
+        iNamedNode | iBlankNode | iDefaultGraph $graphIri = null
     ): string {
         return self::hashTerm($subject) . "\n" . self::hashTerm($predicate) . "\n" .
             self::hashTerm($object) . "\n" . self::hashTerm($graphIri);
@@ -217,11 +211,10 @@ class DataFactory implements \rdfInterface\DataFactory {
     public static function getCacheCounts(): array {
         $ret = [];
         $map = [
-            \rdfInterface\TYPE_BLANK_NODE    => 'blankNodes',
-            \rdfInterface\TYPE_NAMED_NODE    => 'namedNodes',
-            \rdfInterface\TYPE_LITERAL       => 'literals',
-            \rdfInterface\TYPE_DEFAULT_GRAPH => 'defaultGraphs',
-            \rdfInterface\TYPE_QUAD          => 'quads',
+            \rdfInterface\TYPE_BLANK_NODE => 'blankNodes',
+            \rdfInterface\TYPE_NAMED_NODE => 'namedNodes',
+            \rdfInterface\TYPE_LITERAL    => 'literals',
+            \rdfInterface\TYPE_QUAD       => 'quads',
         ];
         foreach ($map as $k => $v) {
             $ret[$k] = (object) ['total' => count(self::${$v}), 'valid' => 0];

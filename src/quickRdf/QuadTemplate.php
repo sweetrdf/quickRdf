@@ -71,7 +71,7 @@ class QuadTemplate implements iQuadTemplate
     public function __construct(
         iTerm | null $subject = null, iNamedNode | null $predicate = null,
         iTerm | null $object = null,
-        iNamedNode | iBlankNode | null $graphIri = null
+        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
     )
     {
         if ($subject === null && $predicate === null && $object === null && $graphIri === null) {
@@ -158,7 +158,7 @@ class QuadTemplate implements iQuadTemplate
         return DF::quadTemplate($this->subject, $this->predicate, $object, $this->graphIri);
     }
 
-    public function withGraphIri(\rdfInterface\NamedNode | \rdfInterface\BlankNode | null $graphIri): iQuadTemplate
+    public function withGraphIri(iNamedNode | iBlankNode | iDefaultGraph | null $graphIri): iQuadTemplate
     {
         return DF::quadTemplate($this->subject, $this->predicate, $this->object, $graphIri);
     }
