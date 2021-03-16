@@ -35,11 +35,7 @@ use quickRdf\DataFactory as DF;
  */
 class NamedNode implements \rdfInterface\NamedNode, HashableTerm {
 
-    /**
-     *
-     * @var string
-     */
-    private $iri;
+    private string $iri;
 
     public function __construct(string $iri) {
         (!DF::$enforceConstructor) || DF::checkCall();
