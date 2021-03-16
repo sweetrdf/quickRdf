@@ -15,7 +15,7 @@ An RDF library for PHP implementing the https://github.com/sweetrdf/rdfInterface
 
 ## Usage
 
-```
+```php
 include 'vendor/autoload.php';
 
 use quickRdf\DataFactory as DF;
