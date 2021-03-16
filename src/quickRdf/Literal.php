@@ -100,10 +100,13 @@ class Literal implements \rdfInterface\Literal, HashableTerm {
     }
 
     public function withLang(?string $lang): \rdfInterface\Literal {
-        return DF::literal($this->value, $lang, $this->datatype);
+        $datatype = empty($lang) ? $this->datatype : RDF::XSD_STRING;
+        return DF::literal($this->value, $lang, $datatype);
     }
 
     public function withDatatype(?string $datatype): \rdfInterface\Literal {
-        return DF::literal($this->value, $this->lang, $datatype);
+        $datatype = empty($datatype) ? RDF::XSD_STRING : $datatype;
+        $lang     = $datatype === RDF::XSD_STRING ? $this->lang : null;
+        return DF::literal($this->value, $lang, $datatype);
     }
 }

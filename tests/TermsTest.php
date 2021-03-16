@@ -26,17 +26,12 @@
 
 namespace quickRdf;
 
-use rdfInterface\NamedNode;
-use quickRdf\DataFactory as DF;
-
 /**
- * Description of RdfNamespace
+ * Description of TermsTest
  *
  * @author zozlak
  */
-class RdfNamespace extends \rdfHelpers\RdfNamespace {
+class TermsTest extends \rdfInterface\tests\TermsTest {
 
-    protected function getNamedNode(string $iri): NamedNode {
-        return DF::namedNode($iri);
-    }
+    use TestTrait;
 }

@@ -26,17 +26,22 @@
 
 namespace quickRdf;
 
-use rdfInterface\NamedNode;
-use quickRdf\DataFactory as DF;
-
 /**
- * Description of RdfNamespace
+ * Description of TestTrait
  *
  * @author zozlak
  */
-class RdfNamespace extends \rdfHelpers\RdfNamespace {
+trait TestTrait {
 
-    protected function getNamedNode(string $iri): NamedNode {
-        return DF::namedNode($iri);
+    public static function getDataFactory(): \rdfInterface\DataFactory {
+        return new DataFactory();
+    }
+
+    public static function getDataset(): \rdfInterface\Dataset {
+        return new Dataset();
+    }
+
+    public static function getRdfNamespace(): \rdfInterface\RdfNamespace {
+        return new RdfNamespace();
     }
 }

@@ -26,17 +26,15 @@
 
 namespace quickRdf;
 
-use rdfInterface\NamedNode;
-use quickRdf\DataFactory as DF;
-
 /**
- * Description of RdfNamespace
  *
  * @author zozlak
  */
-class RdfNamespace extends \rdfHelpers\RdfNamespace {
+class DatasetCompareTest extends \rdfInterface\tests\DatasetCompareTest {
 
-    protected function getNamedNode(string $iri): NamedNode {
-        return DF::namedNode($iri);
+    use TestTrait;
+
+    public static function getDataset(): \rdfInterface\DatasetCompare {
+        return new Dataset();
     }
 }

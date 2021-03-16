@@ -15,8 +15,8 @@
     "require": {
         "php": ">=8.0",
         "zozlak/rdf-constants": "^1.1",
-        "sweetrdf/rdf-helpers": "*",
-        "sweetrdf/rdf-interface": "*"
+        "sweetrdf/rdf-helpers": ">=0.4.0",
+        "sweetrdf/rdf-interface": ">=0.4.5"
     },
     "suggest": {
         "sweetrdf/quick-rdf-io": "*"
