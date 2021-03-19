@@ -105,6 +105,9 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         // $other contained in $this
         foreach ($other as $i) {
             if (!($i->getSubject() instanceof iBlankNode)) {
+                if (!($i instanceof Quad)) {
+                    $i = DataFactory::importQuad($i);
+                }
                 if (!isset($this->quads[$i])) {
                     return false;
                 }
@@ -125,6 +128,9 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
             $quads = [$quads];
         }
         foreach ($quads as $i) {
+            if (!($i instanceof Quad)) {
+                $i = DataFactory::importQuad($i);
+            }
             $this->quads->attach($i);
             $this->index($i);
         }
@@ -315,6 +321,10 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
     private function findMatchingQuads(
         iQuad | iQuadTemplate | iQuadIterator | callable | null $offset
     ): Generator {
+        if ($offset instanceof iQuad && !($offset instanceof Quad)) {
+            $offset = DataFactory::importQuad($offset);
+        }
+
         if ($offset === null) {
             yield from $this->quads;
         } elseif ($offset instanceof iQuad) {
@@ -380,6 +390,9 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         for ($i = 0; $i < count($terms); $i++) {
             $term = $terms[$i];
             if ($term !== null && !($term instanceof iDefaultGraph)) {
+                if (!($term instanceof SingletonTerm)) {
+                    $term = DataFactory::importTerm($term);
+                }
                 $idx = $indices[$i][$term] ?? null;
                 if ($idx === null && $match) {
                     throw new OutOfBoundsException();
@@ -407,6 +420,10 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
     private function findNotMatchingQuads(
         iQuad | iQuadTemplate | iQuadIterator | callable | null $offset
     ): Generator {
+        if ($offset instanceof iQuad && !($offset instanceof Quad)) {
+            $offset = DataFactory::importQuad($offset);
+        }
+
         if ($offset === null) {
             yield from $this->quads;
         } elseif ($offset instanceof iQuad) {
@@ -431,6 +448,9 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         } elseif ($offset instanceof iQuadIterator) {
             $tmp = clone $this->quads;
             foreach ($offset as $i) {
+                if (!($i instanceof Quad)) {
+                    $i = DataFactory::importQuad($i);
+                }
                 $tmp->detach($i);
             }
             yield from $tmp;

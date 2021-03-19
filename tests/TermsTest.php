@@ -26,6 +26,8 @@
 
 namespace quickRdf;
 
+use zozlak\RdfConstants as RDF;
+
 /**
  * Description of TermsTest
  *
@@ -34,4 +36,6 @@ namespace quickRdf;
 class TermsTest extends \rdfInterface\tests\TermsTest {
 
     use TestTrait;
+
+    
 }

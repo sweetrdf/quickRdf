@@ -23,12 +23,11 @@ use quickRdf\DataFactory as DF;
 class DatasetTest extends \rdfInterface\tests\DatasetTest {
 
     use TestTrait;
-    
+
     public function testOffsetGetNoIndex(): void {
         $d = new Dataset(false);
         $d->add(new GenericQuadIterator(self::$quads));
         $q = $d[DF::quadTemplate(self::$quads[1]->getSubject())];
         $this->assertTrue(self::$quads[1]->equals($q));
     }
-    
 }

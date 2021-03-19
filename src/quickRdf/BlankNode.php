@@ -26,6 +26,8 @@
 
 namespace quickRdf;
 
+use rdfInterface\BlankNode as iBlankNode;
+use rdfInterface\Term as iTerm;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -33,7 +35,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class BlankNode implements \rdfInterface\BlankNode, HashableTerm {
+class BlankNode implements \rdfInterface\BlankNode, SingletonTerm {
 
     private static int $n = 0;
 
@@ -43,8 +45,7 @@ class BlankNode implements \rdfInterface\BlankNode, HashableTerm {
      */
     private $id;
 
-    public function __construct(?string $id = null)
-    {
+    public function __construct(?string $id = null) {
         (!DF::$enforceConstructor) || DF::checkCall();
         if (empty($id)) {
             $id = "_:genid" . self::$n;
@@ -56,23 +57,19 @@ class BlankNode implements \rdfInterface\BlankNode, HashableTerm {
         $this->id = $id;
     }
 
-    public function __toString(): string
-    {
+    public function __toString(): string {
         return $this->id;
     }
 
-    public function equals(\rdfInterface\Term $term): bool
-    {
-        return $this === $term;
+    public function equals(iTerm $term): bool {
+        if ($term instanceof SingletonTerm) {
+            return $this === $term;
+        } else {
+            return $term instanceof iBlankNode && $this->getValue() === $term->getValue();
+        }
     }
 
-    public function getType(): string
-    {
-        return \rdfInterface\TYPE_BLANK_NODE;
-    }
-
-    public function getValue(): string
-    {
+    public function getValue(): string {
         return $this->id;
     }
 }

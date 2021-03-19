@@ -26,6 +26,8 @@
 
 namespace quickRdf;
 
+use rdfInterface\NamedNode as iNamedNode;
+use rdfInterface\Term as iTerm;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -33,7 +35,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class NamedNode implements \rdfInterface\NamedNode, HashableTerm {
+class NamedNode implements \rdfInterface\NamedNode, SingletonTerm {
 
     private string $iri;
 
@@ -50,11 +52,11 @@ class NamedNode implements \rdfInterface\NamedNode, HashableTerm {
         return $this->iri;
     }
 
-    public function getType(): string {
-        return \rdfInterface\TYPE_NAMED_NODE;
-    }
-
-    public function equals(\rdfInterface\Term $term): bool {
-        return $this === $term;
+    public function equals(iTerm $term): bool {
+        if ($term instanceof SingletonTerm) {
+            return $this === $term;
+        } else {
+            return $term instanceof iNamedNode && $this->getValue() === $term->getValue();
+        }
     }
 }

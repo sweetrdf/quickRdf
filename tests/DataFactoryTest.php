@@ -30,7 +30,7 @@ class DataFactoryTest extends \rdfInterface\tests\DataFactoryTest {
 
         $n1     = DF::namedNode($iri);
         $n2     = DF::namedNode($iri);
-        $type   = $n1->getType();
+        $type   = $n1::class;
         $this->assertTrue($n1 === $n2);
         $counts = DF::getCacheCounts();
         $this->assertEquals(1, $counts[$type]->total - $base[$type]->total);

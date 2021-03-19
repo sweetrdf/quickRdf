@@ -37,8 +37,16 @@ trait TestTrait {
         return new DataFactory();
     }
 
+    public static function getForeignDataFactory(): \rdfInterface\DataFactory {
+        return new \simpleRdf\DataFactory();
+    }
+
     public static function getDataset(): \rdfInterface\Dataset {
         return new Dataset();
+    }
+
+    public static function getForeignDataset(): \rdfInterface\Dataset {
+        return new \simpleRdf\Dataset();
     }
 
     public static function getRdfNamespace(): \rdfInterface\RdfNamespace {

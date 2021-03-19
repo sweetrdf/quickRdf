@@ -92,17 +92,17 @@ class QuadTemplate implements iQuadTemplate {
         return rtrim("$this->subject $this->predicate $this->object $this->graphIri");
     }
 
-    public function getType(): string {
-        return \rdfInterface\TYPE_QUAD_TMPL;
-    }
-
     public function equals(iTerm $term): bool {
         if ($term instanceof iQuadTemplate) {
-            /* @var $term iQuad */
-            return $this->subject === $term->getSubject() &&
-                $this->predicate === $term->getPredicate() &&
-                $this->object === $term->getObject() &&
-                $this->graphIri === $term->getGraphIri();
+            $tsbj   = $term->getSubject();
+            $tpred  = $term->getPredicate();
+            $tobj   = $term->getObject();
+            $tgraph = $term->getGraphIri();
+            /* @var $term iQuadTemplate */
+            return ($this->subject === $tsbj || $this->subject !== null && $tsbj !== null && $this->subject->equals($tsbj)) &&
+                ($this->predicate === $tpred || $this->predicate !== null && $tpred !== null && $this->predicate->equals($tpred)) &&
+                ($this->object === $tobj || $this->object !== null && $tobj !== null && $this->object->equals($tobj)) &&
+                ($this->graphIri === $tgraph || $this->graphIri !== null && $tgraph !== null && $this->graphIri->equals($tgraph));
         } else if ($term instanceof iQuad) {
             /* @var $term iQuad */
             return ($this->subject === null || $this->subject->equals($term->getSubject())) &&

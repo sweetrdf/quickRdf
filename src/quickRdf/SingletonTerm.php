@@ -30,6 +30,6 @@ namespace quickRdf;
  * Interface used to mark DataFactory-hashable terms
  * @author zozlak
  */
-interface HashableTerm {
+interface SingletonTerm {
     
 }

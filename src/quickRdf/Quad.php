@@ -40,7 +40,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class Quad implements iQuad, HashableTerm {
+class Quad implements iQuad, SingletonTerm {
 
     private iTerm $subject;
     private iNamedNode $predicate;
@@ -65,20 +65,18 @@ class Quad implements iQuad, HashableTerm {
         return rtrim("$this->subject $this->predicate $this->object $this->graphIri");
     }
 
-    public function getType(): string {
-        return \rdfInterface\TYPE_QUAD;
-    }
-
     public function equals(iTerm $term): bool {
-        return $this === $term;
-//        if ($term->getType() !== $this->getType()) {
-//            return false;
-//        }
-//        /* @var $term iQuad */
-//        return $this->subject->equals($term->getSubject()) &&
-//            $this->predicate->equals($term->getPredicate()) &&
-//            $this->object->equals($term->getObject()) &&
-//            $this->graphIri->equals($term->getGraphIri());
+        if ($term instanceof SingletonTerm) {
+            return $this === $term;
+        } else if ($term instanceof iQuad) {
+            /* @var $term iQuad */
+            return $this->subject->equals($term->getSubject()) &&
+                $this->predicate->equals($term->getPredicate()) &&
+                $this->object->equals($term->getObject()) &&
+                $this->graphIri->equals($term->getGraphIri());
+        } else {
+            return false;
+        }
     }
 
     public function getValue(): string {
