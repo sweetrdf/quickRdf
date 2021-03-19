@@ -65,7 +65,7 @@ class Literal implements \rdfInterface\Literal, SingletonTerm {
         // just trust passed values, they should be sanitized by the DataFactory anyway
         $this->value    = $value;
         $this->lang     = $lang;
-        $this->datatype = $datatype;
+        $this->datatype = $datatype ?? RDF::XSD_STRING;
     }
 
     public function __toString(): string {
@@ -82,8 +82,6 @@ class Literal implements \rdfInterface\Literal, SingletonTerm {
         switch ($cast) {
             case self::CAST_LEXICAL_FORM:
                 return (string) $this->value;
-            case self::CAST_NONE:
-                return $this->value;
             default:
                 throw new BadMethodCallException("Unsupported cast requested");
         }

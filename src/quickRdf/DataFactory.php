@@ -161,11 +161,11 @@ class DataFactory implements \rdfInterface\DataFactory {
         throw new RdfException('Variables are not implemented');
     }
 
-    public static function importLiteral(iLiteral $literal): Literal {
+    public static function importLiteral(iLiteral $literal): iLiteral {
         return self::literal($literal->getValue(), $literal->getLang(), $literal->getDatatype());
     }
 
-    public static function importQuad(iQuad $quad): Quad {
+    public static function importQuad(iQuad $quad): iQuad {
         return self::quad($quad->getSubject(), $quad->getPredicate(), $quad->getObject(), $quad->getGraphIri());
     }
 
@@ -179,7 +179,7 @@ class DataFactory implements \rdfInterface\DataFactory {
         } elseif ($term instanceof iDefaultGraph) {
             return self::defaultGraph();
         } elseif ($term instanceof iQuad) {
-            return self::importQuad($quad);
+            return self::importQuad($term);
         } else {
             throw new RdfException("Can't import term of class " . $term::class);
         }
@@ -195,7 +195,7 @@ class DataFactory implements \rdfInterface\DataFactory {
         return true;
     }
 
-    private static function hashTerm(iTerm $t): string | null {
+    private static function hashTerm(iTerm $t): string {
         $sep = chr(1);
         if ($t instanceof iDefaultGraph) {
             return '';
