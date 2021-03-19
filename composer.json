@@ -34,7 +34,7 @@
         "sweetrdf/quick-rdf-io": "*",
         "php-coveralls/php-coveralls": "^2.4",
         "easyrdf/easyrdf": "^1.1",
-        "sweetrdf/simple-rdf": "^0.2.0"
+        "sweetrdf/simple-rdf": "^0.3.0"
     },
     "autoload-dev": {
         "psr-4": {
