@@ -30,8 +30,7 @@ jobs:
         git config user.email "workflow@github.actions"
         git config user.name "Github Actions Workflow"
         git add * || true
-        git commit -a -m 'Automatic documentation generation'
-        git push origin docs
+        git commit -a -m 'Automatic documentation generation' && git push origin docs || true
   phpstan:
     runs-on: ubuntu-latest
     steps:
