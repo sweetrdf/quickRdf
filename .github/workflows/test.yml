@@ -27,7 +27,6 @@ jobs:
         git checkout -b docs
         for i in `ls -1 | grep -v ^docs$`; do rm -fR $i ; done
         cp -R docs/* .
-        rmdir docs
         git config user.email "workflow@github.actions"
         git config user.name "Github Actions Workflow"
         git add *
