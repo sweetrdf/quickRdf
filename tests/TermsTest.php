@@ -26,7 +26,7 @@
 
 namespace quickRdf;
 
-use zozlak\RdfConstants as RDF;
+use BadMethodCallException;
 
 /**
  * Description of TermsTest
@@ -37,5 +37,22 @@ class TermsTest extends \rdfInterface\tests\TermsTest {
 
     use TestTrait;
 
-    
+    public function testLiteralExceptions(): void {
+        $l = self::$df::literal('foo');
+        try {
+            $l->getValue(-100);
+            $this->assertTrue(false);
+        } catch (BadMethodCallException) {
+            
+        }
+
+        try {
+            new Literal('foo');
+            $this->assertTrue(false);
+        } catch (RdfException $ex) {
+            
+        }
+        
+        $this->assertTrue(true); // so PHPUnit doesn't complain about lack of assertions
+    }
 }

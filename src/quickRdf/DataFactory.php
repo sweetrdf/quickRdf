@@ -117,7 +117,7 @@ class DataFactory implements \rdfInterface\DataFactory {
                     break;
                 case 'boolean':
                     $datatype = RDF::XSD_BOOLEAN;
-//                        $value          = (int) $value;
+                    $value    = (int) ((string) $value);
                     break;
                 default:
                     $datatype = RDF::XSD_STRING;
@@ -161,15 +161,7 @@ class DataFactory implements \rdfInterface\DataFactory {
         throw new RdfException('Variables are not implemented');
     }
 
-    public static function importLiteral(iLiteral $literal): iLiteral {
-        return self::literal($literal->getValue(), $literal->getLang(), $literal->getDatatype());
-    }
-
-    public static function importQuad(iQuad $quad): iQuad {
-        return self::quad($quad->getSubject(), $quad->getPredicate(), $quad->getObject(), $quad->getGraphIri());
-    }
-
-    public static function importTerm(iTerm $term): iTerm {
+    public static function importTerm(iTerm $term, bool $recursive = true): iTerm {
         if ($term instanceof iLiteral) {
             return self::literal($term->getValue(), $term->getLang(), $term->getDatatype());
         } elseif ($term instanceof iBlankNode) {
@@ -179,10 +171,30 @@ class DataFactory implements \rdfInterface\DataFactory {
         } elseif ($term instanceof iDefaultGraph) {
             return self::defaultGraph();
         } elseif ($term instanceof iQuad) {
-            return self::importQuad($term);
+            $sbj   = $term->getSubject();
+            $pred  = $term->getPredicate();
+            $obj   = $term->getObject();
+            $graph = $term->getGraphIri();
+            if ($recursive) {
+                $sbj   = self::importTerm($sbj, $recursive);
+                $pred  = self::importTerm($pred, $recursive);
+                $obj   = self::importTerm($obj, $recursive);
+                $graph = self::importTerm($graph, $recursive);
+            }
+            return self::quad($sbj, $pred, $obj, $graph);
         } else {
             throw new RdfException("Can't import term of class " . $term::class);
         }
+    }
+
+    /**
+     * Wrapper for importTerm() to make phpstan happy.
+     * 
+     * @param iQuad $quad
+     * @return iQuad
+     */
+    public static function importQuad(iQuad $quad): iQuad {
+        return self::importTerm($quad);
     }
 
     public static function checkCall(): bool {
@@ -204,11 +216,7 @@ class DataFactory implements \rdfInterface\DataFactory {
         } elseif ($t instanceof iLiteral) {
             return self::hashLiteral($t->getValue(), $t->getLang(), $t->getDatatype());
         } elseif ($t instanceof iQuad) {
-            $sbj   = self::hashTerm($t->getSubject());
-            $pred  = self::hashTerm($t->getPredicate());
-            $obj   = self::hashTerm($t->getObject());
-            $graph = self::hashTerm($t->getGraphIri());
-            return $sbj . $sep . $pred . $sep . $obj . $sep . $graph;
+            return self::hashQuad($t->getSubject(), $t->getPredicate(), $t->getObject(), $t->getGraphIri());
         } else {
             throw new RdfException("Can't hash Term of class " . $t::class);
         }
