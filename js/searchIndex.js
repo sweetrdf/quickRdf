@@ -76,20 +76,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/quickRdf-DataFactory.html#method_variable"
         },                {
-            "fqsen": "\\quickRdf\\DataFactory\u003A\u003AimportLiteral\u0028\u0029",
-            "name": "importLiteral",
-            "summary": "",
-            "url": "classes/quickRdf-DataFactory.html#method_importLiteral"
-        },                {
-            "fqsen": "\\quickRdf\\DataFactory\u003A\u003AimportQuad\u0028\u0029",
-            "name": "importQuad",
-            "summary": "",
-            "url": "classes/quickRdf-DataFactory.html#method_importQuad"
-        },                {
             "fqsen": "\\quickRdf\\DataFactory\u003A\u003AimportTerm\u0028\u0029",
             "name": "importTerm",
             "summary": "",
             "url": "classes/quickRdf-DataFactory.html#method_importTerm"
+        },                {
+            "fqsen": "\\quickRdf\\DataFactory\u003A\u003AimportQuad\u0028\u0029",
+            "name": "importQuad",
+            "summary": "Wrapper\u0020for\u0020importTerm\u0028\u0029\u0020to\u0020make\u0020phpstan\u0020happy.",
+            "url": "classes/quickRdf-DataFactory.html#method_importQuad"
         },                {
             "fqsen": "\\quickRdf\\DataFactory\u003A\u003AcheckCall\u0028\u0029",
             "name": "checkCall",
