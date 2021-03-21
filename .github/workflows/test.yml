@@ -29,6 +29,7 @@ jobs:
         cp -R docs/* .
         git config user.email "workflow@github.actions"
         git config user.name "Github Actions Workflow"
+        git config advice.addIgnoredFile false
         git add *
         git commit -a -m 'Automatic documentation generation'
         git push origin docs
