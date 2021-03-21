@@ -26,7 +26,7 @@ jobs:
         docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 -d src -d vendor/sweetrdf/rdf-interface/src  -d vendor/sweetrdf/rdf-helpers/src/ -t docs
         git checkout -b docs
         for i in `ls -1 | grep -v ^docs$`; do rm -fR $i ; done
-        mv docs/* .
+        cp -R docs/* .
         rmdir docs
         git config user.email "workflow@github.actions"
         git config user.name "Github Actions Workflow"
