@@ -30,12 +30,10 @@ use Generator;
 use Iterator;
 use OutOfBoundsException;
 use SplObjectStorage;
-use rdfInterface\Term as iTerm;
-use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\BlankNode as iBlankNode;
-use rdfInterface\Literal as iLiteral;
 use rdfInterface\DefaultGraph as iDefaultGraph;
 use rdfInterface\Quad as iQuad;
+use rdfInterface\Term as iTerm;
 use rdfInterface\QuadTemplate as iQuadTemplate;
 use rdfInterface\QuadIterator as iQuadIterator;
 use rdfInterface\Dataset as iDataset;
@@ -165,8 +163,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         return $ret;
     }
 
-    public function xor(iQuad | iQuadIterator $other): iDataset {
-        $ret = $this->union($other);
+    public function xor(iQuad | iQuadIterator $other, bool $indexed = false): iDataset {
+        $ret = $this->union($other, $indexed);
         $ret->delete($this->copy($other));
         return $ret;
     }
@@ -525,6 +523,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         }
     }
 
+    // DatasetMapReduce
+
     public function map(callable $fn, bool $indexed = false): iDataset {
         $ret = new Dataset($indexed);
         foreach ($this as $i) {
@@ -539,6 +539,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         }
         return $initialValue;
     }
+
+    // DatasetCompare
 
     public function any(iQuad | iQuadTemplate | iQuadIterator | callable $filter): bool {
         try {
@@ -563,12 +565,6 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
     }
 
     public function none(iQuad | iQuadTemplate | iQuadIterator | callable $filter): bool {
-        try {
-            $iter = $this->findMatchingQuads($filter);
-            $iter = $iter->current(); // so PHP doesn't optimize previous line out
-            return false;
-        } catch (OutOfBoundsException) {
-            return true;
-        }
+        return !$this->any($filter);
     }
 }
