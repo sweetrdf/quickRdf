@@ -7,6 +7,15 @@
 
 An RDF library for PHP implementing the https://github.com/sweetrdf/rdfInterface interface.
 
+Implemented to be fast and memory efficient.
+
+This is achieved by using a global terms hash table with only a single copy of equal rdfInterface terms being stored in memory at a given time.
+It allows to save quite some memory in dense graphs and provides a lightning fast terms comparison (equal if and only if it's the same object).
+It also provides a very efficient implementation of Dataset set operations using PHP's SplObjectStorage.
+
+The Dataset implementation maintains indexes allowing quick quads search 
+(indexing can be turned off if needed as it significantly slows down a dataset creation).
+
 ## Installation
 
 * Obtain the [Composer](https://getcomposer.org)
