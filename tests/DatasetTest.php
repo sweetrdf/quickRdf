@@ -41,19 +41,21 @@ class DatasetTest extends \rdfInterface\tests\DatasetTest {
             //1 <baz> <foo> <bar>
             //2 <bar> <baz> <foo>
             //3 <foo> <bar> "baz"@en <graph>
-            $d = new Dataset($indexed);
+            $d  = new Dataset((bool) $indexed);
             $d->add(new GenericQuadIterator(self::$quads));
 
             $dd = $d->copy($qt);
             $this->assertCount(1, $dd, "Indexed: $indexed");
             foreach ($dd as $i) {
-                $this->assertEquals('en', $i->getObject()->getLang(), "Indexed: $indexed");
+                $obj = $i->getObject();
+                $this->assertTrue($obj instanceof iLiteral && $obj->getLang() === 'en', "Indexed: $indexed");
             }
 
             $dd = $d->copyExcept($qt);
             $this->assertCount(3, $dd, "Indexed: $indexed");
             foreach ($dd as $i) {
-                $this->assertTrue(!($i instanceof iLiteral) || $i->getObject()->getLang() === null, "Indexed: $indexed");
+                $obj = $i->getObject();
+                $this->assertTrue(!($obj instanceof iLiteral) || $obj->getLang() === null, "Indexed: $indexed");
             }
 
             // mix of indexable and non-indexable terms
@@ -68,14 +70,16 @@ class DatasetTest extends \rdfInterface\tests\DatasetTest {
             $dd = $d->copy($qt);
             $this->assertCount(1, $dd);
             foreach ($dd as $i) {
+                $obj = $i->getObject();
                 $this->assertEquals('foo', $i->getSubject()->getValue(), "Indexed: $indexed");
-                $this->assertEquals('en', $i->getObject()->getLang(), "Indexed: $indexed");
+                $this->assertTrue($obj instanceof iLiteral && $obj->getLang() === 'en', "Indexed: $indexed");
             }
 
             $dd = $d->copyExcept($qt);
             $this->assertCount(4, $dd, "Indexed: $indexed");
             foreach ($dd as $i) {
-                $this->assertTrue(!($i instanceof iLiteral) || $i->getObject()->getLang() === null || $i->getSubject()->getValue() !== 'foo', "Indexed: $indexed");
+                $obj = $i->getObject();
+                $this->assertTrue(!($obj instanceof iLiteral) || $obj->getLang() === null || $i->getSubject()->getValue() !== 'foo', "Indexed: $indexed");
             }
         }
     }
