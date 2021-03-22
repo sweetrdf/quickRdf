@@ -19,11 +19,6 @@ class DataFactoryTest extends \rdfInterface\tests\DataFactoryTest {
 
     use TestTrait;
 
-    public function testCreateVariable(): void {
-        $this->expectException(RdfException::class);
-        parent::testCreateVariable();
-    }
-
     public function testImportTerms(): void {
         $l  = self::$df::literal('foo');
         $fl = self::$fdf::literal('foo');
@@ -48,7 +43,7 @@ class DataFactoryTest extends \rdfInterface\tests\DataFactoryTest {
         $this->assertSame($l, $qq->getObject());
 
         try {
-            DF::importTerm(self::$fdf::quadTemplate($fnn));
+            DF::importTerm(new TestUnsupportedTerm());
             $this->assertTrue(false);
         } catch (RdfException) {
             
@@ -58,7 +53,7 @@ class DataFactoryTest extends \rdfInterface\tests\DataFactoryTest {
     public function testHashException(): void {
         $nn = self::$df::namedNode('foo');
         $dg = self::$df::defaultGraph();
-        $qt = self::$df::quadTemplate($dg);
+        $qt = new TestUnsupportedTerm();
         try {
             self::$df::quad($qt, $nn, $qt);
             $this->assertTrue(false);

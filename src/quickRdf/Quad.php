@@ -45,11 +45,11 @@ class Quad implements iQuad, SingletonTerm {
     private iTerm $subject;
     private iNamedNode $predicate;
     private iTerm $object;
-    private iNamedNode | iBlankNode | iDefaultGraph $graphIri;
+    private iNamedNode | iBlankNode | iDefaultGraph $graph;
 
     public function __construct(
         iTerm $subject, iNamedNode $predicate, iTerm $object,
-        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
+        iNamedNode | iBlankNode | iDefaultGraph | null $graph = null
     ) {
         (!DF::$enforceConstructor) || DF::checkCall();
         if ($subject instanceof iLiteral) {
@@ -58,14 +58,14 @@ class Quad implements iQuad, SingletonTerm {
         $this->subject   = $subject;
         $this->predicate = $predicate;
         $this->object    = $object;
-        $this->graphIri  = $graphIri ?? DF::defaultGraph();
+        $this->graph     = $graph ?? DF::defaultGraph();
     }
 
     public function __toString(): string {
         $sbj   = (string) $this->subject;
         $pred  = (string) $this->predicate;
         $obj   = (string) $this->object;
-        $graph = $this->graphIri instanceof iDefaultGraph ? '' : (string) $this->graphIri;
+        $graph = $this->graph instanceof iDefaultGraph ? '' : (string) $this->graph;
         if ($this->subject instanceof iQuad) {
             $sbj = "<< $sbj >>";
         }
@@ -83,7 +83,7 @@ class Quad implements iQuad, SingletonTerm {
             return $this->subject->equals($term->getSubject()) &&
                 $this->predicate->equals($term->getPredicate()) &&
                 $this->object->equals($term->getObject()) &&
-                $this->graphIri->equals($term->getGraphIri());
+                $this->graph->equals($term->getGraph());
         } else {
             return false;
         }
@@ -105,23 +105,23 @@ class Quad implements iQuad, SingletonTerm {
         return $this->object;
     }
 
-    public function getGraphIri(): iNamedNode | iBlankNode | iDefaultGraph {
-        return $this->graphIri;
+    public function getGraph(): iNamedNode | iBlankNode | iDefaultGraph {
+        return $this->graph;
     }
 
     public function withSubject(iTerm $subject): iQuad {
-        return DF::quad($subject, $this->predicate, $this->object, $this->graphIri);
+        return DF::quad($subject, $this->predicate, $this->object, $this->graph);
     }
 
     public function withPredicate(iNamedNode $predicate): iQuad {
-        return DF::quad($this->subject, $predicate, $this->object, $this->graphIri);
+        return DF::quad($this->subject, $predicate, $this->object, $this->graph);
     }
 
     public function withObject(iTerm $object): iQuad {
-        return DF::quad($this->subject, $this->predicate, $object, $this->graphIri);
+        return DF::quad($this->subject, $this->predicate, $object, $this->graph);
     }
 
-    public function withGraphIri(iNamedNode | iBlankNode | iDefaultGraph | null $graphIri): iQuad {
-        return DF::quad($this->subject, $this->predicate, $this->object, $graphIri);
+    public function withGraph(iNamedNode | iBlankNode | iDefaultGraph | null $graph): iQuad {
+        return DF::quad($this->subject, $this->predicate, $this->object, $graph);
     }
 }

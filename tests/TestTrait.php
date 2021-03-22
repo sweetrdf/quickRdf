@@ -26,6 +26,9 @@
 
 namespace quickRdf;
 
+use rdfInterface\Term as iTerm;
+use rdfInterface\TermCompare as iTermCompare;
+
 /**
  * Description of TestTrait
  *
@@ -47,6 +50,13 @@ trait TestTrait {
 
     public static function getForeignDataset(): \rdfInterface\Dataset {
         return new \simpleRdf\Dataset();
+    }
+
+    public static function getQuadTemplate(iTermCompare | iTerm | null $subject = null,
+                                           iTermCompare | iTerm | null $predicate = null,
+                                           iTermCompare | iTerm | null $object = null,
+                                           iTermCompare | iTerm | null $graphIri = null): \rdfInterface\QuadCompare {
+        return new \termTemplates\QuadTemplate($subject, $predicate, $object, $graphIri);
     }
 
     public static function getRdfNamespace(): \rdfInterface\RdfNamespace {

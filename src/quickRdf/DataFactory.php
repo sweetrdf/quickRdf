@@ -35,7 +35,6 @@ use rdfInterface\NamedNode as iNamedNode;
 use rdfInterface\Literal as iLiteral;
 use rdfInterface\DefaultGraph as iDefaultGraph;
 use rdfInterface\Quad as iQuad;
-use rdfInterface\QuadTemplate as iQuadTemplate;
 use rdfHelpers\DefaultGraph;
 
 /**
@@ -99,11 +98,9 @@ class DataFactory implements \rdfInterface\DataFactory {
         return self::$defaultGraph;
     }
 
-    public static function literal(
-        int | float | string | bool | Stringable $value,
-        string | Stringable | null $lang = null,
-        string | Stringable | null $datatype = null
-    ): iLiteral {
+    public static function literal(int | float | string | bool | Stringable $value,
+                                   string | Stringable | null $lang = null,
+                                   string | Stringable | null $datatype = null): iLiteral {
         if (!empty($lang)) {
             $datatype = RDF::RDF_LANG_STRING;
         } elseif (empty($datatype)) {
@@ -135,30 +132,17 @@ class DataFactory implements \rdfInterface\DataFactory {
         return $a[$hash]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
-    public static function quad(
-        iTerm $subject, iNamedNode $predicate, iTerm $object,
-        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
-    ): iQuad {
-        $graphIri ??= self::defaultGraph();
-        $hash     = self::hashQuad($subject, $predicate, $object, $graphIri);
-        $a        = &self::$quads;
+    public static function quad(iTerm $subject, iNamedNode $predicate,
+                                iTerm $object,
+                                iNamedNode | iBlankNode | iDefaultGraph | null $graph = null): iQuad {
+        $graph ??= self::defaultGraph();
+        $hash  = self::hashQuad($subject, $predicate, $object, $graph);
+        $a     = &self::$quads;
         if (!isset($a[$hash]) || $a[$hash]->get() === null) {
-            $obj      = new Quad($subject, $predicate, $object, $graphIri);
+            $obj      = new Quad($subject, $predicate, $object, $graph);
             $a[$hash] = WeakReference::create($obj);
         }
         return $a[$hash]->get() ?? throw new RuntimeException("Object creation failed");
-    }
-
-    public static function quadTemplate(
-        iTerm | null $subject = null, iNamedNode | null $predicate = null,
-        iTerm | null $object = null,
-        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
-    ): iQuadTemplate {
-        return new QuadTemplate($subject, $predicate, $object, $graphIri);
-    }
-
-    public static function variable(string | Stringable $name): \rdfInterface\Variable {
-        throw new RdfException('Variables are not implemented');
     }
 
     public static function importTerm(iTerm $term, bool $recursive = true): iTerm {
@@ -174,7 +158,7 @@ class DataFactory implements \rdfInterface\DataFactory {
             $sbj   = $term->getSubject();
             $pred  = $term->getPredicate();
             $obj   = $term->getObject();
-            $graph = $term->getGraphIri();
+            $graph = $term->getGraph();
             if ($recursive) {
                 $sbj   = self::importTerm($sbj, $recursive);
                 $pred  = self::importTerm($pred, $recursive);
@@ -208,7 +192,6 @@ class DataFactory implements \rdfInterface\DataFactory {
     }
 
     private static function hashTerm(iTerm $t): string {
-        $sep = chr(1);
         if ($t instanceof iDefaultGraph) {
             return '';
         } elseif ($t instanceof iBlankNode || $t instanceof iNamedNode) {
@@ -216,7 +199,7 @@ class DataFactory implements \rdfInterface\DataFactory {
         } elseif ($t instanceof iLiteral) {
             return self::hashLiteral($t->getValue(), $t->getLang(), $t->getDatatype());
         } elseif ($t instanceof iQuad) {
-            return self::hashQuad($t->getSubject(), $t->getPredicate(), $t->getObject(), $t->getGraphIri());
+            return self::hashQuad($t->getSubject(), $t->getPredicate(), $t->getObject(), $t->getGraph());
         } else {
             throw new RdfException("Can't hash Term of class " . $t::class);
         }
@@ -229,10 +212,10 @@ class DataFactory implements \rdfInterface\DataFactory {
     }
 
     private static function hashQuad(iTerm $subject, iTerm $predicate,
-                                     iTerm $object, iTerm $graphIri): string {
+                                     iTerm $object, iTerm $graph): string {
         $sep = chr(1);
         return self::hashTerm($subject) . $sep . self::hashTerm($predicate) . $sep .
-            self::hashTerm($object) . $sep . self::hashTerm($graphIri);
+            self::hashTerm($object) . $sep . self::hashTerm($graph);
     }
 
     /**

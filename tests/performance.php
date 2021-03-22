@@ -6,8 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use EasyRdf\Graph;
 use quickRdfIo\NQuadsParser;
-use quickRdf\Dataset;
-use quickRdf\DataFactory as DF;
+use termTemplates\QuadTemplate;
 
 $testFile = __DIR__ . '/puzzle4d_100k.ntriples';
 $testSbj  = 'https://id.acdh.oeaw.ac.at/td-archiv/MobileObjects_Funde_E19/Inventarbuecher_Datenbanken_Tabellen_Fundzettel/Inventarbuecher/Keramik_07217-07349A/TD_Inv_4DPuzzle1936__TD_7230.tif';
@@ -48,12 +47,21 @@ if ($test == 'easyrdf') {
 
         unset($g);
     }
-} else if (in_array($test, ['idxsafe', 'idxunsafe', 'safe', 'unsafe'])) {
-    DF::$enforceConstructor = in_array($argv[1], ['idxsafe', 'safe']);
+} else if (in_array($test, ['idxsafe', 'idxunsafe', 'safe', 'unsafe', 'simpleRdf'])) {
+    if ($test === 'simpleRdf') {
+        $df = new simpleRdf\DataFactory();
+    } else {
+        $df                      = new quickRdf\DataFactory();
+        $df::$enforceConstructor = in_array($argv[1], ['idxsafe', 'safe']);
+    }
     for ($i = 0; $i < $testCount; $i++) {
         $t = microtime(true);
-        $p = new NQuadsParser(new DF(), false, true);
-        $g = new Dataset(in_array($argv[1], ['idxsafe', 'idxunsafe']));
+        $p = new NQuadsParser($df, false, true);
+        if ($test === 'simpleRdf') {
+            $g = new simpleRdf\Dataset();
+        } else {
+            $g = new quickRdf\Dataset(in_array($argv[1], ['idxsafe', 'idxunsafe']));
+        }
         $f = fopen($testFile, 'r');
         if ($f !== false) {
             $g->add($p->parseStream($f));
@@ -63,20 +71,20 @@ if ($test == 'easyrdf') {
         }
 
         $t = microtime(true);
-        $d = $g->copy(DF::quadTemplate(DF::namedNode($testSbj)));
+        $d = $g->copy(new QuadTemplate($df::namedNode($testSbj)));
         $t = microtime(true) - $t;
         printlog($i, $argv[1], "subject search", $t, count($d));
 
         $t = microtime(true);
-        $d = $g->copy(DF::quadTemplate(null, DF::namedNode($testPred)));
+        $d = $g->copy(new QuadTemplate(null, $df::namedNode($testPred)));
         $t = microtime(true) - $t;
         printlog($i, $argv[1], "predicate search", $t, count($d));
 
         $t = microtime(true);
-        $d = $g->copy(DF::quadTemplate(null, null, DF::namedNode($testObj)));
+        $d = $g->copy(new QuadTemplate(null, null, $df::namedNode($testObj)));
         $t = microtime(true) - $t;
         printlog($i, $argv[1], "object search", $t, count($d));
     }
 } else {
-    exit("Usage: $argv[0] easyrdf/idxsafe/idxunsafe/safe/unsafe [count=1]\n");
+    exit("Usage: $argv[0] easyrdf/idxsafe/idxunsafe/safe/unsafe/simpleRdf [count=1]\n");
 }

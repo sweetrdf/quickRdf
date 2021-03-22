@@ -8,12 +8,10 @@
 
 namespace quickRdf;
 
-use OutOfBoundsException;
 use rdfHelpers\GenericQuadIterator;
 use rdfInterface\Literal as iLiteral;
-use rdfInterface\Quad as iQuad;
-use rdfInterface\Dataset as iDataset;
-use quickRdf\DataFactory as DF;
+use termTemplates\LiteralTemplate;
+use termTemplates\QuadTemplate;
 
 /**
  * Description of LoggerTest
@@ -27,7 +25,58 @@ class DatasetTest extends \rdfInterface\tests\DatasetTest {
     public function testOffsetGetNoIndex(): void {
         $d = new Dataset(false);
         $d->add(new GenericQuadIterator(self::$quads));
-        $q = $d[DF::quadTemplate(self::$quads[1]->getSubject())];
+        $q = $d[static::getQuadTemplate(self::$quads[1]->getSubject())];
         $this->assertTrue(self::$quads[1]->equals($q));
+    }
+
+    /**
+     * Corner cases for findByIndices()
+     * @return void
+     */
+    public function testFindByIndices(): void {
+        foreach ([0, 1] as $indexed) {
+            // single non-indexable term
+            $qt = new QuadTemplate(null, null, new LiteralTemplate(null, ''));
+            //0 <foo> <bar> "baz"
+            //1 <baz> <foo> <bar>
+            //2 <bar> <baz> <foo>
+            //3 <foo> <bar> "baz"@en <graph>
+            $d = new Dataset($indexed);
+            $d->add(new GenericQuadIterator(self::$quads));
+
+            $dd = $d->copy($qt);
+            $this->assertCount(1, $dd, "Indexed: $indexed");
+            foreach ($dd as $i) {
+                $this->assertEquals('en', $i->getObject()->getLang(), "Indexed: $indexed");
+            }
+
+            $dd = $d->copyExcept($qt);
+            $this->assertCount(3, $dd, "Indexed: $indexed");
+            foreach ($dd as $i) {
+                $this->assertTrue(!($i instanceof iLiteral) || $i->getObject()->getLang() === null, "Indexed: $indexed");
+            }
+
+            // mix of indexable and non-indexable terms
+            $qt = new QuadTemplate(static::$df::namedNode('foo'), null, new LiteralTemplate(null, ''));
+            $d->add(self::$quads[3]->withSubject(self::$quads[1]->getSubject()));
+            //0 <foo> <bar> "baz"
+            //1 <baz> <foo> <bar>
+            //2 <bar> <baz> <foo>
+            //3 <foo> <bar> "baz"@en <graph>
+            //4 <baz> <bar> "baz"@en <graph>
+
+            $dd = $d->copy($qt);
+            $this->assertCount(1, $dd);
+            foreach ($dd as $i) {
+                $this->assertEquals('foo', $i->getSubject()->getValue(), "Indexed: $indexed");
+                $this->assertEquals('en', $i->getObject()->getLang(), "Indexed: $indexed");
+            }
+
+            $dd = $d->copyExcept($qt);
+            $this->assertCount(4, $dd, "Indexed: $indexed");
+            foreach ($dd as $i) {
+                $this->assertTrue(!($i instanceof iLiteral) || $i->getObject()->getLang() === null || $i->getSubject()->getValue() !== 'foo', "Indexed: $indexed");
+            }
+        }
     }
 }
