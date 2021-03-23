@@ -29,7 +29,6 @@ namespace quickRdf;
 use Generator;
 use Iterator;
 use OutOfBoundsException;
-use OutOfRangeException;
 use SplObjectStorage;
 use rdfInterface\BlankNode as iBlankNode;
 use rdfInterface\DefaultGraph as iDefaultGraph;
@@ -146,7 +145,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         return $dataset;
     }
 
-    public function copyExcept(iQuadCompare | iQuadIterator | callable | null $filter = null,
+    public function copyExcept(iQuadCompare | iQuadIterator | callable | null $filter,
                                bool $indexed = false): iDataset {
         $dataset = new Dataset($indexed);
         $dataset->add(new GenericQuadIterator($this->findNotMatchingQuads($filter)));
