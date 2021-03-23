@@ -200,7 +200,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
 
     // QuadIterator
 
-    public function current(): iQuad {
+    public function current(): iQuad | null {
         return $this->quads->current();
     }
 
@@ -229,19 +229,14 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
 
     /**
      *
-     * @param int|iQuadCompare|callable $offset
+     * @param iQuadCompare|callable $offset
      * @return bool
      */
     public function offsetExists($offset): bool {
         return $this->exists($offset);
     }
 
-    private function exists(int | iQuadCompare | callable $offset): bool {
-        if ($offset === 0) {
-            return $this->quads->count() > 0;
-        } elseif (is_int($offset)) {
-            throw new OutOfRangeException();
-        }
+    private function exists(iQuadCompare | callable $offset): bool {
         try {
             $iter = $this->findMatchingQuads($offset);
             $this->checkIteratorEnd($iter);
@@ -253,19 +248,14 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
 
     /**
      *
-     * @param int|iQuadCompare|callable $offset
+     * @param iQuadCompare|callable $offset
      * @return iQuad
      */
     public function offsetGet($offset): iQuad {
         return $this->get($offset);
     }
 
-    private function get(int | iQuadCompare | callable $offset): iQuad {
-        if ($offset === 0) {
-            return $this->quads->current() ?? throw new OutOfBoundsException();
-        } elseif (is_int($offset)) {
-            throw new OutOfRangeException();
-        }
+    private function get(iQuadCompare | callable $offset): iQuad {
         $iter = $this->findMatchingQuads($offset);
         $ret  = $iter->current();
         $this->checkIteratorEnd($iter);
