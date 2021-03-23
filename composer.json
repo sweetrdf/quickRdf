@@ -31,11 +31,12 @@
         "phpunit/php-code-coverage": "^9.2",
         "phpstan/phpstan": "*",
         "squizlabs/php_codesniffer": "*",
-        "sweetrdf/quick-rdf-io": "*",
         "php-coveralls/php-coveralls": "^2.4",
-        "easyrdf/easyrdf": "^1.1",
+        "sweetrdf/rdf-interface-tests": "dev-master",
+        "sweetrdf/term-templates": "*",
         "sweetrdf/simple-rdf": "dev-master",
-        "sweetrdf/term-templates": "*"
+        "sweetrdf/quick-rdf-io": "*",
+        "easyrdf/easyrdf": "*"
     },
     "autoload-dev": {
         "psr-4": {
