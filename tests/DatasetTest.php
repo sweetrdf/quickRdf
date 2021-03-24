@@ -28,7 +28,7 @@ class DatasetTest extends \rdfInterface\tests\DatasetTest {
         $q = $d[static::getQuadTemplate(self::$quads[1]->getSubject())];
         $this->assertTrue(self::$quads[1]->equals($q));
     }
-
+    
     /**
      * Corner cases for findByIndices()
      * @return void

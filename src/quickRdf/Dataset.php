@@ -193,7 +193,14 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
 
     public function forEach(callable $fn): void {
         foreach (clone $this->quads as $i) {
-            $this[$i] = $fn($i, $this);
+            $this->quads->detach($i);
+            $this->unindex($i);
+
+            $val = $fn($i, $this);
+            if ($val !== null) {
+                $this->quads->attach($val);
+                $this->index($val);
+            }
         }
     }
 
