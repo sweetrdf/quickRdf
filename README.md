@@ -24,10 +24,10 @@ The Dataset implementation maintains indexes allowing quick quads search
 
 ## Automatically generated documentation
 
-https://sweetrdf.github.io/quickRdf/
+https://sweetrdf.github.io/quickRdf/namespaces/quickrdf.html
 
-It's very incomplite but better than nothing.\
-[RdfInterface](https://sweetrdf.github.io/quickRdf/namespaces/quickrdf.html) documentation is included which explains the most important design decisions.
+It's very incomplete but better than nothing.\
+[RdfInterface](https://github.com/sweetrdf/rdfInterface/) documentation is included which explains the most important design decisions.
 
 ## Usage
 
