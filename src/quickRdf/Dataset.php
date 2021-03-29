@@ -102,7 +102,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         $n = 0;
         // $other contained in $this
         foreach ($other as $i) {
-            if (!($i->getSubject() instanceof iBlankNode)) {
+            if (!($i->getSubject() instanceof iBlankNode) && !($i->getObject() instanceof iBlankNode)) {
                 if (!($i instanceof Quad)) {
                     $i = DataFactory::importQuad($i);
                 }
@@ -114,7 +114,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare {
         }
         // $this contained in $other
         foreach ($this as $i) {
-            if (!($i->getSubject() instanceof iBlankNode)) {
+            if (!($i->getSubject() instanceof iBlankNode) && !($i->getObject() instanceof iBlankNode)) {
                 $n--;
             }
         }
