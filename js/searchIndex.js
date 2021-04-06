@@ -256,6 +256,56 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method_unset"
         },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003Amap\u0028\u0029",
+            "name": "map",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_map"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003Areduce\u0028\u0029",
+            "name": "reduce",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_reduce"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003Aany\u0028\u0029",
+            "name": "any",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_any"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003Aevery\u0028\u0029",
+            "name": "every",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_every"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003Anone\u0028\u0029",
+            "name": "none",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_none"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AlistSubjects\u0028\u0029",
+            "name": "listSubjects",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_listSubjects"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AlistPredicates\u0028\u0029",
+            "name": "listPredicates",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_listPredicates"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AlistObjects\u0028\u0029",
+            "name": "listObjects",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_listObjects"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AlistGraphs\u0028\u0029",
+            "name": "listGraphs",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_listGraphs"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AlistQuadElement\u0028\u0029",
+            "name": "listQuadElement",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_listQuadElement"
+        },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003AfindMatchingQuads\u0028\u0029",
             "name": "findMatchingQuads",
             "summary": "",
@@ -285,31 +335,6 @@ Search.appendIndex(
             "name": "checkIteratorEnd",
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method_checkIteratorEnd"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003Amap\u0028\u0029",
-            "name": "map",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_map"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003Areduce\u0028\u0029",
-            "name": "reduce",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_reduce"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003Aany\u0028\u0029",
-            "name": "any",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_any"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003Aevery\u0028\u0029",
-            "name": "every",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_every"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003Anone\u0028\u0029",
-            "name": "none",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_none"
         },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024quads",
             "name": "quads",
@@ -845,6 +870,31 @@ Search.appendIndex(
             "name": "any",
             "summary": "",
             "url": "classes/rdfInterface-DatasetCompare.html#method_any"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetListQuadParts",
+            "name": "DatasetListQuadParts",
+            "summary": "Set\u0020of\u0020methods\u0020for\u0020listing\u0020distinct\u0020Terms\u0020being\u0020used\u0020on\u0020a\u0020given\u0020position\nof\u0020dataset\u0020quads.",
+            "url": "classes/rdfInterface-DatasetListQuadParts.html"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetListQuadParts\u003A\u003AlistSubjects\u0028\u0029",
+            "name": "listSubjects",
+            "summary": "",
+            "url": "classes/rdfInterface-DatasetListQuadParts.html#method_listSubjects"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetListQuadParts\u003A\u003AlistPredicates\u0028\u0029",
+            "name": "listPredicates",
+            "summary": "",
+            "url": "classes/rdfInterface-DatasetListQuadParts.html#method_listPredicates"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetListQuadParts\u003A\u003AlistObjects\u0028\u0029",
+            "name": "listObjects",
+            "summary": "",
+            "url": "classes/rdfInterface-DatasetListQuadParts.html#method_listObjects"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetListQuadParts\u003A\u003AlistGraphs\u0028\u0029",
+            "name": "listGraphs",
+            "summary": "",
+            "url": "classes/rdfInterface-DatasetListQuadParts.html#method_listGraphs"
         },                {
             "fqsen": "\\rdfInterface\\DatasetMapReduce",
             "name": "DatasetMapReduce",
