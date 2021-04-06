@@ -83,39 +83,4 @@ class DatasetTest extends \rdfInterface\tests\DatasetTest {
             }
         }
     }
-
-    public function testList(): void {
-        //0 <foo> <bar> "baz"
-        //1 <baz> <foo> <bar>
-        //2 <bar> <baz> <foo>
-        //3 <foo> <bar> "baz"@en <graph>
-        $d   = new Dataset();
-        $d->add(new GenericQuadIterator(self::$quads));
-        
-        $list = iterator_to_array($d->listSubjects());
-        $this->assertEquals(3, count($list));
-        $list = iterator_to_array($d->listSubjects(new QuadTemplate(null, static::$df::namedNode('bar'))));
-        $this->assertEquals(1, count($list));
-        $this->assertTrue(static::$df::namedNode('foo')->equals($list[0]));
-        
-        $list = iterator_to_array($d->listPredicates());
-        $this->assertEquals(3, count($list));
-        $list = iterator_to_array($d->listPredicates(new QuadTemplate(static::$df::namedNode('foo'))));
-        $this->assertEquals(1, count($list));
-        $this->assertTrue(static::$df::namedNode('bar')->equals($list[0]));
-
-        $list = iterator_to_array($d->listObjects());
-        $this->assertEquals(4, count($list));
-        $list = iterator_to_array($d->listObjects(new QuadTemplate(static::$df::namedNode('bar'))));
-        $this->assertEquals(1, count($list));
-        $this->assertTrue(static::$df::namedNode('foo')->equals($list[0]));
-
-        $list = iterator_to_array($d->listGraphs());
-        $this->assertEquals(2, count($list));
-        $list = iterator_to_array($d->listGraphs(new QuadTemplate(null, static::$df::namedNode('bar'))));
-        $this->assertEquals(2, count($list));
-        $list = iterator_to_array($d->listGraphs(new QuadTemplate(null, null, static::$df::literal('baz', 'en'))));
-        $this->assertEquals(1, count($list));
-        $this->assertTrue(static::$df::namedNode('graph')->equals($list[0]));        
-    }
 }
