@@ -31,6 +31,8 @@ It's very incomplete but better than nothing.\
 
 ## Usage
 
+(you can also take a look at generic rdfInterface [examples](https://github.com/sweetrdf/rdfInterface/blob/master/EasyRdfReadme.md))
+
 ```php
 include 'vendor/autoload.php';
 

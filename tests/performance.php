@@ -39,8 +39,9 @@ if ($test == 'easyrdf') {
 
         $t = microtime(true);
         $d = [];
+        $objRes = $g->resource($testObj);
         foreach ($g->reversePropertyUris($testObj) as $prop) {
-            $d = array_merge($d, $g->resourcesMatching($prop, $g->resource($testObj)));
+            $d = array_merge($d, $g->resourcesMatching($prop, $objRes));
         }
         $t = microtime(true) - $t;
         printlog($i, $argv[1], "object search", $t, count($d));
