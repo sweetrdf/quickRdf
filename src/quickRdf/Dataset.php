@@ -421,7 +421,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
                                      string $elementFn): Generator {
         try {
             $spotted = new SplObjectStorage();
-            $quads   = $this->findMatchingQuads($filter);
+            // materialize to avoid problems with parallel quads iterations
+            $quads   = iterator_to_array($this->findMatchingQuads($filter));
             foreach ($quads as $i) {
                 $i = $i->$elementFn();
                 if (!$spotted->contains($i)) {
