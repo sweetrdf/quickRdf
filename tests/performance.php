@@ -57,7 +57,7 @@ if ($test == 'easyrdf') {
     }
     for ($i = 0; $i < $testCount; $i++) {
         $t = microtime(true);
-        $p = new NQuadsParser($df, false, true);
+        $p = new NQuadsParser($df, false, NQuadsParser::MODE_TRIPLES);
         if ($test === 'simpleRdf') {
             $g = new simpleRdf\Dataset();
         } else {
