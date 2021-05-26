@@ -26,6 +26,7 @@
 
 namespace quickRdf;
 
+use RuntimeException;
 use Stringable;
 use WeakReference;
 use zozlak\RdfConstants as RDF;
