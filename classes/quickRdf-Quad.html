@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation</title>
+            <title>Documentation</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -15,6 +16,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
         <script src="js/search.js"></script>
@@ -51,21 +53,29 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
-        
-    <section class="phpdocumentor-sidebar__category">
-        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
-                                                <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/quickrdf.html"><abbr title="\quickRdf">quickRdf</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                    </ul>
-                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/rdfhelpers.html"><abbr title="\rdfHelpers">rdfHelpers</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                    </ul>
-                            <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/rdfinterface.html"><abbr title="\rdfInterface">rdfInterface</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                    </ul>
-                        </section>
+                    <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/quickrdf.html" class="">quickRdf</a>
+</h4>
 
-    
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/rdfhelpers.html" class="">rdfHelpers</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/rdfinterface.html" class="">rdfInterface</a>
+</h4>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
@@ -89,6 +99,12 @@
     Quad
 
     
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
     
             <span class="phpdocumentor-element__implements">
             implements
@@ -100,7 +116,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">43</span>
-</aside>
+
+    </aside>
 
             <p class="phpdocumentor-summary">Description of Triple</p>
 
@@ -126,7 +143,7 @@
 
 
 <h3 id="interfaces_class_traits">
-    Interfaces, Classes and Traits
+    Interfaces, Classes, Traits and Enums
     <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
 </h3>
 
@@ -135,6 +152,7 @@
         <dd>Extends Term because of RDF*</dd>
             <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/quickRdf-SingletonTerm.html"><abbr title="\quickRdf\SingletonTerm">SingletonTerm</abbr></a></dt>
         <dd>Interface used to mark DataFactory-hashable terms</dd>
+    
     
     
     </dl>
@@ -146,59 +164,59 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -private">
+                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_graph">$graph</a>
     <span>
-                &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>            </span>
+                        &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_object">$object</a>
     <span>
-                &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>            </span>
+                        &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_predicate">$predicate</a>
     <span>
-                &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>            </span>
+                        &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_subject">$subject</a>
     <span>
-                &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>            </span>
+                        &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>            </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method___construct">__construct()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method___toString">__toString()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_equals">equals()</a>
     <span>
-                        &nbsp;: bool    </span>
+                                &nbsp;: bool    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getGraph">getGraph()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>    </span>
 </dt>
 <dd>Null is not allowed to deal with the ambiguity between DefaultGraph and
 null which mean the same (although it should be noted that all quads in
@@ -207,56 +225,56 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getObject">getObject()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getPredicate">getPredicate()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getSubject">getSubject()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getValue">getValue()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withGraph">withGraph()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withObject">withObject()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withPredicate">withPredicate()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withSubject">withSubject()</a>
     <span>
-                        &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
+                                &nbsp;: <a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a>    </span>
 </dt>
 <dd></dd>
 
@@ -289,7 +307,8 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">48</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -322,7 +341,8 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">47</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -355,7 +375,8 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">46</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -388,7 +409,8 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">45</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -425,12 +447,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">50</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subject</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$predicate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$graph</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subject</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$predicate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$graph</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -487,12 +510,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">64</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -519,12 +543,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">78</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">equals</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$term</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">equals</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$term</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -562,7 +587,8 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">108</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Null is not allowed to deal with the ambiguity between DefaultGraph and
 null which mean the same (although it should be noted that all quads in
@@ -570,7 +596,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getGraph</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getGraph</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a></span></code>
 
     
     
@@ -596,12 +622,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">104</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getObject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getObject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -628,12 +655,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">100</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -660,12 +688,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">96</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getSubject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getSubject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -692,12 +721,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">92</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -724,12 +754,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">124</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withGraph</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$graph</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">withGraph</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>|<a href="classes/rdfInterface-BlankNode.html"><abbr title="\rdfInterface\BlankNode">BlankNode</abbr></a>|<a href="classes/rdfInterface-DefaultGraph.html"><abbr title="\rdfInterface\DefaultGraph">DefaultGraph</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$graph</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -767,12 +798,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">120</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withObject</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">withObject</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -810,12 +842,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">116</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$predicate</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">withPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNode.html"><abbr title="\rdfInterface\NamedNode">NamedNode</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$predicate</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -853,12 +886,13 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">112</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">withSubject</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subject</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">withSubject</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-Term.html"><abbr title="\rdfInterface\Term">Term</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subject</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-Quad.html"><abbr title="\rdfInterface\Quad">Quad</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -884,6 +918,68 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
 </article>
             </section>
 
+        
+    <script type="text/javascript">
+        function loadExternalCodeSnippets(line) {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                pre.setAttribute('data-line', line)
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        var modals = document.querySelectorAll("[data-modal]");
+
+        modals.forEach(function (trigger) {
+            trigger.addEventListener("click", function (event) {
+                //event.preventDefault();
+                const modal = document.getElementById(trigger.dataset.modal);
+                modal.classList.add("phpdocumentor-modal__open");
+                loadExternalCodeSnippets(trigger.dataset.line)
+                const exits = modal.querySelectorAll("[data-exit-button]");
+                exits.forEach(function (exit) {
+                    exit.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        modal.classList.remove("phpdocumentor-modal__open");
+                    });
+                });
+            });
+        });
+    </script>
+
     </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
@@ -908,5 +1004,6 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 </body>
 </html>
