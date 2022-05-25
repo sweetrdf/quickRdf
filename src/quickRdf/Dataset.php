@@ -218,7 +218,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     // QuadIterator
 
     public function current(): iQuad | null {
-        return $this->quads->current();
+        return $this->quads->valid() ? $this->quads->current() : null;
     }
 
     public function key() {
