@@ -6,6 +6,11 @@ Search.appendIndex(
             "summary": "Description\u0020of\u0020BlankNode",
             "url": "classes/quickRdf-BlankNode.html"
         },                {
+            "fqsen": "\\quickRdf\\BlankNode\u003A\u003AresetCounter\u0028\u0029",
+            "name": "resetCounter",
+            "summary": "Resets\u0020the\u0020counter\u0020used\u0020to\u0020assign\u0020blank\u0020node\u0020ids.",
+            "url": "classes/quickRdf-BlankNode.html#method_resetCounter"
+        },                {
             "fqsen": "\\quickRdf\\BlankNode\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
