@@ -40,6 +40,15 @@ class BlankNode implements \rdfInterface\BlankNode, SingletonTerm {
     private static int $n = 0;
 
     /**
+     * Resets the counter used to assign blank node ids.
+     * Useful when predictable blank node ids are required, e.g. in tests context
+     * @return void
+     */
+    public static function resetCounter(): void {
+        self::$n = 0;
+    }
+
+    /**
      *
      * @var string
      */
