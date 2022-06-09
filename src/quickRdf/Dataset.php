@@ -173,7 +173,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
                            bool $indexed = false): iDataset {
         $deleted = new Dataset($indexed);
         try {
-            foreach ($this->findMatchingQuads($filter) as $i) {
+            $quads = iterator_to_array($this->findMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
+            foreach ($quads as $i) {
                 $this->quads->detach($i);
                 $this->unindex($i);
                 $deleted->add($i);
@@ -187,7 +188,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     public function deleteExcept(iQuadCompare | iQuadIterator | callable $filter,
                                  bool $indexed = false): iDataset {
         $deleted = new Dataset($indexed);
-        foreach ($this->findNotMatchingQuads($filter) as $i) {
+        $quads   = iterator_to_array($this->findNotMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
+        foreach ($quads as $i) {
             $this->quads->detach($i);
             $this->unindex($i);
             $deleted->add($i);
@@ -221,7 +223,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
         return $this->quads->valid() ? $this->quads->current() : null;
     }
 
-    public function key() {
+    public function key(): mixed {
         return $this->quads->key();
     }
 
