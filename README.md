@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/sweetrdf/quickRdf/badge.svg?branch=master)](https://coveralls.io/github/sweetrdf/quickRdf?branch=master)
 [![License](https://poser.pugx.org/sweetrdf/quick-rdf/license)](https://packagist.org/packages/sweetrdf/quick-rdf)
 
-An RDF library for PHP providing implemention of https://github.com/sweetrdf/rdfInterface terms and dataset.
+An RDF library for PHP providing implementation of https://github.com/sweetrdf/rdfInterface terms and dataset.
 
 Implemented to be fast and memory efficient.
 
