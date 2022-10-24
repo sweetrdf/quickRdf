@@ -13,13 +13,13 @@ namespace quickRdf;
  *
  * @author zozlak
  */
-class TestUnsupportedTerm implements \rdfInterface\Term {
+class TestUnsupportedTerm implements \rdfInterface\TermInterface {
 
     public function __toString(): string {
         return '';
     }
 
-    public function equals(\rdfInterface\Term $term): bool {
+    public function equals(\rdfInterface\TermInterface $term): bool {
         return false;
     }
 

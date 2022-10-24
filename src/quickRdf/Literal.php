@@ -29,7 +29,8 @@ namespace quickRdf;
 use BadMethodCallException;
 use Stringable;
 use zozlak\RdfConstants as RDF;
-use rdfInterface\Literal as iLiteral;
+use rdfInterface\LiteralInterface as iLiteral;
+use rdfInterface\TermInterface as iTerm;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -37,7 +38,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class Literal implements \rdfInterface\Literal, SingletonTerm {
+class Literal implements iLiteral, SingletonTerm {
 
     /**
      *
@@ -95,7 +96,7 @@ class Literal implements \rdfInterface\Literal, SingletonTerm {
         return $this->datatype;
     }
 
-    public function equals(\rdfInterface\Term $term): bool {
+    public function equals(iTerm $term): bool {
         if ($term instanceof iLiteral) {
             return $this === $term ||
                 $this->getValue(self::CAST_LEXICAL_FORM) === $term->getValue(self::CAST_LEXICAL_FORM) &&
@@ -106,7 +107,7 @@ class Literal implements \rdfInterface\Literal, SingletonTerm {
         }
     }
 
-    public function withValue(int | float | string | bool | Stringable $value): \rdfInterface\Literal {
+    public function withValue(int | float | string | bool | Stringable $value): iLiteral {
         $lang     = $datatype = null;
         if (is_string($value) || $value instanceof Stringable) {
             $lang     = $this->lang;
@@ -115,7 +116,7 @@ class Literal implements \rdfInterface\Literal, SingletonTerm {
         return DF::literal($value, $lang, $datatype);
     }
 
-    public function withLang(?string $lang): \rdfInterface\Literal {
+    public function withLang(?string $lang): iLiteral {
         $hadLang = $this->lang !== null;
         $hasLang = !empty($lang);
         if ($hadLang !== $hasLang) {
@@ -126,7 +127,7 @@ class Literal implements \rdfInterface\Literal, SingletonTerm {
         return DF::literal($this->value, $lang, $datatype);
     }
 
-    public function withDatatype(string $datatype): \rdfInterface\Literal {
+    public function withDatatype(string $datatype): iLiteral {
         if (empty($datatype) || $datatype === RDF::RDF_LANG_STRING) {
             throw new BadMethodCallException("Datatype can't be empty nor rdf:langString");
         }

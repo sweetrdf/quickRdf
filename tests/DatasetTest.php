@@ -9,7 +9,7 @@
 namespace quickRdf;
 
 use rdfHelpers\GenericQuadIterator;
-use rdfInterface\Literal as iLiteral;
+use rdfInterface\LiteralInterface as iLiteral;
 use termTemplates\LiteralTemplate;
 use termTemplates\QuadTemplate;
 
@@ -18,7 +18,7 @@ use termTemplates\QuadTemplate;
  *
  * @author zozlak
  */
-class DatasetTest extends \rdfInterface\tests\DatasetTest {
+class DatasetTest extends \rdfInterface\tests\DatasetInterfaceTest {
 
     use TestTrait;
 

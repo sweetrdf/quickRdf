@@ -26,8 +26,8 @@
 
 namespace quickRdf;
 
-use rdfInterface\BlankNode as iBlankNode;
-use rdfInterface\Term as iTerm;
+use rdfInterface\BlankNodeInterface as iBlankNode;
+use rdfInterface\TermInterface as iTerm;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -35,7 +35,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class BlankNode implements \rdfInterface\BlankNode, SingletonTerm {
+class BlankNode implements iBlankNode, SingletonTerm {
 
     private static int $n = 0;
 

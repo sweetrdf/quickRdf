@@ -13,11 +13,11 @@ namespace quickRdf;
  *
  * @author zozlak
  */
-class DatasetListQuadPartsTest extends \rdfInterface\tests\DatasetListQuadPartsTest {
+class DatasetListQuadPartsTest extends \rdfInterface\tests\DatasetListQuadPartsInterfaceTest {
 
     use TestTrait;
     
-    public static function getDataset(): \rdfInterface\DatasetListQuadParts {
+    public static function getDataset(): Dataset {
         return new Dataset();
     }
 }

@@ -26,8 +26,8 @@
 
 namespace quickRdf;
 
-use rdfInterface\Term as iTerm;
-use rdfInterface\TermCompare as iTermCompare;
+use rdfInterface\TermInterface as iTerm;
+use rdfInterface\TermCompareInterface as iTermCompare;
 
 /**
  * Description of TestTrait
@@ -36,30 +36,30 @@ use rdfInterface\TermCompare as iTermCompare;
  */
 trait TestTrait {
 
-    public static function getDataFactory(): \rdfInterface\DataFactory {
+    public static function getDataFactory(): DataFactory {
         return new DataFactory();
     }
 
-    public static function getForeignDataFactory(): \rdfInterface\DataFactory {
+    public static function getForeignDataFactory(): \simpleRdf\DataFactory {
         return new \simpleRdf\DataFactory();
     }
 
-    public static function getDataset(): \rdfInterface\Dataset {
+    public static function getDataset(): Dataset {
         return new Dataset();
     }
 
-    public static function getForeignDataset(): \rdfInterface\Dataset {
+    public static function getForeignDataset(): \simpleRdf\Dataset {
         return new \simpleRdf\Dataset();
     }
 
     public static function getQuadTemplate(iTermCompare | iTerm | null $subject = null,
                                            iTermCompare | iTerm | null $predicate = null,
                                            iTermCompare | iTerm | null $object = null,
-                                           iTermCompare | iTerm | null $graphIri = null): \rdfInterface\QuadCompare {
+                                           iTermCompare | iTerm | null $graphIri = null): \rdfInterface\QuadCompareInterface {
         return new \termTemplates\QuadTemplate($subject, $predicate, $object, $graphIri);
     }
 
-    public static function getRdfNamespace(): \rdfInterface\RdfNamespace {
+    public static function getRdfNamespace(): RdfNamespace {
         return new RdfNamespace();
     }
 }

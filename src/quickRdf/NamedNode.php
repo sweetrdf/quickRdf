@@ -26,8 +26,8 @@
 
 namespace quickRdf;
 
-use rdfInterface\NamedNode as iNamedNode;
-use rdfInterface\Term as iTerm;
+use rdfInterface\NamedNodeInterface as iNamedNode;
+use rdfInterface\TermInterface as iTerm;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -35,7 +35,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class NamedNode implements \rdfInterface\NamedNode, SingletonTerm {
+class NamedNode implements iNamedNode, SingletonTerm {
 
     private string $iri;
 

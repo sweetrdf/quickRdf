@@ -30,12 +30,13 @@ use RuntimeException;
 use Stringable;
 use WeakReference;
 use zozlak\RdfConstants as RDF;
-use rdfInterface\Term as iTerm;
-use rdfInterface\BlankNode as iBlankNode;
-use rdfInterface\NamedNode as iNamedNode;
-use rdfInterface\Literal as iLiteral;
-use rdfInterface\DefaultGraph as iDefaultGraph;
-use rdfInterface\Quad as iQuad;
+use rdfInterface\DataFactoryInterface as iDataFactory;
+use rdfInterface\TermInterface as iTerm;
+use rdfInterface\BlankNodeInterface as iBlankNode;
+use rdfInterface\NamedNodeInterface as iNamedNode;
+use rdfInterface\LiteralInterface as iLiteral;
+use rdfInterface\DefaultGraphInterface as iDefaultGraph;
+use rdfInterface\QuadInterface as iQuad;
 use rdfHelpers\DefaultGraph;
 
 /**
@@ -43,7 +44,7 @@ use rdfHelpers\DefaultGraph;
  *
  * @author zozlak
  */
-class DataFactory implements \rdfInterface\DataFactory {
+class DataFactory implements iDataFactory {
 
     /**
      *

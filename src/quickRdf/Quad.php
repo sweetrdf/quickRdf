@@ -27,12 +27,12 @@
 namespace quickRdf;
 
 use BadMethodCallException;
-use rdfInterface\NamedNode as iNamedNode;
-use rdfInterface\BlankNode as iBlankNode;
-use rdfInterface\Literal as iLiteral;
-use rdfInterface\DefaultGraph as iDefaultGraph;
-use rdfInterface\Term as iTerm;
-use rdfInterface\Quad as iQuad;
+use rdfInterface\NamedNodeInterface as iNamedNode;
+use rdfInterface\BlankNodeInterface as iBlankNode;
+use rdfInterface\LiteralInterface as iLiteral;
+use rdfInterface\DefaultGraphInterface as iDefaultGraph;
+use rdfInterface\TermInterface as iTerm;
+use rdfInterface\QuadInterface as iQuad;
 use quickRdf\DataFactory as DF;
 
 /**

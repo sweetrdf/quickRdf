@@ -26,7 +26,8 @@
 
 namespace quickRdf;
 
-use rdfInterface\NamedNode;
+use rdfInterface\NamedNodeInterface;
+use rdfInterface\NamedNodeInterface as iNamedNode;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -36,7 +37,7 @@ use quickRdf\DataFactory as DF;
  */
 class RdfNamespace extends \rdfHelpers\RdfNamespace {
 
-    protected function getNamedNode(string $iri): NamedNode {
+    protected function getNamedNode(string $iri): iNamedNode {
         return DF::namedNode($iri);
     }
 }
