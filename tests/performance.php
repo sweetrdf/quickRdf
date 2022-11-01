@@ -1,6 +1,7 @@
 #!/usr/bin/php
 <?php
-# run with XDEBUG_CONFIG=mode=off ./performance.php 
+# run with XDEBUG_CONFIG=mode=off ./performance.php
+# install easyrdf/easyrdf and sweetrdf/quick-rdf-io first
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
