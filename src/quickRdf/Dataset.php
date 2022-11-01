@@ -222,7 +222,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     // QuadIteratorAggregate
 
     public function getIterator(\rdfInterface\QuadCompareInterface | \rdfInterface\QuadIteratorInterface | \rdfInterface\QuadIteratorAggregateInterface | callable | null $filter = null): \rdfInterface\QuadIteratorInterface {
-        return new GenericQuadIterator($this->quads);
+        return new GenericQuadIterator($this->findMatchingQuads($filter));
     }
 
     // Countable
@@ -234,14 +234,14 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
 
     /**
      *
-     * @param iQuadCompare|callable $offset
+     * @param iQuadCompare|callable|int $offset
      * @return bool
      */
-    public function offsetExists($offset): bool {
+    public function offsetExists(mixed $offset): bool {
         return $this->exists($offset);
     }
 
-    private function exists(iQuadCompare | callable $offset): bool {
+    private function exists(iQuadCompare | callable | int $offset): bool {
         try {
             $iter = $this->findMatchingQuads($offset);
             $this->checkIteratorEnd($iter);
@@ -256,21 +256,11 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
      * @param iQuadCompare|callable|int $offset
      * @return iQuad
      */
-    public function offsetGet($offset): iQuad {
+    public function offsetGet(mixed $offset): iQuad {
         return $this->get($offset);
     }
 
     private function get(iQuadCompare | callable | int $offset): iQuad {
-        if (is_int($offset)) {
-            if ($offset !== 0) {
-                throw new OutOfBoundsException("Only integer offset of 0 is allowed");
-            }
-            if (count($this->quads) === 0) {
-                throw new OutOfBoundsException("Dataset is empty");
-            }
-            $this->quads->rewind();
-            return $this->quads->current();
-        }
         $iter = $this->findMatchingQuads($offset);
         $ret  = $iter->current();
         $this->checkIteratorEnd($iter);
@@ -417,17 +407,26 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
 
     /**
      *
-     * @param iQuadCompare|iQuadIterator|iQuadIteratorAggregate|callable|null $offset
+     * @param iQuadCompare|iQuadIterator|iQuadIteratorAggregate|callable|int|null $offset
      * @return Generator<iQuad>
      * @throws OutOfBoundsException
      */
-    private function findMatchingQuads(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable | null $offset): Generator {
+    private function findMatchingQuads(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable | int | null $offset): Generator {
+        if (is_int($offset) && $offset !== 0) {
+            throw new OutOfBoundsException("Only integer offset of 0 is allowed");
+        }
         if ($offset instanceof iQuad && !($offset instanceof Quad)) {
             $offset = DataFactory::importQuad($offset);
         }
 
         if ($offset === null) {
             yield from $this->quads;
+        } elseif (is_int($offset)) {
+            if (count($this->quads) === 0) {
+                throw new OutOfBoundsException();
+            }
+            $this->quads->rewind();
+            yield $this->quads->current();
         } elseif ($offset instanceof iQuad) {
             if (!isset($this->quads[$offset])) {
                 throw new OutOfBoundsException();
