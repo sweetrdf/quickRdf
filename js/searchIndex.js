@@ -151,6 +151,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method_getUri"
         },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AwithUri\u0028\u0029",
+            "name": "withUri",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_withUri"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetDataset\u0028\u0029",
+            "name": "getDataset",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_getDataset"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AwithDataset\u0028\u0029",
+            "name": "withDataset",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_withDataset"
+        },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003Aequals\u0028\u0029",
             "name": "equals",
             "summary": "",
