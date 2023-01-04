@@ -42,7 +42,6 @@ use rdfInterface\DatasetInterface as iDataset;
 use rdfInterface\DatasetMapReduceInterface as iDatasetMapReduce;
 use rdfInterface\DatasetCompareInterface as iDatasetCompare;
 use rdfInterface\DatasetListQuadPartsInterface as iDatasetListQuadParts;
-use rdfInterface\NodeInterface as iNode;
 use rdfHelpers\GenericQuadIterator;
 use rdfHelpers\GenericTermIterator;
 
@@ -51,13 +50,7 @@ use rdfHelpers\GenericTermIterator;
  *
  * @author zozlak
  */
-class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetListQuadParts, iNode {
-
-    /**
-     * Used only for the rdfInterface\NodeInterface implementation
-     * @var iTerm
-     */
-    private iTerm $node;
+class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetListQuadParts {
 
     /**
      *
@@ -90,7 +83,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     private SplObjectStorage $graphIdx;
     private bool $indexed;
 
-    public function __construct(bool $indexed = true, ?iTerm $node = null) {
+    public function __construct(bool $indexed = true) {
         $this->quads   = new SplObjectStorage();
         $this->indexed = $indexed;
         if ($this->indexed) {
@@ -99,9 +92,6 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
             $this->objectIdx    = new SplObjectStorage();
             $this->graphIdx     = new SplObjectStorage();
         }
-        if ($node !== null) {
-            $this->node = $node;
-        }
     }
 
     public function __toString(): string {
@@ -109,26 +99,6 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
         foreach ($this->quads as $i) {
             $ret .= $i . "\n";
         }
-        return $ret;
-    }
-
-    public function getTerm(): iTerm {
-        return $this->node;
-    }
-
-    public function withTerm(iTerm $term): self {
-        $ret       = $this->copy(null, $this->indexed);
-        $ret->node = $term;
-        return $ret;
-    }
-
-    public function getDataset(): self {
-        return $this;
-    }
-
-    public function withDataset(iDataset $dataset, bool $indexed = true): self {
-        $ret = new Dataset($indexed, $this->node ?? null);
-        $ret->add($dataset);
         return $ret;
     }
 
@@ -169,8 +139,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     }
 
     public function copy(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable | null $filter = null,
-                         bool $indexed = false): self {
-        $dataset = new Dataset($indexed, $this->node ?? null);
+                         bool $indexed = false): iDataset {
+        $dataset = new Dataset($indexed);
         try {
             $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
         } catch (OutOfBoundsException) {
@@ -180,29 +150,29 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     }
 
     public function copyExcept(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable | null $filter,
-                               bool $indexed = false): self {
-        $dataset = new Dataset($indexed, $this->node ?? null);
+                               bool $indexed = false): iDataset {
+        $dataset = new Dataset($indexed);
         $dataset->add(new GenericQuadIterator($this->findNotMatchingQuads($filter)));
         return $dataset;
     }
 
     public function union(iQuad | iQuadIterator | iQuadIteratorAggregate $other,
-                          bool $indexed = false): self {
-        $ret = new Dataset($indexed, $this->node ?? null);
+                          bool $indexed = false): iDataset {
+        $ret = new Dataset($indexed);
         $ret->add($this);
         $ret->add($other);
         return $ret;
     }
 
     public function xor(iQuad | iQuadIterator | iQuadIteratorAggregate $other,
-                        bool $indexed = false): self {
+                        bool $indexed = false): iDataset {
         $ret = $this->union($other, $indexed);
         $ret->delete($this->copy($other));
         return $ret;
     }
 
     public function delete(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable $filter,
-                           bool $indexed = false): self {
+                           bool $indexed = false): iDataset {
         $deleted = new Dataset($indexed);
         try {
             $quads = iterator_to_array($this->findMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
@@ -218,7 +188,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     }
 
     public function deleteExcept(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable $filter,
-                                 bool $indexed = false): self {
+                                 bool $indexed = false): iDataset {
         $deleted = new Dataset($indexed);
         $quads   = iterator_to_array($this->findNotMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
         foreach ($quads as $i) {
@@ -347,7 +317,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     public function map(callable $fn,
                         iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable $filter = null,
                         bool $indexed = false): iDatasetMapReduce {
-        $ret = new Dataset($indexed, $this->node ?? null);
+        $ret = new Dataset($indexed);
         try {
             $quads = $this->findMatchingQuads($filter);
             foreach ($quads as $i) {
