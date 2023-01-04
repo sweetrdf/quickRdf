@@ -146,15 +146,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method___toString"
         },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetUri\u0028\u0029",
-            "name": "getUri",
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetTerm\u0028\u0029",
+            "name": "getTerm",
             "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_getUri"
+            "url": "classes/quickRdf-Dataset.html#method_getTerm"
         },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003AwithUri\u0028\u0029",
-            "name": "withUri",
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AwithTerm\u0028\u0029",
+            "name": "withTerm",
             "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_withUri"
+            "url": "classes/quickRdf-Dataset.html#method_withTerm"
         },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetDataset\u0028\u0029",
             "name": "getDataset",
@@ -341,10 +341,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method_checkIteratorEnd"
         },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024resourceUri",
-            "name": "resourceUri",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#property_resourceUri"
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024node",
+            "name": "node",
+            "summary": "Used\u0020only\u0020for\u0020the\u0020rdfInterface\\NodeInterface\u0020implementation",
+            "url": "classes/quickRdf-Dataset.html#property_node"
         },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024quads",
             "name": "quads",
@@ -1030,6 +1030,31 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/rdfInterface-NamedNodeInterface.html#method___construct"
+        },                {
+            "fqsen": "\\rdfInterface\\NodeInterface",
+            "name": "NodeInterface",
+            "summary": "A\u0020very\u0020minimalistic\u0020interface\u0020for\u0020dealing\u0020with\u0020a\u0020dataset\u0020in\u0020a\u0020node\u002Doriented\u0020way.",
+            "url": "classes/rdfInterface-NodeInterface.html"
+        },                {
+            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AgetTerm\u0028\u0029",
+            "name": "getTerm",
+            "summary": "",
+            "url": "classes/rdfInterface-NodeInterface.html#method_getTerm"
+        },                {
+            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AwithTerm\u0028\u0029",
+            "name": "withTerm",
+            "summary": "",
+            "url": "classes/rdfInterface-NodeInterface.html#method_withTerm"
+        },                {
+            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AgetDataset\u0028\u0029",
+            "name": "getDataset",
+            "summary": "",
+            "url": "classes/rdfInterface-NodeInterface.html#method_getDataset"
+        },                {
+            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AwithDataset\u0028\u0029",
+            "name": "withDataset",
+            "summary": "",
+            "url": "classes/rdfInterface-NodeInterface.html#method_withDataset"
         },                {
             "fqsen": "\\rdfInterface\\ParserInterface",
             "name": "ParserInterface",

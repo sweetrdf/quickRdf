@@ -110,7 +110,7 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a>,                             <a href="classes/rdfInterface-DatasetMapReduceInterface.html"><abbr title="\rdfInterface\DatasetMapReduceInterface">DatasetMapReduceInterface</abbr></a>,                             <a href="classes/rdfInterface-DatasetCompareInterface.html"><abbr title="\rdfInterface\DatasetCompareInterface">DatasetCompareInterface</abbr></a>,                             <a href="classes/rdfInterface-DatasetListQuadPartsInterface.html"><abbr title="\rdfInterface\DatasetListQuadPartsInterface">DatasetListQuadPartsInterface</abbr></a>                    </span>
+                            <a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a>,                             <a href="classes/rdfInterface-DatasetMapReduceInterface.html"><abbr title="\rdfInterface\DatasetMapReduceInterface">DatasetMapReduceInterface</abbr></a>,                             <a href="classes/rdfInterface-DatasetCompareInterface.html"><abbr title="\rdfInterface\DatasetCompareInterface">DatasetCompareInterface</abbr></a>,                             <a href="classes/rdfInterface-DatasetListQuadPartsInterface.html"><abbr title="\rdfInterface\DatasetListQuadPartsInterface">DatasetListQuadPartsInterface</abbr></a>,                             <a href="classes/rdfInterface-NodeInterface.html"><abbr title="\rdfInterface\NodeInterface">NodeInterface</abbr></a>                    </span>
     
     </h2>
 
@@ -122,7 +122,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -164,7 +164,7 @@
     </h4>
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a></dt><dd>Main, edge(quad) and Dataset-oriented Dataset API</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-DatasetMapReduceInterface.html"><abbr title="\rdfInterface\DatasetMapReduceInterface">DatasetMapReduceInterface</abbr></a></dt><dd>Immutable edge processing methods</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-DatasetCompareInterface.html"><abbr title="\rdfInterface\DatasetCompareInterface">DatasetCompareInterface</abbr></a></dt><dd>Main, edge(quad) and Dataset-oriented Dataset API</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-DatasetListQuadPartsInterface.html"><abbr title="\rdfInterface\DatasetListQuadPartsInterface">DatasetListQuadPartsInterface</abbr></a></dt><dd>Set of methods for listing distinct Terms being used on a given position
-of dataset quads.</dd>    </dl>
+of dataset quads.</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-NodeInterface.html"><abbr title="\rdfInterface\NodeInterface">NodeInterface</abbr></a></dt><dd>A very minimalistic interface for dealing with a dataset in a node-oriented way.</dd>    </dl>
 
 
 
@@ -190,6 +190,13 @@ of dataset quads.</dd>    </dl>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/quickRdf-Dataset.html#property_node">$node</a>
+    <span>
+                        &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>            </span>
+</dt>
+<dd>Used only for the rdfInterface\NodeInterface implementation</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Dataset.html#property_objectIdx">$objectIdx</a>
     <span>
                         &nbsp;: <abbr title="\SplObjectStorage">SplObjectStorage</abbr>&lt;<a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>, mixed&gt;            </span>
@@ -205,12 +212,6 @@ of dataset quads.</dd>    </dl>
     <a href="classes/quickRdf-Dataset.html#property_quads">$quads</a>
     <span>
                         &nbsp;: <abbr title="\SplObjectStorage">SplObjectStorage</abbr>&lt;<a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>, mixed&gt;            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/quickRdf-Dataset.html#property_resourceUri">$resourceUri</a>
-    <span>
-                        &nbsp;: <a href="classes/quickRdf-NamedNode.html"><abbr title="\quickRdf\NamedNode">NamedNode</abbr></a>|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -318,9 +319,9 @@ of dataset quads.</dd>    </dl>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Dataset.html#method_getUri">getUri()</a>
+    <a href="classes/quickRdf-Dataset.html#method_getTerm">getTerm()</a>
     <span>
-                                &nbsp;: <a href="classes/quickRdf-NamedNode.html"><abbr title="\quickRdf\NamedNode">NamedNode</abbr></a>|null    </span>
+                                &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -407,7 +408,7 @@ of dataset quads.</dd>    </dl>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Dataset.html#method_withUri">withUri()</a>
+    <a href="classes/quickRdf-Dataset.html#method_withTerm">withTerm()</a>
     <span>
                                 &nbsp;: self    </span>
 </dt>
@@ -517,7 +518,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -550,7 +551,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">91</span>
 
     </aside>
 
@@ -559,6 +560,40 @@ the $other one.</dd>
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">bool</span>
     <span class="phpdocumentor-signature__name">$indexed</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_node">
+        $node
+        <a href="classes/quickRdf-Dataset.html#property_node" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">60</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Used only for the rdfInterface\NodeInterface implementation</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$node</span>
     </code>
 
     
@@ -583,7 +618,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -616,7 +651,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -649,7 +684,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -659,39 +694,6 @@ the $other one.</dd>
         <span class="phpdocumentor-signature__type"><abbr title="\SplObjectStorage">SplObjectStorage</abbr>&lt;<a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$quads</span>
     </code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_resourceUri">
-        $resourceUri
-        <a href="classes/quickRdf-Dataset.html#property_resourceUri" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">55</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/quickRdf-NamedNode.html"><abbr title="\quickRdf\NamedNode">NamedNode</abbr></a>|null</span>
-    <span class="phpdocumentor-signature__name">$resourceUri</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
     
@@ -715,7 +717,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
@@ -753,14 +755,14 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$indexed</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\quickRdf\iNamedNode">iNamedNode</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resourceUri</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$indexed</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$node</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -775,8 +777,8 @@ the $other one.</dd>
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$resourceUri</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\quickRdf\iNamedNode">iNamedNode</abbr>|null</span>
+                <span class="phpdocumentor-signature__argument__name">$node</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -801,7 +803,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
@@ -836,7 +838,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">154</span>
+    <span class="phpdocumentor-element-found-in__line">158</span>
 
     </aside>
 
@@ -878,7 +880,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">373</span>
+    <span class="phpdocumentor-element-found-in__line">377</span>
 
     </aside>
 
@@ -923,7 +925,7 @@ the $other one.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
     </aside>
 
@@ -988,7 +990,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">178</span>
+    <span class="phpdocumentor-element-found-in__line">182</span>
 
     </aside>
 
@@ -1054,7 +1056,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">256</span>
+    <span class="phpdocumentor-element-found-in__line">260</span>
 
     </aside>
 
@@ -1089,7 +1091,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">200</span>
+    <span class="phpdocumentor-element-found-in__line">204</span>
 
     </aside>
 
@@ -1158,7 +1160,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">216</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
@@ -1227,7 +1229,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
@@ -1272,7 +1274,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">383</span>
+    <span class="phpdocumentor-element-found-in__line">387</span>
 
     </aside>
 
@@ -1317,7 +1319,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">228</span>
+    <span class="phpdocumentor-element-found-in__line">232</span>
 
     </aside>
 
@@ -1371,7 +1373,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
@@ -1406,7 +1408,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">250</span>
+    <span class="phpdocumentor-element-found-in__line">254</span>
 
     </aside>
 
@@ -1443,22 +1445,22 @@ an all quads</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getUri">
-        getUri()
-        <a href="classes/quickRdf-Dataset.html#method_getUri" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getTerm">
+        getTerm()
+        <a href="classes/quickRdf-Dataset.html#method_getTerm" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getUri</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/quickRdf-NamedNode.html"><abbr title="\quickRdf\NamedNode">NamedNode</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getTerm</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1468,7 +1470,7 @@ an all quads</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/quickRdf-NamedNode.html"><abbr title="\quickRdf\NamedNode">NamedNode</abbr></a>|null</span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
             </section>
 
 </article>
@@ -1486,7 +1488,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">413</span>
+    <span class="phpdocumentor-element-found-in__line">417</span>
 
     </aside>
 
@@ -1531,7 +1533,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">409</span>
+    <span class="phpdocumentor-element-found-in__line">413</span>
 
     </aside>
 
@@ -1576,7 +1578,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">405</span>
+    <span class="phpdocumentor-element-found-in__line">409</span>
 
     </aside>
 
@@ -1621,7 +1623,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">401</span>
+    <span class="phpdocumentor-element-found-in__line">405</span>
 
     </aside>
 
@@ -1666,7 +1668,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">343</span>
+    <span class="phpdocumentor-element-found-in__line">347</span>
 
     </aside>
 
@@ -1727,7 +1729,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">395</span>
+    <span class="phpdocumentor-element-found-in__line">399</span>
 
     </aside>
 
@@ -1772,7 +1774,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">266</span>
+    <span class="phpdocumentor-element-found-in__line">270</span>
 
     </aside>
 
@@ -1818,7 +1820,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">285</span>
+    <span class="phpdocumentor-element-found-in__line">289</span>
 
     </aside>
 
@@ -1864,7 +1866,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">302</span>
+    <span class="phpdocumentor-element-found-in__line">306</span>
 
     </aside>
 
@@ -1913,7 +1915,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">326</span>
+    <span class="phpdocumentor-element-found-in__line">330</span>
 
     </aside>
 
@@ -1955,7 +1957,7 @@ an all quads</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">358</span>
+    <span class="phpdocumentor-element-found-in__line">362</span>
 
     </aside>
 
@@ -2013,7 +2015,7 @@ applied on each quad and returns last callback result</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">189</span>
 
     </aside>
 
@@ -2068,7 +2070,7 @@ applied on each quad and returns last callback result</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 
     </aside>
 
@@ -2112,22 +2114,22 @@ applied on each quad and returns last callback result</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_withUri">
-        withUri()
-        <a href="classes/quickRdf-Dataset.html#method_withUri" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_withTerm">
+        withTerm()
+        <a href="classes/quickRdf-Dataset.html#method_withTerm" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">withUri</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\quickRdf\iNamedNode">iNamedNode</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$uri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+                    <span class="phpdocumentor-signature__name">withTerm</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$term</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2135,8 +2137,8 @@ applied on each quad and returns last callback result</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$uri</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\quickRdf\iNamedNode">iNamedNode</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$term</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2165,7 +2167,7 @@ applied on each quad and returns last callback result</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">193</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -2221,7 +2223,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">673</span>
+    <span class="phpdocumentor-element-found-in__line">677</span>
 
     </aside>
 
@@ -2277,7 +2279,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">270</span>
+    <span class="phpdocumentor-element-found-in__line">274</span>
 
     </aside>
 
@@ -2322,7 +2324,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">504</span>
+    <span class="phpdocumentor-element-found-in__line">508</span>
 
     </aside>
 
@@ -2374,7 +2376,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">440</span>
+    <span class="phpdocumentor-element-found-in__line">444</span>
 
     </aside>
 
@@ -2434,7 +2436,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">574</span>
+    <span class="phpdocumentor-element-found-in__line">578</span>
 
     </aside>
 
@@ -2479,7 +2481,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">289</span>
+    <span class="phpdocumentor-element-found-in__line">293</span>
 
     </aside>
 
@@ -2524,7 +2526,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">612</span>
+    <span class="phpdocumentor-element-found-in__line">616</span>
 
     </aside>
 
@@ -2565,7 +2567,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">417</span>
+    <span class="phpdocumentor-element-found-in__line">421</span>
 
     </aside>
 
@@ -2617,7 +2619,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">310</span>
+    <span class="phpdocumentor-element-found-in__line">314</span>
 
     </aside>
 
@@ -2665,7 +2667,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">643</span>
+    <span class="phpdocumentor-element-found-in__line">647</span>
 
     </aside>
 
@@ -2706,7 +2708,7 @@ the $other one.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Dataset.php"><a href="files/src-quickrdf-dataset.html"><abbr title="src/quickRdf/Dataset.php">Dataset.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">330</span>
+    <span class="phpdocumentor-element-found-in__line">334</span>
 
     </aside>
 
@@ -2848,10 +2850,10 @@ the $other one.</p>
                     <ul class="phpdocumentor-list -clean">
                                                     <li><a href="classes/quickRdf-Dataset.html#property_graphIdx">$graphIdx<a href="classes/quickRdf-Dataset.html"></li>
                                                     <li><a href="classes/quickRdf-Dataset.html#property_indexed">$indexed<a href="classes/quickRdf-Dataset.html"></li>
+                                                    <li><a href="classes/quickRdf-Dataset.html#property_node">$node<a href="classes/quickRdf-Dataset.html"></li>
                                                     <li><a href="classes/quickRdf-Dataset.html#property_objectIdx">$objectIdx<a href="classes/quickRdf-Dataset.html"></li>
                                                     <li><a href="classes/quickRdf-Dataset.html#property_predicateIdx">$predicateIdx<a href="classes/quickRdf-Dataset.html"></li>
                                                     <li><a href="classes/quickRdf-Dataset.html#property_quads">$quads<a href="classes/quickRdf-Dataset.html"></li>
-                                                    <li><a href="classes/quickRdf-Dataset.html#property_resourceUri">$resourceUri<a href="classes/quickRdf-Dataset.html"></li>
                                                     <li><a href="classes/quickRdf-Dataset.html#property_subjectIdx">$subjectIdx<a href="classes/quickRdf-Dataset.html"></li>
                                             </ul>
                 </li>
@@ -2873,7 +2875,7 @@ the $other one.</p>
                                             <li><a href="classes/quickRdf-Dataset.html#method_forEach">forEach()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_getDataset">getDataset()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_getIterator">getIterator()</a></li>
-                                            <li><a href="classes/quickRdf-Dataset.html#method_getUri">getUri()</a></li>
+                                            <li><a href="classes/quickRdf-Dataset.html#method_getTerm">getTerm()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_listGraphs">listGraphs()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_listObjects">listObjects()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_listPredicates">listPredicates()</a></li>
@@ -2887,7 +2889,7 @@ the $other one.</p>
                                             <li><a href="classes/quickRdf-Dataset.html#method_reduce">reduce()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_union">union()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_withDataset">withDataset()</a></li>
-                                            <li><a href="classes/quickRdf-Dataset.html#method_withUri">withUri()</a></li>
+                                            <li><a href="classes/quickRdf-Dataset.html#method_withTerm">withTerm()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_xor">xor()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_checkIteratorEnd">checkIteratorEnd()</a></li>
                                             <li><a href="classes/quickRdf-Dataset.html#method_exists">exists()</a></li>
