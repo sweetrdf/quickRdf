@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -89,8 +90,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/rdfhelpers.html">rdfHelpers</a></li>
     </ul>
 
@@ -112,6 +114,13 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Abstract</span><span>Yes</span></div>
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
     :
@@ -130,7 +139,8 @@ of the getNamedNode() method (which should be just a one-liner).</p>
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/rdfHelpers-RdfNamespace.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -146,42 +156,54 @@ of the getNamedNode() method (which should be just a one-liner).</p>
 
 
 
-
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes, Traits and Enums
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
-</h3>
-
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-RdfNamespaceInterface.html"><abbr title="\rdfInterface\RdfNamespaceInterface">RdfNamespaceInterface</abbr></a></dt>
-        <dd></dd>
-    
-    
-    
-    </dl>
-
-
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/rdfHelpers-RdfNamespace.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/rdfHelpers-RdfNamespace.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-RdfNamespaceInterface.html"><abbr title="\rdfInterface\RdfNamespaceInterface">RdfNamespaceInterface</abbr></a></dt>    </dl>
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/rdfHelpers-RdfNamespace.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/rdfHelpers-RdfNamespace.html#property_n">$n</a>
     <span>
                         &nbsp;: int            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/rdfHelpers-RdfNamespace.html#property_namespaces">$namespaces</a>
     <span>
                         &nbsp;: array&lt;string, string&gt;            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/rdfHelpers-RdfNamespace.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/rdfHelpers-RdfNamespace.html#method_add">add()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -229,9 +251,9 @@ being namespace short names and array values containing URL prefixes.</dd>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -242,6 +264,7 @@ being namespace short names and array values containing URL prefixes.</dd>
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/rdfHelpers-RdfNamespace.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -253,6 +276,7 @@ being namespace short names and array values containing URL prefixes.</dd>
     <h4 class="phpdocumentor-element__name" id="property_n">
         $n
         <a href="classes/rdfHelpers-RdfNamespace.html#property_n" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -270,17 +294,9 @@ being namespace short names and array values containing URL prefixes.</dd>
     <span class="phpdocumentor-signature__name">$n</span>
      = <span class="phpdocumentor-signature__default-value">0</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
+    
 
 </article>
                     <article
@@ -293,6 +309,7 @@ being namespace short names and array values containing URL prefixes.</dd>
     <h4 class="phpdocumentor-element__name" id="property_namespaces">
         $namespaces
         <a href="classes/rdfHelpers-RdfNamespace.html#property_namespaces" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -313,12 +330,6 @@ being namespace short names and array values containing URL prefixes.</dd>
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
 </article>
             </section>
@@ -327,6 +338,7 @@ being namespace short names and array values containing URL prefixes.</dd>
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/rdfHelpers-RdfNamespace.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -337,6 +349,7 @@ being namespace short names and array values containing URL prefixes.</dd>
     <h4 class="phpdocumentor-element__name" id="method_add">
         add()
         <a href="classes/rdfHelpers-RdfNamespace.html#method_add" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
@@ -351,6 +364,8 @@ being namespace short names and array values containing URL prefixes.</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">add</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iriPrefix</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$shortName</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -374,20 +389,16 @@ If null or empty, the short name is automatically generated.</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>The short name under which the URL prefix was registered.</p>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The short name under which the URL prefix was registered.</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -398,6 +409,7 @@ If null or empty, the short name is automatically generated.</p>
     <h4 class="phpdocumentor-element__name" id="method_expand">
         expand()
         <a href="classes/rdfHelpers-RdfNamespace.html#method_expand" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
@@ -412,6 +424,8 @@ If null or empty, the short name is automatically generated.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">expand</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$shortIri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Throws an error if the short name used in the shortened IRI is unknown or
 when the $shortIri is not a shortened IRI.</p>
 </section>
@@ -428,18 +442,12 @@ when the $shortIri is not a shortened IRI.</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -450,6 +458,7 @@ when the $shortIri is not a shortened IRI.</p>
     <h4 class="phpdocumentor-element__name" id="method_get">
         get()
         <a href="classes/rdfHelpers-RdfNamespace.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
@@ -464,6 +473,8 @@ when the $shortIri is not a shortened IRI.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$shortName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Throws an exception if a given short name isn't registered.</p>
 </section>
 
@@ -479,18 +490,12 @@ when the $shortIri is not a shortened IRI.</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -501,6 +506,7 @@ when the $shortIri is not a shortened IRI.</p>
     <h4 class="phpdocumentor-element__name" id="method_getAll">
         getAll()
         <a href="classes/rdfHelpers-RdfNamespace.html#method_getAll" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
@@ -516,21 +522,17 @@ being namespace short names and array values containing URL prefixes.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAll</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -541,6 +543,7 @@ being namespace short names and array values containing URL prefixes.</p>
     <h4 class="phpdocumentor-element__name" id="method_remove">
         remove()
         <a href="classes/rdfHelpers-RdfNamespace.html#method_remove" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
@@ -555,6 +558,8 @@ being namespace short names and array values containing URL prefixes.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">remove</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$shortName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -568,17 +573,7 @@ being namespace short names and array values containing URL prefixes.</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -590,6 +585,7 @@ being namespace short names and array values containing URL prefixes.</p>
     <h4 class="phpdocumentor-element__name" id="method_shorten">
         shorten()
         <a href="classes/rdfHelpers-RdfNamespace.html#method_shorten" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
@@ -604,6 +600,8 @@ being namespace short names and array values containing URL prefixes.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">shorten</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iri</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$create</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>If corresponding IRI prefix is not registered yet, the behavior depends on
 the $create parameter value. If it's true, a new short name is registered
 automatically. Otherwise an expception is thrown.</p>
@@ -616,8 +614,7 @@ automatically. Otherwise an expception is thrown.</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$create</span>
@@ -632,18 +629,12 @@ prefix if there is no matching one?</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -654,6 +645,7 @@ prefix if there is no matching one?</p>
     <h4 class="phpdocumentor-element__name" id="method_getNamedNode">
         getNamedNode()
         <a href="classes/rdfHelpers-RdfNamespace.html#method_getNamedNode" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-rdfnamespace.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/RdfNamespace.php">RdfNamespace.php</abbr></a></abbr>
@@ -667,8 +659,9 @@ prefix if there is no matching one?</p>
     <span class="phpdocumentor-signature__visibility">protected</span>
     <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">getNamedNode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iri</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -676,24 +669,17 @@ prefix if there is no matching one?</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
+            </section>
+
 </article>
             </section>
 
@@ -790,7 +776,47 @@ prefix if there is no matching one?</p>
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/rdfHelpers-RdfNamespace.html#property_n">$n<a href="classes/rdfHelpers-RdfNamespace.html"></li>
+                                                    <li><a href="classes/rdfHelpers-RdfNamespace.html#property_namespaces">$namespaces<a href="classes/rdfHelpers-RdfNamespace.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#method_add">add()</a></li>
+                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#method_expand">expand()</a></li>
+                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#method_get">get()</a></li>
+                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#method_getAll">getAll()</a></li>
+                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#method_remove">remove()</a></li>
+                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#method_shorten">shorten()</a></li>
+                                            <li><a href="classes/rdfHelpers-RdfNamespace.html#method_getNamedNode">getNamedNode()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -801,7 +827,6 @@ prefix if there is no matching one?</p>
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/rdfHelpers-RdfNamespace.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

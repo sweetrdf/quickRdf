@@ -146,6 +146,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method___toString"
         },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetUri\u0028\u0029",
+            "name": "getUri",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#method_getUri"
+        },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003Aequals\u0028\u0029",
             "name": "equals",
             "summary": "",
@@ -320,6 +325,11 @@ Search.appendIndex(
             "name": "checkIteratorEnd",
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method_checkIteratorEnd"
+        },                {
+            "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024resourceUri",
+            "name": "resourceUri",
+            "summary": "",
+            "url": "classes/quickRdf-Dataset.html#property_resourceUri"
         },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024quads",
             "name": "quads",

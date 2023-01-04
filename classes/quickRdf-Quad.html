@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -89,8 +90,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/quickrdf.html">quickRdf</a></li>
     </ul>
 
@@ -112,6 +114,11 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
     :
@@ -125,7 +132,8 @@
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/quickRdf-Quad.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
@@ -141,77 +149,82 @@
 
 
 
-
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes, Traits and Enums
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
-</h3>
-
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></dt>
-        <dd>Extends Term because of RDF*</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/quickRdf-SingletonTerm.html"><abbr title="\quickRdf\SingletonTerm">SingletonTerm</abbr></a></dt>
-        <dd>Interface used to mark DataFactory-hashable terms</dd>
-    
-    
-    
-    </dl>
-
-
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/quickRdf-Quad.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/quickRdf-Quad.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></dt><dd>Extends Term because of RDF*</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/quickRdf-SingletonTerm.html"><abbr title="\quickRdf\SingletonTerm">SingletonTerm</abbr></a></dt><dd>Interface used to mark DataFactory-hashable terms</dd>    </dl>
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/quickRdf-Quad.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_graph">$graph</a>
     <span>
                         &nbsp;: <a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|<a href="classes/rdfInterface-BlankNodeInterface.html"><abbr title="\rdfInterface\BlankNodeInterface">BlankNodeInterface</abbr></a>|<a href="classes/rdfInterface-DefaultGraphInterface.html"><abbr title="\rdfInterface\DefaultGraphInterface">DefaultGraphInterface</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_object">$object</a>
     <span>
                         &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_predicate">$predicate</a>
     <span>
                         &nbsp;: <a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/quickRdf-Quad.html#property_subject">$subject</a>
     <span>
                         &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/quickRdf-Quad.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method___toString">__toString()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_equals">equals()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getGraph">getGraph()</a>
@@ -227,58 +240,51 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getPredicate">getPredicate()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getSubject">getSubject()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_getValue">getValue()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withGraph">withGraph()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withObject">withObject()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withPredicate">withPredicate()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Quad.html#method_withSubject">withSubject()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -289,6 +295,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/quickRdf-Quad.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -300,6 +307,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="property_graph">
         $graph
         <a href="classes/quickRdf-Quad.html#property_graph" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -317,17 +325,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span class="phpdocumentor-signature__name">$graph</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
+    
 
 </article>
                     <article
@@ -340,6 +340,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="property_object">
         $object
         <a href="classes/quickRdf-Quad.html#property_object" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -357,17 +358,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span class="phpdocumentor-signature__name">$object</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
+    
 
 </article>
                     <article
@@ -380,6 +373,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="property_predicate">
         $predicate
         <a href="classes/quickRdf-Quad.html#property_predicate" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -397,17 +391,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span class="phpdocumentor-signature__name">$predicate</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
+    
 
 </article>
                     <article
@@ -420,6 +406,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="property_subject">
         $subject
         <a href="classes/quickRdf-Quad.html#property_subject" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -437,17 +424,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span class="phpdocumentor-signature__name">$subject</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
+    
 
 </article>
             </section>
@@ -456,6 +435,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/quickRdf-Quad.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -466,6 +446,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
         <a href="classes/quickRdf-Quad.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -479,6 +460,8 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subject</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$predicate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|<a href="classes/rdfInterface-BlankNodeInterface.html"><abbr title="\rdfInterface\BlankNodeInterface">BlankNodeInterface</abbr></a>|<a href="classes/rdfInterface-DefaultGraphInterface.html"><abbr title="\rdfInterface\DefaultGraphInterface">DefaultGraphInterface</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$graph</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -513,17 +496,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -535,6 +508,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="method___toString">
         __toString()
         <a href="classes/quickRdf-Quad.html#method___toString" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -548,22 +522,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -574,6 +543,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="method_equals">
         equals()
         <a href="classes/quickRdf-Quad.html#method_equals" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -587,8 +557,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">equals</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$term</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -596,24 +567,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -624,6 +588,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</dd>
     <h4 class="phpdocumentor-element__name" id="method_getGraph">
         getGraph()
         <a href="classes/quickRdf-Quad.html#method_getGraph" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -640,21 +605,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getGraph</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|<a href="classes/rdfInterface-BlankNodeInterface.html"><abbr title="\rdfInterface\BlankNodeInterface">BlankNodeInterface</abbr></a>|<a href="classes/rdfInterface-DefaultGraphInterface.html"><abbr title="\rdfInterface\DefaultGraphInterface">DefaultGraphInterface</abbr></a></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|<a href="classes/rdfInterface-BlankNodeInterface.html"><abbr title="\rdfInterface\BlankNodeInterface">BlankNodeInterface</abbr></a>|<a href="classes/rdfInterface-DefaultGraphInterface.html"><abbr title="\rdfInterface\DefaultGraphInterface">DefaultGraphInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|<a href="classes/rdfInterface-BlankNodeInterface.html"><abbr title="\rdfInterface\BlankNodeInterface">BlankNodeInterface</abbr></a>|<a href="classes/rdfInterface-DefaultGraphInterface.html"><abbr title="\rdfInterface\DefaultGraphInterface">DefaultGraphInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -665,6 +626,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_getObject">
         getObject()
         <a href="classes/quickRdf-Quad.html#method_getObject" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -678,22 +640,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getObject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -704,6 +661,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_getPredicate">
         getPredicate()
         <a href="classes/quickRdf-Quad.html#method_getPredicate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -717,22 +675,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -743,6 +696,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_getSubject">
         getSubject()
         <a href="classes/quickRdf-Quad.html#method_getSubject" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -756,22 +710,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getSubject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -782,6 +731,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_getValue">
         getValue()
         <a href="classes/quickRdf-Quad.html#method_getValue" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -795,22 +745,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -821,6 +766,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_withGraph">
         withGraph()
         <a href="classes/quickRdf-Quad.html#method_withGraph" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -834,8 +780,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">withGraph</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|<a href="classes/rdfInterface-BlankNodeInterface.html"><abbr title="\rdfInterface\BlankNodeInterface">BlankNodeInterface</abbr></a>|<a href="classes/rdfInterface-DefaultGraphInterface.html"><abbr title="\rdfInterface\DefaultGraphInterface">DefaultGraphInterface</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$graph</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -843,24 +790,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|<a href="classes/rdfInterface-BlankNodeInterface.html"><abbr title="\rdfInterface\BlankNodeInterface">BlankNodeInterface</abbr></a>|<a href="classes/rdfInterface-DefaultGraphInterface.html"><abbr title="\rdfInterface\DefaultGraphInterface">DefaultGraphInterface</abbr></a>|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -871,6 +811,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_withObject">
         withObject()
         <a href="classes/quickRdf-Quad.html#method_withObject" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -884,8 +825,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">withObject</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$object</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -893,24 +835,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -921,6 +856,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_withPredicate">
         withPredicate()
         <a href="classes/quickRdf-Quad.html#method_withPredicate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -934,8 +870,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">withPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$predicate</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -943,24 +880,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -971,6 +901,7 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <h4 class="phpdocumentor-element__name" id="method_withSubject">
         withSubject()
         <a href="classes/quickRdf-Quad.html#method_withSubject" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Quad.php"><a href="files/src-quickrdf-quad.html"><abbr title="src/quickRdf/Quad.php">Quad.php</abbr></a></abbr>
@@ -984,8 +915,9 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">withSubject</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$subject</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -993,24 +925,17 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                </dl>
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a></span>
+            </section>
+
 </article>
             </section>
 
@@ -1107,7 +1032,54 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/quickRdf-Quad.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/quickRdf-Quad.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/quickRdf-Quad.html#property_graph">$graph<a href="classes/quickRdf-Quad.html"></li>
+                                                    <li><a href="classes/quickRdf-Quad.html#property_object">$object<a href="classes/quickRdf-Quad.html"></li>
+                                                    <li><a href="classes/quickRdf-Quad.html#property_predicate">$predicate<a href="classes/quickRdf-Quad.html"></li>
+                                                    <li><a href="classes/quickRdf-Quad.html#property_subject">$subject<a href="classes/quickRdf-Quad.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/quickRdf-Quad.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method___toString">__toString()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_equals">equals()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_getGraph">getGraph()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_getObject">getObject()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_getPredicate">getPredicate()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_getSubject">getSubject()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_getValue">getValue()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_withGraph">withGraph()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_withObject">withObject()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_withPredicate">withPredicate()</a></li>
+                                            <li><a href="classes/quickRdf-Quad.html#method_withSubject">withSubject()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1118,7 +1090,6 @@ NamedNode/BlankNode graphs also belong to the DefaultGraph).</p>
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/quickRdf-Quad.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
