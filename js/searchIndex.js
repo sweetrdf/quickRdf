@@ -1006,31 +1006,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/rdfInterface-NamedNodeInterface.html#method___construct"
         },                {
-            "fqsen": "\\rdfInterface\\NodeInterface",
-            "name": "NodeInterface",
-            "summary": "A\u0020very\u0020minimalistic\u0020interface\u0020for\u0020dealing\u0020with\u0020a\u0020dataset\u0020in\u0020a\u0020node\u002Doriented\u0020way.",
-            "url": "classes/rdfInterface-NodeInterface.html"
-        },                {
-            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AgetTerm\u0028\u0029",
-            "name": "getTerm",
-            "summary": "",
-            "url": "classes/rdfInterface-NodeInterface.html#method_getTerm"
-        },                {
-            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AwithTerm\u0028\u0029",
-            "name": "withTerm",
-            "summary": "",
-            "url": "classes/rdfInterface-NodeInterface.html#method_withTerm"
-        },                {
-            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AgetDataset\u0028\u0029",
-            "name": "getDataset",
-            "summary": "",
-            "url": "classes/rdfInterface-NodeInterface.html#method_getDataset"
-        },                {
-            "fqsen": "\\rdfInterface\\NodeInterface\u003A\u003AwithDataset\u0028\u0029",
-            "name": "withDataset",
-            "summary": "",
-            "url": "classes/rdfInterface-NodeInterface.html#method_withDataset"
-        },                {
             "fqsen": "\\rdfInterface\\ParserInterface",
             "name": "ParserInterface",
             "summary": "",
