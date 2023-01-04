@@ -52,6 +52,8 @@ use rdfHelpers\GenericTermIterator;
  */
 class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetListQuadParts {
 
+    private NamedNode $resourceUri;
+
     /**
      *
      * @var SplObjectStorage<iQuad, mixed>
@@ -83,7 +85,8 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     private SplObjectStorage $graphIdx;
     private bool $indexed;
 
-    public function __construct(bool $indexed = true) {
+    public function __construct(bool $indexed = true,
+                                ?iNamedNode $resourceUri = null) {
         $this->quads   = new SplObjectStorage();
         $this->indexed = $indexed;
         if ($this->indexed) {
@@ -91,6 +94,9 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
             $this->predicateIdx = new SplObjectStorage();
             $this->objectIdx    = new SplObjectStorage();
             $this->graphIdx     = new SplObjectStorage();
+        }
+        if (!empty($resourceUri)) {
+            $this->resourceUri = DataFactory::namedNode($resourceUri);
         }
     }
 
@@ -100,6 +106,10 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
             $ret .= $i . "\n";
         }
         return $ret;
+    }
+
+    public function getUri(): NamedNode {
+        return $this->resourceUri;
     }
 
     public function equals(iDataset $other): bool {
@@ -140,7 +150,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
 
     public function copy(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable | null $filter = null,
                          bool $indexed = false): iDataset {
-        $dataset = new Dataset($indexed);
+        $dataset = new Dataset($indexed, $this->resourceUri);
         try {
             $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
         } catch (OutOfBoundsException) {
@@ -151,14 +161,14 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
 
     public function copyExcept(iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable | null $filter,
                                bool $indexed = false): iDataset {
-        $dataset = new Dataset($indexed);
+        $dataset = new Dataset($indexed, $this->resourceUri);
         $dataset->add(new GenericQuadIterator($this->findNotMatchingQuads($filter)));
         return $dataset;
     }
 
     public function union(iQuad | iQuadIterator | iQuadIteratorAggregate $other,
                           bool $indexed = false): iDataset {
-        $ret = new Dataset($indexed);
+        $ret = new Dataset($indexed, $this->resourceUri);
         $ret->add($this);
         $ret->add($other);
         return $ret;
@@ -317,7 +327,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
     public function map(callable $fn,
                         iQuadCompare | iQuadIterator | iQuadIteratorAggregate | callable $filter = null,
                         bool $indexed = false): iDatasetMapReduce {
-        $ret = new Dataset($indexed);
+        $ret = new Dataset($indexed, $this->resourceUri);
         try {
             $quads = $this->findMatchingQuads($filter);
             foreach ($quads as $i) {
