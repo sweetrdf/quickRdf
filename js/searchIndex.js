@@ -146,26 +146,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method___toString"
         },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetTerm\u0028\u0029",
-            "name": "getTerm",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_getTerm"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003AwithTerm\u0028\u0029",
-            "name": "withTerm",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_withTerm"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetDataset\u0028\u0029",
-            "name": "getDataset",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_getDataset"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003AwithDataset\u0028\u0029",
-            "name": "withDataset",
-            "summary": "",
-            "url": "classes/quickRdf-Dataset.html#method_withDataset"
-        },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003Aequals\u0028\u0029",
             "name": "equals",
             "summary": "",
@@ -340,11 +320,6 @@ Search.appendIndex(
             "name": "checkIteratorEnd",
             "summary": "",
             "url": "classes/quickRdf-Dataset.html#method_checkIteratorEnd"
-        },                {
-            "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024node",
-            "name": "node",
-            "summary": "Used\u0020only\u0020for\u0020the\u0020rdfInterface\\NodeInterface\u0020implementation",
-            "url": "classes/quickRdf-Dataset.html#property_node"
         },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003A\u0024quads",
             "name": "quads",
