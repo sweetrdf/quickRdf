@@ -52,7 +52,7 @@ use rdfHelpers\GenericTermIterator;
  */
 class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetListQuadParts {
 
-    private NamedNode $resourceUri;
+    private ?NamedNode $resourceUri = null;
 
     /**
      *
@@ -108,7 +108,7 @@ class Dataset implements iDataset, iDatasetMapReduce, iDatasetCompare, iDatasetL
         return $ret;
     }
 
-    public function getUri(): NamedNode {
+    public function getUri(): ?NamedNode {
         return $this->resourceUri;
     }
 
