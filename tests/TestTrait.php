@@ -57,7 +57,7 @@ trait TestTrait {
 
     public static function getDatasetNode(TermInterface $node,
                                           DatasetInterface | null $dataset = null): DatasetNodeInterface {
-        return new DatasetNode($node, $dataset ?? new Dataset());
+        return DatasetNode::factory($node, $dataset);
     }
 
     public static function getForeignDatasetNode(TermInterface $node,
