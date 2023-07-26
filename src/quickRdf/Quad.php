@@ -31,7 +31,8 @@ use rdfInterface\NamedNodeInterface as iNamedNode;
 use rdfInterface\BlankNodeInterface as iBlankNode;
 use rdfInterface\LiteralInterface as iLiteral;
 use rdfInterface\DefaultGraphInterface as iDefaultGraph;
-use rdfInterface\TermInterface as iTerm;
+use rdfInterface\TermInterface;
+use rdfInterface\TermCompareInterface;
 use rdfInterface\QuadInterface as iQuad;
 use quickRdf\DataFactory as DF;
 
@@ -42,13 +43,13 @@ use quickRdf\DataFactory as DF;
  */
 class Quad implements iQuad, SingletonTerm {
 
-    private iTerm $subject;
+    private TermInterface $subject;
     private iNamedNode $predicate;
-    private iTerm $object;
+    private TermInterface $object;
     private iNamedNode | iBlankNode | iDefaultGraph $graph;
 
     public function __construct(
-        iTerm $subject, iNamedNode $predicate, iTerm $object,
+        TermInterface $subject, iNamedNode $predicate, TermInterface $object,
         iNamedNode | iBlankNode | iDefaultGraph | null $graph = null
     ) {
         (!DF::$enforceConstructor) || DF::checkCall();
@@ -75,7 +76,7 @@ class Quad implements iQuad, SingletonTerm {
         return rtrim("$sbj $pred $obj $graph");
     }
 
-    public function equals(iTerm $term): bool {
+    public function equals(TermCompareInterface $term): bool {
         if ($term instanceof SingletonTerm) {
             return $this === $term;
         } else if ($term instanceof iQuad) {
@@ -93,7 +94,7 @@ class Quad implements iQuad, SingletonTerm {
         throw new \BadMethodCallException();
     }
 
-    public function getSubject(): iTerm {
+    public function getSubject(): TermInterface {
         return $this->subject;
     }
 
@@ -101,7 +102,7 @@ class Quad implements iQuad, SingletonTerm {
         return $this->predicate;
     }
 
-    public function getObject(): iTerm {
+    public function getObject(): TermInterface {
         return $this->object;
     }
 
@@ -109,7 +110,7 @@ class Quad implements iQuad, SingletonTerm {
         return $this->graph;
     }
 
-    public function withSubject(iTerm $subject): iQuad {
+    public function withSubject(TermInterface $subject): iQuad {
         return DF::quad($subject, $this->predicate, $this->object, $this->graph);
     }
 
@@ -117,7 +118,7 @@ class Quad implements iQuad, SingletonTerm {
         return DF::quad($this->subject, $predicate, $this->object, $this->graph);
     }
 
-    public function withObject(iTerm $object): iQuad {
+    public function withObject(TermInterface $object): iQuad {
         return DF::quad($this->subject, $this->predicate, $object, $this->graph);
     }
 

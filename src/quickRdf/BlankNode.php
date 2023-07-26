@@ -27,7 +27,7 @@
 namespace quickRdf;
 
 use rdfInterface\BlankNodeInterface as iBlankNode;
-use rdfInterface\TermInterface as iTerm;
+use rdfInterface\TermCompareInterface;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -70,7 +70,7 @@ class BlankNode implements iBlankNode, SingletonTerm {
         return $this->id;
     }
 
-    public function equals(iTerm $term): bool {
+    public function equals(TermCompareInterface $term): bool {
         if ($term instanceof SingletonTerm) {
             return $this === $term;
         } else {

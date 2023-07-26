@@ -47,14 +47,14 @@ class DatasetTest extends \rdfInterface\tests\DatasetInterfaceTest {
             $dd = $d->copy($qt);
             $this->assertCount(1, $dd, "Indexed: $indexed");
             foreach ($dd as $i) {
-                $obj = $i?->getObject();
+                $obj = $i->getObject();
                 $this->assertTrue($obj instanceof iLiteral && $obj->getLang() === 'en', "Indexed: $indexed");
             }
 
             $dd = $d->copyExcept($qt);
             $this->assertCount(3, $dd, "Indexed: $indexed");
             foreach ($dd as $i) {
-                $obj = $i?->getObject();
+                $obj = $i->getObject();
                 $this->assertTrue(!($obj instanceof iLiteral) || $obj->getLang() === null, "Indexed: $indexed");
             }
 
@@ -70,16 +70,16 @@ class DatasetTest extends \rdfInterface\tests\DatasetInterfaceTest {
             $dd = $d->copy($qt);
             $this->assertCount(1, $dd);
             foreach ($dd as $i) {
-                $obj = $i?->getObject();
-                $this->assertEquals('foo', $i?->getSubject()?->getValue(), "Indexed: $indexed");
+                $obj = $i->getObject();
+                $this->assertEquals('foo', $i->getSubject()->getValue(), "Indexed: $indexed");
                 $this->assertTrue($obj instanceof iLiteral && $obj->getLang() === 'en', "Indexed: $indexed");
             }
 
             $dd = $d->copyExcept($qt);
             $this->assertCount(4, $dd, "Indexed: $indexed");
             foreach ($dd as $i) {
-                $obj = $i?->getObject();
-                $this->assertTrue(!($obj instanceof iLiteral) || $obj->getLang() === null || $i?->getSubject()->getValue() !== 'foo', "Indexed: $indexed");
+                $obj = $i->getObject();
+                $this->assertTrue(!($obj instanceof iLiteral) || $obj->getLang() === null || $i->getSubject()->getValue() !== 'foo', "Indexed: $indexed");
             }
         }
     }

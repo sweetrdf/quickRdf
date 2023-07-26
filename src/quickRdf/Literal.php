@@ -30,7 +30,7 @@ use BadMethodCallException;
 use Stringable;
 use zozlak\RdfConstants as RDF;
 use rdfInterface\LiteralInterface as iLiteral;
-use rdfInterface\TermInterface as iTerm;
+use rdfInterface\TermCompareInterface;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -96,7 +96,7 @@ class Literal implements iLiteral, SingletonTerm {
         return $this->datatype;
     }
 
-    public function equals(iTerm $term): bool {
+    public function equals(TermCompareInterface $term): bool {
         if ($term instanceof iLiteral) {
             return $this === $term ||
                 $this->getValue(self::CAST_LEXICAL_FORM) === $term->getValue(self::CAST_LEXICAL_FORM) &&

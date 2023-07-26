@@ -19,7 +19,7 @@ class TestUnsupportedTerm implements \rdfInterface\TermInterface {
         return '';
     }
 
-    public function equals(\rdfInterface\TermInterface $term): bool {
+    public function equals(\rdfInterface\TermCompareInterface $term): bool {
         return false;
     }
 

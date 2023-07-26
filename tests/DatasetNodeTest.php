@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2021 zozlak.
+ * Copyright 2023 zozlak.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,14 +27,11 @@
 namespace quickRdf;
 
 /**
+ * Description of DatasetNodeTest
  *
  * @author zozlak
  */
-class DatasetCompareTest extends \rdfInterface\tests\DatasetCompareInterfaceTest {
+class DatasetNodeTest extends \rdfInterface\tests\DatasetNodeInterfaceTest {
 
     use TestTrait;
-
-    public static function getDataset(): Dataset {
-        return new Dataset();
-    }
 }

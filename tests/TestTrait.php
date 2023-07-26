@@ -26,8 +26,11 @@
 
 namespace quickRdf;
 
-use rdfInterface\TermInterface as iTerm;
-use rdfInterface\TermCompareInterface as iTermCompare;
+use rdfInterface\TermInterface;
+use rdfInterface\TermCompareInterface;
+use rdfInterface\DataFactoryInterface;
+use rdfInterface\DatasetInterface;
+use rdfInterface\DatasetNodeInterface;
 
 /**
  * Description of TestTrait
@@ -40,23 +43,33 @@ trait TestTrait {
         return new DataFactory();
     }
 
-    public static function getForeignDataFactory(): \simpleRdf\DataFactory {
+    public static function getForeignDataFactory(): DataFactoryInterface {
         return new \simpleRdf\DataFactory();
     }
 
     public static function getDataset(): Dataset {
-        return new Dataset();
+        return Dataset::factory();
     }
 
-    public static function getForeignDataset(): \simpleRdf\Dataset {
-        return new \simpleRdf\Dataset();
+    public static function getForeignDataset(): DatasetInterface {
+        return \simpleRdf\Dataset::factory();
     }
 
-    public static function getQuadTemplate(iTermCompare | iTerm | null $subject = null,
-                                           iTermCompare | iTerm | null $predicate = null,
-                                           iTermCompare | iTerm | null $object = null,
-                                           iTermCompare | iTerm | null $graphIri = null): \rdfInterface\QuadCompareInterface {
-        return new \termTemplates\QuadTemplate($subject, $predicate, $object, $graphIri);
+    public static function getDatasetNode(TermInterface $node,
+                                          DatasetInterface | null $dataset = null): DatasetNodeInterface {
+        return new DatasetNode($node, $dataset ?? new Dataset());
+    }
+
+    public static function getForeignDatasetNode(TermInterface $node,
+                                                 DatasetInterface | null $dataset = null): DatasetNodeInterface {
+        throw new \Exception('There is no foreign implementation so far');
+    }
+
+    public static function getQuadTemplate(TermCompareInterface | TermInterface | null $subject = null,
+                                           TermCompareInterface | TermInterface | null $predicate = null,
+                                           TermCompareInterface | TermInterface | null $object = null,
+                                           TermCompareInterface | TermInterface | null $graph = null): \rdfInterface\QuadCompareInterface {
+        return new \termTemplates\QuadTemplate($subject, $predicate, $object, $graph);
     }
 
     public static function getRdfNamespace(): RdfNamespace {

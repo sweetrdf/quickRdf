@@ -26,8 +26,8 @@
 
 namespace quickRdf;
 
-use rdfInterface\NamedNodeInterface as iNamedNode;
-use rdfInterface\TermInterface as iTerm;
+use rdfInterface\NamedNodeInterface;
+use rdfInterface\TermCompareInterface;
 use quickRdf\DataFactory as DF;
 
 /**
@@ -35,7 +35,7 @@ use quickRdf\DataFactory as DF;
  *
  * @author zozlak
  */
-class NamedNode implements iNamedNode, SingletonTerm {
+class NamedNode implements NamedNodeInterface, SingletonTerm {
 
     private string $iri;
 
@@ -52,11 +52,11 @@ class NamedNode implements iNamedNode, SingletonTerm {
         return $this->iri;
     }
 
-    public function equals(iTerm $term): bool {
+    public function equals(TermCompareInterface $term): bool {
         if ($term instanceof SingletonTerm) {
             return $this === $term;
         } else {
-            return $term instanceof iNamedNode && $this->getValue() === $term->getValue();
+            return $term instanceof NamedNodeInterface && $this->getValue() === $term->getValue();
         }
     }
 }
