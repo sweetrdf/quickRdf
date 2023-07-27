@@ -27,7 +27,7 @@
 namespace quickRdf;
 
 use BadMethodCallException;
-use OutOfBoundsException;
+use UnexpectedValueException;
 use rdfInterface\DatasetNodeInterface;
 use rdfInterface\DatasetInterface;
 use rdfInterface\TermInterface;
@@ -37,6 +37,7 @@ use rdfInterface\QuadInterface;
 use rdfInterface\QuadIteratorInterface;
 use rdfInterface\QuadIteratorAggregateInterface;
 use rdfInterface\QuadCompareInterface;
+use rdfInterface\MultipleQuadsMatchedException;
 use termTemplates\QuadTemplate;
 
 /**
@@ -69,12 +70,8 @@ class DatasetNode implements DatasetNodeInterface {
 
     public function __toString(): string {
         $ret = '';
-        try {
-            foreach ($this->getIterator(new QuadTemplate($this->node)) as $i) {
-                $ret .= $i . "\n";
-            }
-        } catch (OutOfBoundsException) {
-            
+        foreach ($this->getIterator(new QuadTemplate($this->node)) as $i) {
+            $ret .= $i . "\n";
         }
         return $ret;
     }
@@ -173,7 +170,8 @@ class DatasetNode implements DatasetNodeInterface {
      * 
      * @param QuadCompareInterface|callable|int<0, 0> $offset
      * @return bool
-     * @throws \OutOfBoundsException
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetExists($offset): bool {
         return $this->copyNode()->offsetExists($offset);
@@ -183,7 +181,8 @@ class DatasetNode implements DatasetNodeInterface {
      * 
      * @param QuadCompareInterface|callable|int<0, 0> $offset
      * @return QuadInterface
-     * @throws \OutOfBoundsException
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetGet($offset): QuadInterface {
         return $this->copyNode()->offsetGet($offset);
@@ -194,6 +193,8 @@ class DatasetNode implements DatasetNodeInterface {
      * @param QuadCompareInterface|callable|null $offset
      * @param QuadInterface $value
      * @return void
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetSet($offset, $value): void {
         if ($offset !== null) {
@@ -209,16 +210,15 @@ class DatasetNode implements DatasetNodeInterface {
      * 
      * @param QuadCompareInterface|callable $offset
      * @return void
-     * @throws \OutOfBoundsException
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetUnset($offset): void {
-        try {
-            $match = $this->offsetGet($offset);
-            $this->dataset->delete($match);
-        } catch (OutOfBoundsException $ex) {
-            if ($ex->getMessage() === Dataset::ERR_MULTIPLE_MATCHES) {
-                throw $ex;
-            }
+        if ($offset === 0) {
+            throw new UnexpectedValueException();
+        }
+        if ($this->offsetExists($offset)) {
+            $this->dataset->delete($offset);
         }
     }
 
@@ -278,14 +278,10 @@ class DatasetNode implements DatasetNodeInterface {
         $node        = $this->getNode();
         $datasetNode = new DatasetNode($node, null, $indexed);
         $dataset     = $datasetNode->getDataset();
-        try {
-            foreach ($this->dataset->getIterator($filter) as $i) {
-                if ($node->equals($i->getSubject())) {
-                    $dataset->add($fn($i, $this));
-                }
+        foreach ($this->dataset->getIterator($filter) as $i) {
+            if ($node->equals($i->getSubject())) {
+                $dataset->add($fn($i, $this));
             }
-        } catch (OutOfBoundsException) {
-            
         }
         return $datasetNode;
     }
@@ -307,11 +303,7 @@ class DatasetNode implements DatasetNodeInterface {
 
     private function copyNode(bool $indexed = false): Dataset {
         $dataset = new Dataset($indexed);
-        try {
-            $dataset->add($this->dataset->getIterator(new QuadTemplate($this->node)));
-        } catch (OutOfBoundsException) {
-            
-        }
+        $dataset->add($this->dataset->getIterator(new QuadTemplate($this->node)));
         return $dataset;
     }
 }
