@@ -28,7 +28,7 @@ namespace quickRdf;
 
 use Generator;
 use Iterator;
-use OutOfBoundsException;
+use UnexpectedValueException;
 use SplObjectStorage;
 use rdfInterface\BlankNodeInterface;
 use rdfInterface\DatasetInterface;
@@ -39,6 +39,7 @@ use rdfInterface\QuadIteratorInterface;
 use rdfInterface\QuadIteratorAggregateInterface;
 use rdfInterface\TermInterface;
 use rdfInterface\TermIteratorInterface;
+use rdfInterface\MultipleQuadsMatchedException;
 use rdfHelpers\GenericQuadIterator;
 use rdfHelpers\GenericTermIterator;
 
@@ -48,8 +49,6 @@ use rdfHelpers\GenericTermIterator;
  * @author zozlak
  */
 class Dataset implements DatasetInterface {
-
-    const ERR_MULTIPLE_MATCHES = 'More than one quad matched';
 
     static public function factory(bool $indexed = true): Dataset {
         return new Dataset($indexed);
@@ -128,7 +127,12 @@ class Dataset implements DatasetInterface {
         return $n === 0;
     }
 
-    public function add(QuadInterface | QuadIteratorInterface | QuadIteratorAggregateInterface $quads): void {
+    /**
+     * 
+     * @param QuadInterface|\Traversable<\rdfInterface\QuadInterface>|array<\rdfInterface\QuadInterface> $quads
+     * @return void
+     */
+    public function add(QuadInterface | \Traversable | array $quads): void {
         if ($quads instanceof QuadInterface) {
             $quads = [$quads];
         }
@@ -144,11 +148,7 @@ class Dataset implements DatasetInterface {
     public function copy(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter = null,
                          bool $indexed = false): Dataset {
         $dataset = new Dataset($indexed);
-        try {
-            $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
-        } catch (OutOfBoundsException) {
-            
-        }
+        $dataset->add(new GenericQuadIterator($this->findMatchingQuads($filter)));
         return $dataset;
     }
 
@@ -177,15 +177,11 @@ class Dataset implements DatasetInterface {
     public function delete(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter = null,
                            bool $indexed = false): Dataset {
         $deleted = new Dataset($indexed);
-        try {
-            $quads = iterator_to_array($this->findMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
-            foreach ($quads as $i) {
-                $this->quads->detach($i);
-                $this->unindex($i);
-                $deleted->add($i);
-            }
-        } catch (OutOfBoundsException) {
-            
+        $quads   = iterator_to_array($this->findMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
+        foreach ($quads as $i) {
+            $this->quads->detach($i);
+            $this->unindex($i);
+            $deleted->add($i);
         }
         return $deleted;
     }
@@ -204,21 +200,17 @@ class Dataset implements DatasetInterface {
 
     public function forEach(callable $fn,
                             QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter = null): void {
-        try {
-            $quads = iterator_to_array($this->findMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
-            foreach ($quads as $i) {
-                $val = $fn($i, $this);
-                if ($val !== $i) {
-                    $this->quads->detach($i);
-                    $this->unindex($i);
-                    if ($val !== null) {
-                        $this->quads->attach($val);
-                        $this->index($val);
-                    }
+        $quads = iterator_to_array($this->findMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
+        foreach ($quads as $i) {
+            $val = $fn($i, $this);
+            if ($val !== $i) {
+                $this->quads->detach($i);
+                $this->unindex($i);
+                if ($val !== null) {
+                    $this->quads->attach($val);
+                    $this->index($val);
                 }
             }
-        } catch (OutOfBoundsException $e) {
-            
         }
     }
 
@@ -237,37 +229,40 @@ class Dataset implements DatasetInterface {
 
     /**
      *
-     * @param QuadCompareInterface|callable|int $offset
+     * @param QuadCompareInterface|callable|int<0, 0> $offset
      * @return bool
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetExists(mixed $offset): bool {
+        if (!($offset instanceof QuadCompareInterface || is_callable($offset) || $offset === 0)) {
+            throw new UnexpectedValueException();
+        }
         return $this->exists($offset);
     }
 
     private function exists(QuadCompareInterface | callable | int $offset): bool {
-        try {
-            $iter = $this->findMatchingQuads($offset);
-            $this->checkIteratorEnd($iter);
-            return true;
-        } catch (OutOfBoundsException) {
-            return false;
-        }
+        $iter = $this->findMatchingQuads($offset);
+        return $this->checkIterator($iter, false) !== null;
     }
 
     /**
      *
-     * @param QuadCompareInterface|callable|int $offset
+     * @param QuadCompareInterface|callable|int<0, 0> $offset
      * @return QuadInterface
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetGet(mixed $offset): QuadInterface {
+        if (!($offset instanceof QuadCompareInterface || is_callable($offset) || $offset === 0)) {
+            throw new UnexpectedValueException();
+        }
         return $this->get($offset);
     }
 
     private function get(QuadCompareInterface | callable | int $offset): QuadInterface {
         $iter = $this->findMatchingQuads($offset);
-        $ret  = $iter->current();
-        $this->checkIteratorEnd($iter);
-        return $ret;
+        return $this->checkIterator($iter, true);
     }
 
     /**
@@ -275,8 +270,13 @@ class Dataset implements DatasetInterface {
      * @param QuadCompareInterface|callable|null $offset
      * @param QuadInterface $value
      * @return void
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetSet($offset, $value): void {
+        if (!($offset instanceof QuadCompareInterface || is_callable($offset) || $offset === null)) {
+            throw new UnexpectedValueException();
+        }
         if ($offset === null) {
             $this->add($value);
         } else {
@@ -287,8 +287,7 @@ class Dataset implements DatasetInterface {
     private function set(QuadCompareInterface | callable $offset,
                          QuadInterface $value): void {
         $iter  = $this->findMatchingQuads($offset);
-        $match = $iter->current();
-        $this->checkIteratorEnd($iter);
+        $match = $this->checkIterator($iter, true);
         if ($match !== $value) {
             $this->quads->detach($match);
             $this->unindex($match);
@@ -300,23 +299,22 @@ class Dataset implements DatasetInterface {
      *
      * @param QuadCompareInterface|callable $offset
      * @return void
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
     public function offsetUnset($offset): void {
+        if (!($offset instanceof QuadCompareInterface || is_callable($offset))) {
+            throw new UnexpectedValueException();
+        }
         $this->unset($offset);
     }
 
     private function unset(QuadCompareInterface | callable $offset): void {
-        $iter = false;
-        try {
-            $iter = $this->findMatchingQuads($offset);
-            $quad = $iter->current();
-            $this->checkIteratorEnd($iter);
-            $this->quads->detach($quad);
-            $this->unindex($quad);
-        } catch (OutOfBoundsException $ex) {
-            if ($ex->getMessage() === self::ERR_MULTIPLE_MATCHES) {
-                throw $ex;
-            }
+        $iter  = $this->findMatchingQuads($offset);
+        $match = $this->checkIterator($iter, false);
+        if ($match !== null) {
+            $this->quads->detach($match);
+            $this->unindex($match);
         }
     }
 
@@ -325,27 +323,19 @@ class Dataset implements DatasetInterface {
     public function map(callable $fn,
                         QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter = null,
                         bool $indexed = false): Dataset {
-        $ret = new Dataset($indexed);
-        try {
-            $quads = $this->findMatchingQuads($filter);
-            foreach ($quads as $i) {
-                $ret->add($fn($i, $this));
-            }
-        } catch (OutOfBoundsException $e) {
-            
+        $ret   = new Dataset($indexed);
+        $quads = $this->findMatchingQuads($filter);
+        foreach ($quads as $i) {
+            $ret->add($fn($i, $this));
         }
         return $ret;
     }
 
     public function reduce(callable $fn, $initialValue = null,
                            QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter = null): mixed {
-        try {
-            $quads = $this->findMatchingQuads($filter);
-            foreach ($quads as $i) {
-                $initialValue = $fn($initialValue, $i, $this);
-            }
-        } catch (OutOfBoundsException $e) {
-            
+        $quads = $this->findMatchingQuads($filter);
+        foreach ($quads as $i) {
+            $initialValue = $fn($initialValue, $i, $this);
         }
         return $initialValue;
     }
@@ -353,25 +343,12 @@ class Dataset implements DatasetInterface {
     // DatasetCompare
 
     public function any(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter): bool {
-        try {
-            $iter = $this->findMatchingQuads($filter);
-            $iter = $iter->current(); // so PHP doesn't optimize previous line out
-            return true;
-        } catch (OutOfBoundsException) {
-            return false;
-        }
+        $iter = $this->findMatchingQuads($filter);
+        return $iter->valid();
     }
 
     public function every(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter): bool {
-        try {
-            $n = 0;
-            foreach ($this->findMatchingQuads($filter) as $i) {
-                $n++;
-            }
-            return $n === $this->count();
-        } catch (OutOfBoundsException) {
-            return false;
-        }
+        return iterator_count($this->findMatchingQuads($filter)) === $this->count();
     }
 
     public function none(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter): bool {
@@ -399,15 +376,11 @@ class Dataset implements DatasetInterface {
     private function listQuadElement(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter,
                                      string $elementFn): TermIteratorInterface {
         $spotted = new SplObjectStorage();
-        try {
-            foreach ($this->findMatchingQuads($filter) as $i) {
-                $i = $i->$elementFn();
-                if (!$spotted->contains($i)) {
-                    $spotted->attach($i);
-                }
+        foreach ($this->findMatchingQuads($filter) as $i) {
+            $i = $i->$elementFn();
+            if (!$spotted->contains($i)) {
+                $spotted->attach($i);
             }
-        } catch (OutOfBoundsException $ex) {
-            
         }
         return new GenericTermIterator($spotted);
     }
@@ -415,13 +388,13 @@ class Dataset implements DatasetInterface {
 
     /**
      *
-     * @param QuadCompareInterface|QuadIteratorInterface|QuadIteratorAggregateInterface|callable|int|null $offset
+     * @param QuadCompareInterface|QuadIteratorInterface|QuadIteratorAggregateInterface|callable|int<0, 0>|null $offset
      * @return Generator<QuadInterface>
-     * @throws OutOfBoundsException
+     * @throws UnexpectedValueException
      */
     private function findMatchingQuads(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | int | null $offset): Generator {
         if (is_int($offset) && $offset !== 0) {
-            throw new OutOfBoundsException("Only integer offset of 0 is allowed");
+            throw new UnexpectedValueException("Only integer offset of 0 is allowed");
         }
         if ($offset instanceof QuadInterface && !($offset instanceof Quad)) {
             $offset = DataFactory::importQuad($offset);
@@ -429,17 +402,13 @@ class Dataset implements DatasetInterface {
 
         if ($offset === null) {
             yield from $this->quads;
-        } elseif (is_int($offset)) {
-            if (count($this->quads) === 0) {
-                throw new OutOfBoundsException();
-            }
+        } elseif (is_int($offset) && count($this->quads) > 0) {
             $this->quads->rewind();
             yield $this->quads->current();
         } elseif ($offset instanceof QuadInterface) {
-            if (!isset($this->quads[$offset])) {
-                throw new OutOfBoundsException();
+            if (isset($this->quads[$offset])) {
+                yield $offset;
             }
-            yield $offset;
         } elseif ($offset instanceof QuadCompareInterface && $this->indexed) {
             yield from $this->findByIndices($offset);
         } elseif ($offset instanceof QuadCompareInterface && !$this->indexed || is_callable($offset)) {
@@ -457,9 +426,6 @@ class Dataset implements DatasetInterface {
                     yield $i;
                 }
             }
-            if ($n === 0) {
-                throw new OutOfBoundsException();
-            }
         } elseif ($offset instanceof QuadIteratorInterface || $offset instanceof QuadIteratorAggregateInterface) {
             $n = 0;
             foreach ($offset as $i) {
@@ -468,12 +434,9 @@ class Dataset implements DatasetInterface {
                         $n++;
                         yield $j;
                     }
-                } catch (OutOfBoundsException) {
+                } catch (UnexpectedValueException) {
                     
                 }
-            }
-            if ($n == 0) {
-                throw new OutOfBoundsException();
             }
         }
     }
@@ -543,8 +506,6 @@ class Dataset implements DatasetInterface {
             $ret2 = clone $this->quads;
             $ret2->removeAll($ret);
             $ret  = $ret2;
-        } elseif ($ret->count() === 0) {
-            throw new OutOfBoundsException();
         }
         yield from $ret;
     }
@@ -650,13 +611,23 @@ class Dataset implements DatasetInterface {
     /**
      * 
      * @param Iterator<QuadInterface> $i
-     * @return void
-     * @throws OutOfBoundsException
+     * @return QuadInterface|null
+     * @throws UnexpectedValueException
+     * @throws MultipleQuadsMatchedException
      */
-    private function checkIteratorEnd(Iterator $i): void {
-        $i->next();
-        if ($i->key() !== null) {
-            throw new OutOfBoundsException(self::ERR_MULTIPLE_MATCHES);
+    private function checkIterator(Iterator $i, bool $errorOrInvalid): QuadInterface | null {
+        if (!$i->valid()) {
+            if ($errorOrInvalid) {
+                throw new UnexpectedValueException();
+            } else {
+                return null;
+            }
         }
+        $ret = $i->current();
+        $i->next();
+        if ($i->valid()) {
+            throw new MultipleQuadsMatchedException();
+        }
+        return $ret;
     }
 }

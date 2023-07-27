@@ -91,7 +91,12 @@ class DatasetNode implements DatasetNodeInterface {
         return $datasetNode;
     }
 
-    public function add(QuadInterface | QuadIteratorInterface | QuadIteratorAggregateInterface $quads): void {
+    /**
+     * 
+     * @param QuadInterface|\Traversable<\rdfInterface\QuadInterface>|array<\rdfInterface\QuadInterface> $quads
+     * @return void
+     */
+    public function add(QuadInterface | \Traversable | array $quads): void {
         $this->dataset->add($quads);
     }
 
