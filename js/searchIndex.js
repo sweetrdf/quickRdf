@@ -741,6 +741,71 @@ Search.appendIndex(
             "summary": "Interface\u0020used\u0020to\u0020mark\u0020DataFactory\u002Dhashable\u0020terms",
             "url": "classes/quickRdf-SingletonTerm.html"
         },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait",
+            "name": "DatasetGettersTrait",
+            "summary": "",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AlistSubjects\u0028\u0029",
+            "name": "listSubjects",
+            "summary": "Fetches\u0020an\u0020iterator\u0020over\u0020unique\u0020set\u0020of\u0020dataset\u0020quad\u0020subjects.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_listSubjects"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AlistPredicates\u0028\u0029",
+            "name": "listPredicates",
+            "summary": "Fetches\u0020an\u0020iterator\u0020over\u0020unique\u0020set\u0020of\u0020dataset\u0020quad\u0020predicates.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_listPredicates"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AlistObjects\u0028\u0029",
+            "name": "listObjects",
+            "summary": "Fetches\u0020an\u0020iterator\u0020over\u0020unique\u0020set\u0020of\u0020dataset\u0020quad\u0020objects.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_listObjects"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AlistGraphs\u0028\u0029",
+            "name": "listGraphs",
+            "summary": "Fetches\u0020an\u0020iterator\u0020over\u0020unique\u0020set\u0020of\u0020dataset\u0020quad\u0020graphs.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_listGraphs"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetSubject\u0028\u0029",
+            "name": "getSubject",
+            "summary": "Fetches\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getSubject"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetPredicate\u0028\u0029",
+            "name": "getPredicate",
+            "summary": "Fetches\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getPredicate"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetObject\u0028\u0029",
+            "name": "getObject",
+            "summary": "Fetches\u0020object\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getObject"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetGraph\u0028\u0029",
+            "name": "getGraph",
+            "summary": "Fetches\u0020graph\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getGraph"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetSubjectValue\u0028\u0029",
+            "name": "getSubjectValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getSubjectValue"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetPredicateValue\u0028\u0029",
+            "name": "getPredicateValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getPredicateValue"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetObjectValue\u0028\u0029",
+            "name": "getObjectValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getObjectValue"
+        },                {
+            "fqsen": "\\rdfHelpers\\DatasetGettersTrait\u003A\u003AgetGraphValue\u0028\u0029",
+            "name": "getGraphValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfHelpers-DatasetGettersTrait.html#method_getGraphValue"
+        },                {
             "fqsen": "\\rdfHelpers\\DefaultGraph",
             "name": "DefaultGraph",
             "summary": "Description\u0020of\u0020DefaultGraph",
@@ -1125,6 +1190,46 @@ Search.appendIndex(
             "name": "listGraphs",
             "summary": "Fetches\u0020an\u0020iterator\u0020over\u0020unique\u0020set\u0020of\u0020dataset\u0020quad\u0020graphs.",
             "url": "classes/rdfInterface-DatasetInterface.html#method_listGraphs"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetSubject\u0028\u0029",
+            "name": "getSubject",
+            "summary": "Fetches\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getSubject"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetPredicate\u0028\u0029",
+            "name": "getPredicate",
+            "summary": "Fetches\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getPredicate"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetObject\u0028\u0029",
+            "name": "getObject",
+            "summary": "Fetches\u0020object\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getObject"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetGraph\u0028\u0029",
+            "name": "getGraph",
+            "summary": "Fetches\u0020graph\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getGraph"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetSubjectValue\u0028\u0029",
+            "name": "getSubjectValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getSubjectValue"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetPredicateValue\u0028\u0029",
+            "name": "getPredicateValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getPredicateValue"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetObjectValue\u0028\u0029",
+            "name": "getObjectValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getObjectValue"
+        },                {
+            "fqsen": "\\rdfInterface\\DatasetInterface\u003A\u003AgetGraphValue\u0028\u0029",
+            "name": "getGraphValue",
+            "summary": "Returns\u0020result\u0020of\u0020calling\u0020the\u0020getValue\u0028\u0029\u0020method\u0020on\u0020a\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020if\u0020no\u0020quad\u0020matches\u0020the\u0020filter.",
+            "url": "classes/rdfInterface-DatasetInterface.html#method_getGraphValue"
         },                {
             "fqsen": "\\rdfInterface\\DatasetNodeInterface",
             "name": "DatasetNodeInterface",
