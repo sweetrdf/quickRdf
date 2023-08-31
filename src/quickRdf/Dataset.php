@@ -50,6 +50,8 @@ use rdfHelpers\GenericTermIterator;
  */
 class Dataset implements DatasetInterface {
 
+    use \rdfHelpers\DatasetGettersTrait;
+
     static public function factory(bool $indexed = true): Dataset {
         return new Dataset($indexed);
     }
