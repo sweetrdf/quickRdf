@@ -47,6 +47,8 @@ use termTemplates\QuadTemplate;
  */
 class DatasetNode implements DatasetNodeInterface {
 
+    use \rdfHelpers\DatasetGettersTrait;
+
     public static function factory(TermInterface | null $node = null,
                                    QuadIteratorInterface | QuadIteratorAggregateInterface | null $quads = null): DatasetNodeInterface {
         if ($node === null) {
