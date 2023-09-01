@@ -17,7 +17,7 @@
         "zozlak/rdf-constants": "^1.1",
         "sweetrdf/rdf-interface": "^2.0.0-RC2",
         "sweetrdf/rdf-helpers": "^1.2.0",
-        "sweetrdf/term-templates": "^1"
+        "sweetrdf/term-templates": "^1 | ^2"
     },
     "suggest": {
         "sweetrdf/quick-rdf-io": "*"
