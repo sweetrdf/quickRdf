@@ -70,13 +70,7 @@ class Literal implements iLiteral, SingletonTerm {
     }
 
     public function __toString(): string {
-        $langtype = '';
-        if (!empty($this->lang)) {
-            $langtype = "@" . $this->lang;
-        } elseif ($this->datatype !== RDF::XSD_STRING) {
-            $langtype = "^^<$this->datatype>";
-        }
-        return '"' . $this->value . '"' . $langtype;
+        return (string) $this->value;
     }
 
     public function getValue(int $cast = self::CAST_LEXICAL_FORM): mixed {

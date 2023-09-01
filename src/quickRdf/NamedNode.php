@@ -45,7 +45,7 @@ class NamedNode implements NamedNodeInterface, SingletonTerm {
     }
 
     public function __toString(): string {
-        return '<' . $this->iri . '>';
+        return $this->iri;
     }
 
     public function getValue(): string {
