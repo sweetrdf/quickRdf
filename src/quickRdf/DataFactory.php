@@ -38,6 +38,7 @@ use rdfInterface\LiteralInterface as iLiteral;
 use rdfInterface\DefaultGraphInterface as iDefaultGraph;
 use rdfInterface\QuadInterface as iQuad;
 use rdfHelpers\DefaultGraph;
+use rdfHelpers\QuadNoSubject;
 
 /**
  * Description of DataFactory
@@ -63,7 +64,7 @@ class DataFactory implements iDataFactory {
      * @var array<string, WeakReference<Literal>>
      */
     private static array $literals     = [];
-    private static iDefaultGraph | null $defaultGraph = null;
+    private static DefaultGraph $defaultGraph;
 
     /**
      *
@@ -72,7 +73,7 @@ class DataFactory implements iDataFactory {
     private static array $quads             = [];
     public static bool $enforceConstructor = true;
 
-    public static function blankNode(string | Stringable | null $iri = null): iBlankNode {
+    public static function blankNode(string | Stringable | null $iri = null): BlankNode {
         $a   = &self::$blankNodes;
         $iri = $iri === null ? $iri : (string) $iri;
         if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
@@ -83,7 +84,7 @@ class DataFactory implements iDataFactory {
         return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
-    public static function namedNode(string | Stringable $iri): iNamedNode {
+    public static function namedNode(string | Stringable $iri): NamedNode {
         $iri = (string) $iri;
         $a   = &self::$namedNodes;
         if (!isset($a[$iri]) || $a[$iri]->get() === null) {
@@ -93,8 +94,8 @@ class DataFactory implements iDataFactory {
         return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
     }
 
-    public static function defaultGraph(): iDefaultGraph {
-        if (self::$defaultGraph === null) {
+    public static function defaultGraph(): DefaultGraph {
+        if (!isset(self::$defaultGraph)) {
             self::$defaultGraph = new DefaultGraph();
         }
         return self::$defaultGraph;
@@ -102,7 +103,7 @@ class DataFactory implements iDataFactory {
 
     public static function literal(int | float | string | bool | Stringable $value,
                                    string | Stringable | null $lang = null,
-                                   string | Stringable | null $datatype = null): iLiteral {
+                                   string | Stringable | null $datatype = null): Literal {
         if (!empty($lang)) {
             $datatype = RDF::RDF_LANG_STRING;
         } elseif (empty($datatype)) {
@@ -136,7 +137,7 @@ class DataFactory implements iDataFactory {
 
     public static function quad(iTerm $subject, iNamedNode $predicate,
                                 iTerm $object,
-                                iNamedNode | iBlankNode | iDefaultGraph | null $graph = null): iQuad {
+                                iNamedNode | iBlankNode | iDefaultGraph | null $graph = null): Quad {
         $graph ??= self::defaultGraph();
         $hash  = self::hashQuad($subject, $predicate, $object, $graph);
         $a     = &self::$quads;
@@ -145,6 +146,13 @@ class DataFactory implements iDataFactory {
             $a[$hash] = WeakReference::create($obj);
         }
         return $a[$hash]->get() ?? throw new RuntimeException("Object creation failed");
+    }
+
+    public static function quadNoSubject(
+        iNamedNode $predicate, iTerm $object,
+        iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
+    ): QuadNoSubject {
+        return new QuadNoSubject(clone $predicate, clone $object, $graphIri);
     }
 
     public static function importTerm(iTerm $term, bool $recursive = true): iTerm {
