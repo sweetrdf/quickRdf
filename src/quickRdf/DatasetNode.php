@@ -27,6 +27,8 @@
 namespace quickRdf;
 
 use BadMethodCallException;
+use InvalidArgumentException;
+use Traversable;
 use UnexpectedValueException;
 use rdfInterface\DatasetNodeInterface;
 use rdfInterface\DatasetInterface;
@@ -37,6 +39,7 @@ use rdfInterface\QuadInterface;
 use rdfInterface\QuadIteratorInterface;
 use rdfInterface\QuadIteratorAggregateInterface;
 use rdfInterface\QuadCompareInterface;
+use rdfInterface\QuadNoSubjectInterface;
 use rdfInterface\MultipleQuadsMatchedException;
 use termTemplates\QuadTemplate;
 
@@ -92,10 +95,19 @@ class DatasetNode implements DatasetNodeInterface {
 
     /**
      * 
-     * @param QuadInterface|\Traversable<\rdfInterface\QuadInterface>|array<\rdfInterface\QuadInterface> $quads
+     * @param QuadInterface|QuadNoSubjectInterface|Traversable<QuadInterface|QuadNoSubjectInterface>|array<QuadInterface|QuadNoSubjectInterface> $quads
+     * @throws InvalidArgumentException
      * @return void
      */
-    public function add(QuadInterface | \Traversable | array $quads): void {
+    public function add(QuadInterface | QuadNoSubjectInterface | Traversable | array $quads): void {
+        if ($quads instanceof QuadNoSubjectInterface) {
+            $quads = [$quads];
+        }
+        foreach ($quads as &$i) {
+            if (!($i instanceof QuadNoSubjectInterface)) {
+                $i = DataFactory::quad($this->node, $i->getPredicate(), $i->getObject(), $i->getGraph());
+            }
+        }
         $this->dataset->add($quads);
     }
 
@@ -139,7 +151,7 @@ class DatasetNode implements DatasetNodeInterface {
         } elseif ($other instanceof DatasetNodeInterface || $other instanceof DatasetInterface) {
             return $local->equals($other->copy($tmpl));
         } elseif ($other instanceof TermCompareInterface) {
-            return $this->getNode()->equals($other);
+            return $other->equals($this->getNode());
         } else {
             throw new BadMethodCallException("Unsupported parameter type");
         }
