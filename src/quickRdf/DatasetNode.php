@@ -101,14 +101,17 @@ class DatasetNode implements DatasetNodeInterface {
      */
     public function add(QuadInterface | QuadNoSubjectInterface | Traversable | array $quads): void {
         if ($quads instanceof QuadNoSubjectInterface) {
-            $quads = [$quads];
-        }
-        foreach ($quads as &$i) {
-            if (!($i instanceof QuadNoSubjectInterface)) {
-                $i = DataFactory::quad($this->node, $i->getPredicate(), $i->getObject(), $i->getGraph());
+            $this->dataset->add([DataFactory::quad($this->node, $quads->getPredicate(), $quads->getObject(), $quads->getGraph())]);
+        } else {
+            $tmp = [];
+            foreach ($quads as $i) {
+                if (!($i instanceof QuadNoSubjectInterface)) {
+                    $i = DataFactory::quad($this->node, $i->getPredicate(), $i->getObject(), $i->getGraph());
+                }
+                $tmp[] = $i;
             }
+            $this->dataset->add($tmp);
         }
-        $this->dataset->add($quads);
     }
 
     public function copy(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter = null,
