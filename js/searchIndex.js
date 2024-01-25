@@ -71,6 +71,11 @@ Search.appendIndex(
             "summary": "Creates\u0020a\u0020new\u0020RDF\u0020quad.",
             "url": "classes/quickRdf-DataFactory.html#method_quad"
         },                {
+            "fqsen": "\\quickRdf\\DataFactory\u003A\u003AquadNoSubject\u0028\u0029",
+            "name": "quadNoSubject",
+            "summary": "Creates\u0020a\u0020new\u0020RDF\u0020quadNoSubject.",
+            "url": "classes/quickRdf-DataFactory.html#method_quadNoSubject"
+        },                {
             "fqsen": "\\quickRdf\\DataFactory\u003A\u003AimportTerm\u0028\u0029",
             "name": "importTerm",
             "summary": "",
@@ -658,7 +663,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\quickRdf\\Quad\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Should\u0020always\u0020throw\u0020the\u0020\\BadMethodCallException",
             "url": "classes/quickRdf-Quad.html#method_getValue"
         },                {
             "fqsen": "\\quickRdf\\Quad\u003A\u003AgetSubject\u0028\u0029",
@@ -981,6 +986,46 @@ Search.appendIndex(
             "summary": "Characters\u0020forbidden\u0020in\u0020n\u002Dtriples\u0020literals\u0020according\u0020to\nhttps\u003A\/\/www.w3.org\/TR\/n\u002Dtriples\/\u0023grammar\u002Dproduction\u002DSTRING_LITERAL_QUOTE",
             "url": "classes/rdfHelpers-NtriplesUtil.html#property_literalEscapeMap"
         },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject",
+            "name": "QuadNoSubject",
+            "summary": "Description\u0020of\u0020QuadNoSubject",
+            "url": "classes/rdfHelpers-QuadNoSubject.html"
+        },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/rdfHelpers-QuadNoSubject.html#method___construct"
+        },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject\u003A\u003AgetPredicate\u0028\u0029",
+            "name": "getPredicate",
+            "summary": "",
+            "url": "classes/rdfHelpers-QuadNoSubject.html#method_getPredicate"
+        },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject\u003A\u003AgetObject\u0028\u0029",
+            "name": "getObject",
+            "summary": "",
+            "url": "classes/rdfHelpers-QuadNoSubject.html#method_getObject"
+        },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject\u003A\u003AgetGraph\u0028\u0029",
+            "name": "getGraph",
+            "summary": "Null\u0020is\u0020not\u0020allowed\u0020to\u0020deal\u0020with\u0020the\u0020ambiguity\u0020between\u0020DefaultGraph\u0020and\nnull\u0020which\u0020mean\u0020the\u0020same\u0020\u0028although\u0020it\u0020should\u0020be\u0020noted\u0020that\u0020all\u0020quads\u0020in\nNamedNode\/BlankNode\u0020graphs\u0020also\u0020belong\u0020to\u0020the\u0020DefaultGraph\u0029.",
+            "url": "classes/rdfHelpers-QuadNoSubject.html#method_getGraph"
+        },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject\u003A\u003A\u0024predicate",
+            "name": "predicate",
+            "summary": "",
+            "url": "classes/rdfHelpers-QuadNoSubject.html#property_predicate"
+        },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject\u003A\u003A\u0024object",
+            "name": "object",
+            "summary": "",
+            "url": "classes/rdfHelpers-QuadNoSubject.html#property_object"
+        },                {
+            "fqsen": "\\rdfHelpers\\QuadNoSubject\u003A\u003A\u0024graph",
+            "name": "graph",
+            "summary": "",
+            "url": "classes/rdfHelpers-QuadNoSubject.html#property_graph"
+        },                {
             "fqsen": "\\rdfHelpers\\RdfHelpersException",
             "name": "RdfHelpersException",
             "summary": "Description\u0020of\u0020RdfHelpersException",
@@ -1070,6 +1115,11 @@ Search.appendIndex(
             "name": "quad",
             "summary": "Creates\u0020a\u0020new\u0020RDF\u0020quad.",
             "url": "classes/rdfInterface-DataFactoryInterface.html#method_quad"
+        },                {
+            "fqsen": "\\rdfInterface\\DataFactoryInterface\u003A\u003AquadNoSubject\u0028\u0029",
+            "name": "quadNoSubject",
+            "summary": "Creates\u0020a\u0020new\u0020RDF\u0020quadNoSubject.",
+            "url": "classes/rdfInterface-DataFactoryInterface.html#method_quadNoSubject"
         },                {
             "fqsen": "\\rdfInterface\\DatasetInterface",
             "name": "DatasetInterface",
@@ -1413,7 +1463,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\rdfInterface\\QuadInterface",
             "name": "QuadInterface",
-            "summary": "Extends\u0020Term\u0020because\u0020of\u0020RDF\u002A",
+            "summary": "Description\u0020of\u0020RdfTerm",
             "url": "classes/rdfInterface-QuadInterface.html"
         },                {
             "fqsen": "\\rdfInterface\\QuadInterface\u003A\u003AgetSubject\u0028\u0029",
@@ -1430,6 +1480,11 @@ Search.appendIndex(
             "name": "getObject",
             "summary": "",
             "url": "classes/rdfInterface-QuadInterface.html#method_getObject"
+        },                {
+            "fqsen": "\\rdfInterface\\QuadInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "Should\u0020always\u0020throw\u0020the\u0020\\BadMethodCallException",
+            "url": "classes/rdfInterface-QuadInterface.html#method_getValue"
         },                {
             "fqsen": "\\rdfInterface\\QuadInterface\u003A\u003AgetGraph\u0028\u0029",
             "name": "getGraph",
@@ -1475,6 +1530,26 @@ Search.appendIndex(
             "name": "current",
             "summary": "",
             "url": "classes/rdfInterface-QuadIteratorInterface.html#method_current"
+        },                {
+            "fqsen": "\\rdfInterface\\QuadNoSubjectInterface",
+            "name": "QuadNoSubjectInterface",
+            "summary": "Interface\u0020used\u0020to\u0020allow\u0020adding\u0020quads\u0020without\u0020subject\u0020to\u0020a\u0020DatasetNode",
+            "url": "classes/rdfInterface-QuadNoSubjectInterface.html"
+        },                {
+            "fqsen": "\\rdfInterface\\QuadNoSubjectInterface\u003A\u003AgetPredicate\u0028\u0029",
+            "name": "getPredicate",
+            "summary": "",
+            "url": "classes/rdfInterface-QuadNoSubjectInterface.html#method_getPredicate"
+        },                {
+            "fqsen": "\\rdfInterface\\QuadNoSubjectInterface\u003A\u003AgetObject\u0028\u0029",
+            "name": "getObject",
+            "summary": "",
+            "url": "classes/rdfInterface-QuadNoSubjectInterface.html#method_getObject"
+        },                {
+            "fqsen": "\\rdfInterface\\QuadNoSubjectInterface\u003A\u003AgetGraph\u0028\u0029",
+            "name": "getGraph",
+            "summary": "Null\u0020is\u0020not\u0020allowed\u0020to\u0020deal\u0020with\u0020the\u0020ambiguity\u0020between\u0020DefaultGraph\u0020and\nnull\u0020which\u0020mean\u0020the\u0020same\u0020\u0028although\u0020it\u0020should\u0020be\u0020noted\u0020that\u0020all\u0020quads\u0020in\nNamedNode\/BlankNode\u0020graphs\u0020also\u0020belong\u0020to\u0020the\u0020DefaultGraph\u0029.",
+            "url": "classes/rdfInterface-QuadNoSubjectInterface.html#method_getGraph"
         },                {
             "fqsen": "\\rdfInterface\\RdfNamespaceInterface",
             "name": "RdfNamespaceInterface",
