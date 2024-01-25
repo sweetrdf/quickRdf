@@ -105,7 +105,7 @@ class DatasetNode implements DatasetNodeInterface {
         } else {
             $tmp = [];
             foreach ($quads as $i) {
-                if (!($i instanceof QuadNoSubjectInterface)) {
+                if ($i instanceof QuadNoSubjectInterface) {
                     $i = DataFactory::quad($this->node, $i->getPredicate(), $i->getObject(), $i->getGraph());
                 }
                 $tmp[] = $i;
