@@ -100,7 +100,9 @@ class DatasetNode implements DatasetNodeInterface {
      * @return void
      */
     public function add(QuadInterface | QuadNoSubjectInterface | Traversable | array $quads): void {
-        if ($quads instanceof QuadNoSubjectInterface) {
+        if ($quads instanceof QuadInterface) {
+            $this->dataset->add($quads);
+        } elseif ($quads instanceof QuadNoSubjectInterface) {
             $this->dataset->add([DataFactory::quad($this->node, $quads->getPredicate(), $quads->getObject(), $quads->getGraph())]);
         } else {
             $tmp = [];
