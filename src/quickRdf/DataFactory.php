@@ -152,7 +152,7 @@ class DataFactory implements iDataFactory {
         iNamedNode $predicate, iTerm $object,
         iNamedNode | iBlankNode | iDefaultGraph | null $graphIri = null
     ): QuadNoSubject {
-        return new QuadNoSubject(clone $predicate, clone $object, $graphIri);
+        return new QuadNoSubject($predicate, $object, $graphIri);
     }
 
     public static function importTerm(iTerm $term, bool $recursive = true): iTerm {
