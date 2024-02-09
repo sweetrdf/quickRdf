@@ -52,8 +52,15 @@ class DatasetNode implements DatasetNodeInterface {
 
     use \rdfHelpers\DatasetGettersTrait;
 
+    /**
+     * 
+     * @param TermInterface|null $node
+     * @param QuadInterface|QuadNoSubjectInterface|Traversable<QuadInterface|QuadNoSubjectInterface>|array<QuadInterface|QuadNoSubjectInterface>|null $quads
+     * @return DatasetNodeInterface
+     * @throws BadMethodCallException
+     */
     public static function factory(TermInterface | null $node = null,
-                                   QuadIteratorInterface | QuadIteratorAggregateInterface | null $quads = null): DatasetNodeInterface {
+                                   QuadInterface | QuadNoSubjectInterface | Traversable | array | null $quads = null): DatasetNodeInterface {
         if ($node === null) {
             throw new BadMethodCallException('$node parameter has to be provided');
         }
@@ -117,15 +124,15 @@ class DatasetNode implements DatasetNodeInterface {
     }
 
     public function copy(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter = null,
-                         bool $indexed = false): self {
-        $dataset = $this->copyOther($indexed);
+                         bool $includeOther = true, bool $indexed = false): self {
+        $dataset = $includeOther ? $this->copyOther($indexed) : new Dataset($indexed);
         $dataset->add($this->copyNode()->copy($filter));
         return $this->withDataset($dataset);
     }
 
     public function copyExcept(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter,
-                               bool $indexed = false): self {
-        $dataset = $this->copyOther($indexed);
+                               bool $includeOther = true, bool $indexed = false): self {
+        $dataset = $includeOther ? $this->copyOther($indexed) : new Dataset($indexed);
         $dataset->add($this->copyNode()->copyExcept($filter));
         return $this->withDataset($dataset);
     }
@@ -134,7 +141,7 @@ class DatasetNode implements DatasetNodeInterface {
         return $this->copyNode()->count();
     }
 
-    public function delete(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter,
+    public function delete(QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter = null,
                            bool $indexed = false): Dataset {
         $toDelete = $this->copyNode()->delete($filter, $indexed);
         $this->dataset->delete($toDelete);
@@ -157,8 +164,6 @@ class DatasetNode implements DatasetNodeInterface {
             return $local->equals($other->copy($tmpl));
         } elseif ($other instanceof TermCompareInterface) {
             return $other->equals($this->getNode());
-        } else {
-            throw new BadMethodCallException("Unsupported parameter type");
         }
     }
 
@@ -293,13 +298,15 @@ class DatasetNode implements DatasetNodeInterface {
 
     public function map(callable $fn,
                         QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter = null,
-                        bool $indexed = false): DatasetNodeInterface {
+                        bool $includeOther = true, bool $indexed = false): DatasetNodeInterface {
         $node        = $this->getNode();
         $datasetNode = new DatasetNode($node, null, $indexed);
         $dataset     = $datasetNode->getDataset();
         foreach ($this->dataset->getIterator($filter) as $i) {
             if ($node->equals($i->getSubject())) {
                 $dataset->add($fn($i, $this));
+            } elseif ($includeOther) {
+                $dataset->add($i);
             }
         }
         return $datasetNode;
