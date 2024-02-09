@@ -307,7 +307,7 @@
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Iterates trough all quads replacing them with a callback result.</dd>
+<dd>In-place modifies all dataset quads using a given callback.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/rdfHelpers-DatasetGettersTrait.html#method_getGraph">getGraph()</a>
@@ -404,6 +404,8 @@
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a>    </span>
 </dt>
+<dd>Returns a new dataset from quads processed with a given
+callback function.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Dataset.html#method_none">none()</a>
@@ -445,6 +447,7 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Performs a reduce operation on the dataset quads.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/quickRdf-Dataset.html#method_union">union()</a>
@@ -458,7 +461,7 @@
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a>    </span>
 </dt>
-<dd>Returns a dataset being a symmetric difference of the current dataset and
+<dd>Returns a new dataset being a symmetric difference of the current dataset and
 the $other one.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
@@ -940,12 +943,12 @@ the $other one.</dd>
     <div class="phpdocumentor-label-line">
         </div>
         <section class="phpdocumentor-description"><p>If $filter is provided, the copy contains only quads matching the $filter.</p>
-<p>$filter can be specified as:</p>
+<p>The $filter can be specified as:</p>
 <ul>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single Quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
-(e.g. another Dataset)</li>
+or the \rdfInterface\QuadIteratorAggregateInterface (e.g. another Dataset)</li>
 <li>A callable with signature <code class="prettyprint">fn(\rdfInterface\QuadInterface, \rdfInterface\DatasetInterface): bool</code>
 All quads for which the callable returns true are copied.</li>
 </ul>
@@ -1005,13 +1008,13 @@ All quads for which the callable returns true are copied.</li>
     <div class="phpdocumentor-label-line">
         </div>
         <section class="phpdocumentor-description"><p>If $filter is provided, the copy contains only quads not matching the
-$filter.</p>
-<p>$filter can be specified as:</p>
+The $filter.</p>
+<p>The $filter can be specified as:</p>
 <ul>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
-(e.g. a single Quad)</li>
+(e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
-(e.g. another Dataset)</li>
+or the \rdfInterface\QuadIteratorAggregateInterface (e.g. another dataset)</li>
 <li>A callable with signature <code class="prettyprint">fn(\rdfInterface\QuadInterface, \rdfInterface\DatasetInterface): bool</code>
 All quads for which the callable returns true are copied.</li>
 </ul>
@@ -1106,12 +1109,12 @@ All quads for which the callable returns true are copied.</li>
     <div class="phpdocumentor-label-line">
         </div>
         <section class="phpdocumentor-description"><p>All quads matching the $filter parameter are removed.</p>
-<p>$filter can be specified as:</p>
+<p>The $filter can be specified as:</p>
 <ul>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
-(e.g. a single Quad)</li>
+(e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
-(e.g. another Dataset)</li>
+or the \rdfInterface\QuadIteratorAggregateInterface (e.g. another dataset)</li>
 <li>A callable with signature <code class="prettyprint">fn(\rdfInterface\QuadInterface, \rdfInterface\DatasetInterface): bool</code>
 All quads for which the callable returns true are copied.</li>
 </ul>
@@ -1175,12 +1178,12 @@ All quads for which the callable returns true are copied.</li>
     <div class="phpdocumentor-label-line">
         </div>
         <section class="phpdocumentor-description"><p>All quads but ones matching the $filter parameter are removed.</p>
-<p>$filter can be specified as:</p>
+<p>The $filter can be specified as:</p>
 <ul>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
-(e.g. a single Quad)</li>
+(e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
-(e.g. another Dataset)</li>
+or the \rdfInterface\QuadIteratorAggregateInterface (e.g. another dataset)</li>
 <li>A callable with signature <code class="prettyprint">fn(\rdfInterface\QuadInterface, \rdfInterface\DatasetInterface): bool</code>
 All quads for which the callable returns true are copied.</li>
 </ul>
@@ -1371,7 +1374,7 @@ All quads for which the callable returns true are copied.</li>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Iterates trough all quads replacing them with a callback result.</p>
+        <p class="phpdocumentor-summary">In-place modifies all dataset quads using a given callback.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1379,7 +1382,19 @@ All quads for which the callable returns true are copied.</li>
 
     <div class="phpdocumentor-label-line">
         </div>
-        <section class="phpdocumentor-description"><p>If the callback returns null, the quad should be removed from the dataset.</p>
+        <section class="phpdocumentor-description"><p>All quads matching the $filter parameter are modified.</p>
+<p>The $filter can be specified as:</p>
+<ul>
+<li>
+<code class="prettyprint">null</code> which matches all quads.</li>
+<li>An object implementing the \rdfInterface\QuadCompareInterface
+(e.g. a single quad)</li>
+<li>An object implementing the \rdfInterface\QuadIteratorInterface
+or the \rdfInterface\QuadIteratorAggregateInterface (e.g. another dataset)</li>
+<li>A callable with signature <code class="prettyprint">fn(\rdfInterface\QuadInterface, \rdfInterface\DatasetInterface): bool</code>
+All quads for which the callable returns true are copied.</li>
+</ul>
+<p>If the callback returns null, the quad should be removed from the dataset.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -1389,8 +1404,8 @@ All quads for which the callable returns true are copied.</li>
                 : <span class="phpdocumentor-signature__argument__return-type">callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>with signature <code class="prettyprint">fn(Quad, Dataset): ?Quad</code> to be run
-an all quads</p>
+                    <section class="phpdocumentor-description"><p>a callback with signature <code class="prettyprint">fn(\rdfInterface\Quad, \rdfInterface\Dataset): \rdfInterface\Quad|null</code>
+modyfying a single quad</p>
 </section>
 
             </dd>
@@ -2022,7 +2037,9 @@ an all quads</p>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns a new dataset from quads processed with a given
+callback function.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">map</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$indexed</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a></span></code>
@@ -2037,7 +2054,7 @@ an all quads</p>
                 : <span class="phpdocumentor-signature__argument__return-type">callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>function applied to every quad with signature <code class="prettyprint">fn(quad, dataset)</code></p>
+                    <section class="phpdocumentor-description"><p>function applied to every quad with signature <code class="prettyprint">fn(QuadInterface, DatasetInterface)</code></p>
 </section>
 
             </dd>
@@ -2404,14 +2421,21 @@ an all quads</p>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Performs a reduce operation on the dataset quads.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">reduce</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fn</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$initialValue</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>The reduce operation consist of calling a given callback function on all
+matching quads. The first call is made with the $initialValue passed as
+the callback's $prevValue. Following calls pass previous callback's call
+return value as the next callback's call $prevValue. The return value of
+the last callback function call is the return value of the reduce() method.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2419,8 +2443,8 @@ an all quads</p>
                 : <span class="phpdocumentor-signature__argument__return-type">callable</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>aggregate function with signature <code class="prettyprint">fn(accumulator, quad, dataset)</code>
-applied on each quad and returns last callback result</p>
+                    <section class="phpdocumentor-description"><p>aggregate function with signature
+<code class="prettyprint">fn(mixed $prevValue, QuadInterface, DatasetInterface)</code></p>
 </section>
 
             </dd>
@@ -2470,7 +2494,7 @@ applied on each quad and returns last callback result</p>
 
     <div class="phpdocumentor-label-line">
         </div>
-        <section class="phpdocumentor-description"><p>For in-place union use add().</p>
+        <section class="phpdocumentor-description"><p>For a in-place union use add().</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -2517,7 +2541,7 @@ applied on each quad and returns last callback result</p>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Returns a dataset being a symmetric difference of the current dataset and
+        <p class="phpdocumentor-summary">Returns a new dataset being a symmetric difference of the current dataset and
 the $other one.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
