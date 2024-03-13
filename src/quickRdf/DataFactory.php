@@ -63,7 +63,7 @@ class DataFactory implements iDataFactory {
      *
      * @var array<string, WeakReference<Literal>>
      */
-    private static array $literals     = [];
+    private static array $literals = [];
     private static DefaultGraph $defaultGraph;
 
     /**
@@ -75,23 +75,28 @@ class DataFactory implements iDataFactory {
 
     public static function blankNode(string | Stringable | null $iri = null): BlankNode {
         $a   = &self::$blankNodes;
-        $iri = $iri === null ? $iri : (string) $iri;
-        if ($iri === null || !isset($a[$iri]) || $a[$iri]->get() === null) {
+        $obj = null;
+        if ($iri !== null) {
+            $iri = (string) $iri;
+            $obj = isset($a[$iri]) ? $a[$iri]->get() : null;
+        }
+        if ($obj === null) {
             $obj     = new BlankNode($iri);
             $iri     = $obj->getValue();
             $a[$iri] = WeakReference::create($obj);
         }
-        return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
+        return $obj;
     }
 
     public static function namedNode(string | Stringable $iri): NamedNode {
         $iri = (string) $iri;
         $a   = &self::$namedNodes;
-        if (!isset($a[$iri]) || $a[$iri]->get() === null) {
+        $obj = isset($a[$iri]) ? $a[$iri]->get() : null;
+        if ($obj === null) {
             $obj     = new NamedNode($iri);
             $a[$iri] = WeakReference::create($obj);
         }
-        return $a[$iri]->get() ?? throw new RuntimeException("Object creation failed");
+        return $obj;
     }
 
     public static function defaultGraph(): DefaultGraph {
@@ -128,11 +133,12 @@ class DataFactory implements iDataFactory {
 
         $hash = self::hashLiteral((string) $value, $lang, $datatype);
         $a    = &self::$literals;
-        if (!isset($a[$hash]) || $a[$hash]->get() === null) {
+        $obj  = isset($a[$hash]) ? $a[$hash]->get() : null;
+        if ($obj === null) {
             $obj      = new Literal($value, $lang, $datatype);
             $a[$hash] = WeakReference::create($obj);
         }
-        return $a[$hash]->get() ?? throw new RuntimeException("Object creation failed");
+        return $obj;
     }
 
     public static function quad(iTerm $subject, iNamedNode $predicate,
@@ -141,11 +147,12 @@ class DataFactory implements iDataFactory {
         $graph ??= self::defaultGraph();
         $hash  = self::hashQuad($subject, $predicate, $object, $graph);
         $a     = &self::$quads;
-        if (!isset($a[$hash]) || $a[$hash]->get() === null) {
+        $obj   = isset($a[$hash]) ? $a[$hash]->get() : null;
+        if ($obj === null) {
             $obj      = new Quad($subject, $predicate, $object, $graph);
             $a[$hash] = WeakReference::create($obj);
         }
-        return $a[$hash]->get() ?? throw new RuntimeException("Object creation failed");
+        return $obj;
     }
 
     public static function quadNoSubject(
