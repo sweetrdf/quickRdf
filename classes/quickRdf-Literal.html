@@ -130,6 +130,7 @@
 
 
 
+
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
         <a href="classes/quickRdf-Literal.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
@@ -146,6 +147,8 @@
 
                                     </dd>
                                             </dl>
+
+
 
 
 
@@ -177,21 +180,21 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/quickRdf-Literal.html#property_datatype">$datatype</a>
+    <a class="" href="classes/quickRdf-Literal.html#property_datatype">$datatype</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/quickRdf-Literal.html#property_lang">$lang</a>
+    <a class="" href="classes/quickRdf-Literal.html#property_lang">$lang</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/quickRdf-Literal.html#property_value">$value</a>
+    <a class="" href="classes/quickRdf-Literal.html#property_value">$value</a>
     <span>
-                        &nbsp;: int            </span>
+                        &nbsp;: int|float|string|bool|<abbr title="\Stringable">Stringable</abbr>            </span>
 </dt>
 
     </dl>
@@ -203,46 +206,47 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method___construct">__construct()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method___toString">__toString()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method___toString">__toString()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>Should return:</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method_equals">equals()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method_equals">equals()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method_getDatatype">getDatatype()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method_getDatatype">getDatatype()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
 <dd>Returns literal&#039;s datatype.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method_getLang">getLang()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method_getLang">getLang()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
 <dd>Returns literal&#039;s language tag.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method_getValue">getValue()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method_getValue">getValue()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd>Returns literal&#039;s value.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method_withDatatype">withDatatype()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method_withDatatype">withDatatype()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-LiteralInterface.html"><abbr title="\rdfInterface\LiteralInterface">LiteralInterface</abbr></a>    </span>
 </dt>
@@ -250,7 +254,7 @@
 a given value.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method_withLang">withLang()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method_withLang">withLang()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-LiteralInterface.html"><abbr title="\rdfInterface\LiteralInterface">LiteralInterface</abbr></a>    </span>
 </dt>
@@ -258,7 +262,7 @@ a given value.</dd>
 a given value.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/quickRdf-Literal.html#method_withValue">withValue()</a>
+    <a class="" href="classes/quickRdf-Literal.html#method_withValue">withValue()</a>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-LiteralInterface.html"><abbr title="\rdfInterface\LiteralInterface">LiteralInterface</abbr></a>    </span>
 </dt>
@@ -267,9 +271,6 @@ a given value.</dd>
     </dl>
 
 
-
-
-        
 
         
 
@@ -302,6 +303,7 @@ a given value.</dd>
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">string</span>
@@ -310,6 +312,8 @@ a given value.</dd>
 
     
     
+    
+
     
 
 </article>
@@ -335,6 +339,7 @@ a given value.</dd>
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">string|null</span>
@@ -343,6 +348,8 @@ a given value.</dd>
 
     
     
+    
+
     
 
 </article>
@@ -368,15 +375,16 @@ a given value.</dd>
     </aside>
 
     
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__type">int|float|string|bool|<abbr title="\Stringable">Stringable</abbr></span>
     <span class="phpdocumentor-signature__name">$value</span>
     </code>
 
     
-        <section class="phpdocumentor-description"><p>| float | string | bool | Stringable</p>
-</section>
+    
+    
 
     
 
@@ -415,6 +423,7 @@ a given value.</dd>
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -443,6 +452,8 @@ a given value.</dd>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -462,7 +473,8 @@ a given value.</dd>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Should return:</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
@@ -470,7 +482,16 @@ a given value.</dd>
     <div class="phpdocumentor-label-line">
         </div>
     
+        <section class="phpdocumentor-description"><ul>
+<li>an URI for named nodes and blank nodes</li>
+<li>a value in lexical form for literals</li>
+</ul>
+<p>For all other kind of terms the return value depends on the implementation</p>
+</section>
+
     
+    
+
     
 
             <section>
@@ -505,6 +526,7 @@ a given value.</dd>
     <div class="phpdocumentor-label-line">
         </div>
     
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -515,6 +537,8 @@ a given value.</dd>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -550,6 +574,7 @@ a given value.</dd>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
         <section class="phpdocumentor-description"><p>The method must return the actual datatype even if it's implicit. It
 means <code class="prettyprint">http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</code> must be
 returned for literals with a lang tag and
@@ -558,6 +583,8 @@ without lang tag and without datatype specified explicitely.</p>
 </section>
 
     
+    
+
     
 
             <section>
@@ -592,11 +619,14 @@ without lang tag and without datatype specified explicitely.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
         <section class="phpdocumentor-description"><p>If a literal lacks a language tag, null should be returned. It means this
 method can't return an empty string.</p>
 </section>
 
     
+    
+
     
 
             <section>
@@ -631,6 +661,7 @@ method can't return an empty string.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
         <section class="phpdocumentor-description"><p>Separate cast options are needed as the RDF specification defines a few
 kinds of literal values. See
 https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal for details.</p>
@@ -657,6 +688,8 @@ Implementations may provide additional types of cast.</li>
 
             </dd>
             </dl>
+
+    
 
     
 
@@ -689,6 +722,7 @@ a given value.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
         <section class="phpdocumentor-description"><p>Be aware it's impossibe to set the datatype to rdf::langString that way
 as it would require setting a non-empty lang tag. The withLang()
 method should be used in such a case as it changes the datatype implicitly.</p>
@@ -710,6 +744,8 @@ empty one).</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -746,6 +782,7 @@ a given value.</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
         <section class="phpdocumentor-description"><p>Be aware setting a lang tag on a literal without one as well as dropping
 a lang tag from a literal having it implicitly changes literal's datatype.
 Setting a lang on a literal without one enforces setting its datatype to
@@ -764,6 +801,8 @@ https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal for details).</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -799,6 +838,7 @@ https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal for details).</p>
 
     <div class="phpdocumentor-label-line">
         </div>
+    
         <section class="phpdocumentor-description"><p>If the $value type is int/float/bool, the lang tag of the returned literal
 is set to null and the datatype is set to a corresponding XSD type (see
 the constructor documentation). If the $value is string/Stringable, the
@@ -815,6 +855,8 @@ lang tag and datatype are preserved.</p>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -937,24 +979,24 @@ lang tag and datatype are preserved.</p>
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li><a href="classes/quickRdf-Literal.html#property_datatype">$datatype<a href="classes/quickRdf-Literal.html"></li>
-                                                    <li><a href="classes/quickRdf-Literal.html#property_lang">$lang<a href="classes/quickRdf-Literal.html"></li>
-                                                    <li><a href="classes/quickRdf-Literal.html#property_value">$value<a href="classes/quickRdf-Literal.html"></li>
+                                                    <li class=""><a href="classes/quickRdf-Literal.html#property_datatype">$datatype</a></li>
+                                                    <li class=""><a href="classes/quickRdf-Literal.html#property_lang">$lang</a></li>
+                                                    <li class=""><a href="classes/quickRdf-Literal.html#property_value">$value</a></li>
                                             </ul>
                 </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li><a href="classes/quickRdf-Literal.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method___toString">__toString()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method_equals">equals()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method_getDatatype">getDatatype()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method_getLang">getLang()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method_getValue">getValue()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method_withDatatype">withDatatype()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method_withLang">withLang()</a></li>
-                                            <li><a href="classes/quickRdf-Literal.html#method_withValue">withValue()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method___toString">__toString()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method_equals">equals()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method_getDatatype">getDatatype()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method_getLang">getLang()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method_getValue">getValue()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method_withDatatype">withDatatype()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method_withLang">withLang()</a></li>
+                                            <li class=""><a href="classes/quickRdf-Literal.html#method_withValue">withValue()</a></li>
                                     </ul>
             </li>
                     </ul>

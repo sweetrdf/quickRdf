@@ -18,7 +18,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\quickRdf\\BlankNode\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "Should\u0020return\u003A",
             "url": "classes/quickRdf-BlankNode.html#method___toString"
         },                {
             "fqsen": "\\quickRdf\\BlankNode\u003A\u003Aequals\u0028\u0029",
@@ -203,7 +203,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003AgetIterator\u0028\u0029",
             "name": "getIterator",
-            "summary": "",
+            "summary": "Returns\u0020QuadIteratorInterface\u0020iterating\u0020over\u0020dataset\u0027s\u0020quads.",
             "url": "classes/quickRdf-Dataset.html#method_getIterator"
         },                {
             "fqsen": "\\quickRdf\\Dataset\u003A\u003Acount\u0028\u0029",
@@ -378,7 +378,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\quickRdf\\DatasetNode\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "Should\u0020return\u003A",
             "url": "classes/quickRdf-DatasetNode.html#method___toString"
         },                {
             "fqsen": "\\quickRdf\\DatasetNode\u003A\u003AwithDataset\u0028\u0029",
@@ -558,7 +558,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\quickRdf\\Literal\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "Should\u0020return\u003A",
             "url": "classes/quickRdf-Literal.html#method___toString"
         },                {
             "fqsen": "\\quickRdf\\Literal\u003A\u003AgetValue\u0028\u0029",
@@ -623,7 +623,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\quickRdf\\NamedNode\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "Should\u0020return\u003A",
             "url": "classes/quickRdf-NamedNode.html#method___toString"
         },                {
             "fqsen": "\\quickRdf\\NamedNode\u003A\u003AgetValue\u0028\u0029",
@@ -653,7 +653,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\quickRdf\\Quad\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "Should\u0020return\u003A",
             "url": "classes/quickRdf-Quad.html#method___toString"
         },                {
             "fqsen": "\\quickRdf\\Quad\u003A\u003Aequals\u0028\u0029",
@@ -823,7 +823,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\rdfHelpers\\DefaultGraph\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "Should\u0020return\u003A",
             "url": "classes/rdfHelpers-DefaultGraph.html#method___toString"
         },                {
             "fqsen": "\\rdfHelpers\\DefaultGraph\u003A\u003AgetValue\u0028\u0029",
