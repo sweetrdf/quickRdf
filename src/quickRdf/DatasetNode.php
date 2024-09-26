@@ -168,7 +168,7 @@ class DatasetNode implements DatasetNodeInterface {
     }
 
     public function forEach(callable $fn,
-                            QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable $filter = null): void {
+                            QuadCompareInterface | QuadIteratorInterface | QuadIteratorAggregateInterface | callable | null $filter = null): void {
         $node         = $this->getNode();
         $restrictedFn = fn(QuadInterface $quad, DatasetInterface $dataset) => $node->equals($quad->getSubject()) ? $fn($quad, $dataset) : $quad;
         $this->dataset->forEach($restrictedFn, $filter);
