@@ -55,7 +55,7 @@ class DatasetNode implements DatasetNodeInterface {
     /**
      * 
      * @param TermInterface|null $node
-     * @param QuadInterface|QuadNoSubjectInterface|Traversable<QuadInterface|QuadNoSubjectInterface>|array<QuadInterface|QuadNoSubjectInterface>|null $quads
+     * @param \rdfInterface\QuadInterface|\rdfInterface\QuadIteratorInterface|\rdfInterface\QuadIteratorAggregateInterface|\rdfInterface\QuadNoSubjectInterface|Traversable<\rdfInterface\QuadInterface>|array<\rdfInterface\QuadInterface>|null $quads
      * @return DatasetNodeInterface
      * @throws BadMethodCallException
      */
@@ -192,7 +192,7 @@ class DatasetNode implements DatasetNodeInterface {
 
     /**
      * 
-     * @param QuadCompareInterface|callable|int<0, 0> $offset
+     * @param QuadCompareInterface|callable|int<0, max> $offset
      * @return bool
      * @throws UnexpectedValueException
      * @throws MultipleQuadsMatchedException
@@ -232,7 +232,7 @@ class DatasetNode implements DatasetNodeInterface {
 
     /**
      * 
-     * @param QuadCompareInterface|callable $offset
+     * @param QuadCompareInterface|callable|int<0, max> $offset
      * @return void
      * @throws UnexpectedValueException
      * @throws MultipleQuadsMatchedException

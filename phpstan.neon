@@ -1,0 +1,16 @@
+parameters:
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    fileExtensions:
+        - php
+
+    level: 4
+
+    paths:
+        - src
+
+    parallel:
+        maximumNumberOfProcesses: 4
+
+    tmpDir: /tmp/phpstan

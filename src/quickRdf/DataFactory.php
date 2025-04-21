@@ -195,7 +195,9 @@ class DataFactory implements iDataFactory {
      * @return iQuad
      */
     public static function importQuad(iQuad $quad): iQuad {
-        return self::importTerm($quad);
+        /** @var iQuad */
+        $quad = self::importTerm($quad);
+        return $quad;
     }
 
     public static function checkCall(): bool {

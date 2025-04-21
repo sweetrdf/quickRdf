@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*",
-        "phpstan/phpstan": "^1",
+        "phpstan/phpstan": "^2",
         "sweetrdf/rdf-interface-tests": "2.0.0",
         "sweetrdf/simple-rdf": "^2"
     },
