@@ -70,8 +70,13 @@ class DatasetNode implements DatasetNodeInterface {
     private DatasetInterface $dataset;
     private TermInterface $node;
 
+    /**
+     * 
+     * @param TermInterface $node
+     * @param QuadInterface|QuadNoSubjectInterface|Traversable<QuadInterface|QuadNoSubjectInterface>|array<QuadInterface|QuadNoSubjectInterface>|null $quads
+     */
     public function __construct(TermInterface $node,
-                                QuadIteratorInterface | QuadIteratorAggregateInterface | null $quads = null,
+                                QuadInterface | QuadNoSubjectInterface | Traversable | array | null $quads = null,
                                 bool $indexed = true) {
         $this->node    = $node;
         $this->dataset = new Dataset($indexed);
@@ -232,7 +237,7 @@ class DatasetNode implements DatasetNodeInterface {
 
     /**
      * 
-     * @param QuadCompareInterface|callable $offset
+     * @param QuadCompareInterface|callable|int<0, 0> $offset
      * @return void
      * @throws UnexpectedValueException
      * @throws MultipleQuadsMatchedException

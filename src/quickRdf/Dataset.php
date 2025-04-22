@@ -111,7 +111,7 @@ class Dataset implements DatasetInterface {
         // $other contained in $this
         foreach ($other as $i) {
             if (!($i->getSubject() instanceof BlankNodeInterface) && !($i->getObject() instanceof BlankNodeInterface)) {
-                if (!($i instanceof Quad) && $i !== null) {
+                if (!($i instanceof Quad)) {
                     $i = DataFactory::importQuad($i);
                 }
                 if (!isset($this->quads[$i])) {
@@ -131,7 +131,7 @@ class Dataset implements DatasetInterface {
 
     /**
      * 
-     * @param QuadInterface|\Traversable<\rdfInterface\QuadInterface>|array<\rdfInterface\QuadInterface> $quads
+     * @param QuadInterface|\Traversable<QuadInterface>|array<QuadInterface> $quads
      * @return void
      */
     public function add(QuadInterface | \Traversable | array $quads): void {
