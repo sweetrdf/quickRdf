@@ -346,7 +346,7 @@ dataset node&#039;s node and optionally matching a given filter.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/rdfHelpers-DatasetGettersTrait.html#method_getPredicate">getPredicate()</a>
     <span>
-                                &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null    </span>
+                                &nbsp;: <abbr title="\rdfHelpers\NameNodeInterface">NameNodeInterface</abbr>|null    </span>
 </dt>
 <dd>Fetches subject of a first quad matching a given filter or null if no quad matches the filter.</dd>
 
@@ -617,14 +617,14 @@ the current one but has another node.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$node</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$quads</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$indexed</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$node</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>|<a href="classes/rdfInterface-QuadNoSubjectInterface.html"><abbr title="\rdfInterface\QuadNoSubjectInterface">QuadNoSubjectInterface</abbr></a>|<abbr title="\Traversable">Traversable</abbr>&lt;string|int, <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>|<a href="classes/rdfInterface-QuadNoSubjectInterface.html"><abbr title="\rdfInterface\QuadNoSubjectInterface">QuadNoSubjectInterface</abbr></a>&gt;|array&lt;string|int, <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>|<a href="classes/rdfInterface-QuadNoSubjectInterface.html"><abbr title="\rdfInterface\QuadNoSubjectInterface">QuadNoSubjectInterface</abbr></a>&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$quads</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$indexed</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -641,7 +641,7 @@ the current one but has another node.</dd>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$quads</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|null</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>|<a href="classes/rdfInterface-QuadNoSubjectInterface.html"><abbr title="\rdfInterface\QuadNoSubjectInterface">QuadNoSubjectInterface</abbr></a>|<abbr title="\Traversable">Traversable</abbr>&lt;string|int, <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>|<a href="classes/rdfInterface-QuadNoSubjectInterface.html"><abbr title="\rdfInterface\QuadNoSubjectInterface">QuadNoSubjectInterface</abbr></a>&gt;|array&lt;string|int, <a href="classes/rdfInterface-QuadInterface.html"><abbr title="\rdfInterface\QuadInterface">QuadInterface</abbr></a>|<a href="classes/rdfInterface-QuadNoSubjectInterface.html"><abbr title="\rdfInterface\QuadNoSubjectInterface">QuadNoSubjectInterface</abbr></a>&gt;|null</span>
                  = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -675,7 +675,7 @@ the current one but has another node.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -720,7 +720,7 @@ the current one but has another node.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -780,7 +780,7 @@ the current one but has another node.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">276</span>
 
     </aside>
 
@@ -830,7 +830,7 @@ node match a given filter.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">126</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -910,7 +910,7 @@ $includeOther parameter value;</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">138</span>
 
     </aside>
 
@@ -990,7 +990,7 @@ $includeOther parameter value;</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">145</span>
 
     </aside>
 
@@ -1028,7 +1028,7 @@ $includeOther parameter value;</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -1045,8 +1045,7 @@ $includeOther parameter value;</p>
 dataset node's node are removed.</p>
 <p>The $filter can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> meaning &quot;remove all&quot;.</li>
+<li><code class="prettyprint">null</code> meaning &quot;remove all&quot;.</li>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
@@ -1103,7 +1102,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">156</span>
 
     </aside>
 
@@ -1176,7 +1175,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">163</span>
 
     </aside>
 
@@ -1234,7 +1233,7 @@ and the $termOrDataset object.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">275</span>
+    <span class="phpdocumentor-element-found-in__line">280</span>
 
     </aside>
 
@@ -1355,7 +1354,7 @@ node match a given filter.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">175</span>
 
     </aside>
 
@@ -1371,8 +1370,7 @@ node match a given filter.</p>
         <section class="phpdocumentor-description"><p>All quads with subject matching dataset node's node and the $filter parameter are modified.</p>
 <p>The $filter can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> which matches all quads.</li>
+<li><code class="prettyprint">null</code> which matches all quads.</li>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
@@ -1424,7 +1422,7 @@ modyfying a single quad</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">177</span>
+    <span class="phpdocumentor-element-found-in__line">182</span>
 
     </aside>
 
@@ -1466,7 +1464,7 @@ these changes are shared with the DatasetNodeInterface object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -1515,7 +1513,7 @@ these changes are shared with the DatasetNodeInterface object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">149</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -1560,7 +1558,7 @@ these changes are shared with the DatasetNodeInterface object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">181</span>
+    <span class="phpdocumentor-element-found-in__line">186</span>
 
     </aside>
 
@@ -1576,8 +1574,7 @@ dataset node&#039;s node and optionally matching a given filter.</p>
     
         <section class="phpdocumentor-description"><p>The $filter can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> matches all quads.</li>
+<li><code class="prettyprint">null</code> matches all quads.</li>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
@@ -1622,7 +1619,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">190</span>
 
     </aside>
 
@@ -1661,7 +1658,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -1710,7 +1707,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 
     </aside>
 
@@ -1755,7 +1752,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -1763,7 +1760,7 @@ All quads for which the callable returns true are copied.</li>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\rdfHelpers\NameNodeInterface">NameNodeInterface</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1786,7 +1783,7 @@ All quads for which the callable returns true are copied.</li>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\rdfHelpers\NameNodeInterface">NameNodeInterface</abbr>|null</span>
             </section>
 
 </article>
@@ -1804,7 +1801,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -1849,7 +1846,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1898,7 +1895,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
@@ -1943,7 +1940,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">194</span>
 
     </aside>
 
@@ -1978,7 +1975,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">283</span>
+    <span class="phpdocumentor-element-found-in__line">288</span>
 
     </aside>
 
@@ -2028,7 +2025,7 @@ subject matching dataset node&#039;s node and optionally matching a given filter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">287</span>
+    <span class="phpdocumentor-element-found-in__line">292</span>
 
     </aside>
 
@@ -2078,7 +2075,7 @@ subject matching dataset node&#039;s node and optionally matching a given filter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">291</span>
+    <span class="phpdocumentor-element-found-in__line">296</span>
 
     </aside>
 
@@ -2128,7 +2125,7 @@ subject matching dataset node&#039;s node and optionally matching a given filter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">295</span>
+    <span class="phpdocumentor-element-found-in__line">300</span>
 
     </aside>
 
@@ -2178,7 +2175,7 @@ subject matching dataset node&#039;s node and optionally matching a given filter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">299</span>
+    <span class="phpdocumentor-element-found-in__line">304</span>
 
     </aside>
 
@@ -2254,7 +2251,7 @@ callback function.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">279</span>
+    <span class="phpdocumentor-element-found-in__line">284</span>
 
     </aside>
 
@@ -2304,7 +2301,7 @@ node match a given filter.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">200</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -2377,7 +2374,7 @@ which subject matching dataset node&#039;s node.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">211</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
@@ -2450,7 +2447,7 @@ node&#039;s node.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">223</span>
+    <span class="phpdocumentor-element-found-in__line">228</span>
 
     </aside>
 
@@ -2526,7 +2523,7 @@ matching dataset node&#039;s node.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">240</span>
+    <span class="phpdocumentor-element-found-in__line">245</span>
 
     </aside>
 
@@ -2535,7 +2532,7 @@ node&#039;s node.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">offsetUnset</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">offsetUnset</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|callable|int<0, 0>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2545,7 +2542,7 @@ node&#039;s node.</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$offset</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|callable</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|callable|int<0, 0></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2595,7 +2592,7 @@ node&#039;s node.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">315</span>
+    <span class="phpdocumentor-element-found-in__line">320</span>
 
     </aside>
 
@@ -2664,7 +2661,7 @@ the last callback function call is the return value of the reduce() method.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">249</span>
+    <span class="phpdocumentor-element-found-in__line">254</span>
 
     </aside>
 
@@ -2728,7 +2725,7 @@ from the $other mathing the dataset node&#039;s node.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -2782,7 +2779,7 @@ object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -2832,7 +2829,7 @@ the current one but has another node.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">264</span>
+    <span class="phpdocumentor-element-found-in__line">269</span>
 
     </aside>
 
@@ -2894,7 +2891,7 @@ node and quads of the $other</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">330</span>
+    <span class="phpdocumentor-element-found-in__line">335</span>
 
     </aside>
 
@@ -2942,7 +2939,7 @@ node and quads of the $other</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">320</span>
+    <span class="phpdocumentor-element-found-in__line">325</span>
 
     </aside>
 

@@ -255,8 +255,8 @@ node match a given filter.</dd>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null    </span>
 </dt>
-<dd>Fetches graph of a first quad  having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</dd>
+<dd>Fetches graph of a first quad matching a given filter and subject
+matching dataset node&#039;s node or null otherwise.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/rdfInterface-DatasetNodeInterface.html#method_getGraphValue">getGraphValue()</a>
@@ -287,8 +287,8 @@ dataset node&#039;s node and optionally matching a given filter.</dd>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null    </span>
 </dt>
-<dd>Fetches object of a first quad  having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</dd>
+<dd>Fetches object of a first quad mathing a given filter and subject
+matching dataset node&#039;s node or null otherwise.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/rdfInterface-DatasetNodeInterface.html#method_getObjectValue">getObjectValue()</a>
@@ -302,10 +302,10 @@ or null otherwise.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/rdfInterface-DatasetNodeInterface.html#method_getPredicate">getPredicate()</a>
     <span>
-                                &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null    </span>
+                                &nbsp;: <a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|null    </span>
 </dt>
-<dd>Fetches subject of a first quad having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</dd>
+<dd>Fetches predicate of a first quad matching a given filter and subject
+matching dataset node&#039;s node or null otherwise.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/rdfInterface-DatasetNodeInterface.html#method_getPredicateValue">getPredicateValue()</a>
@@ -321,8 +321,8 @@ or null otherwise.</dd>
     <span>
                                 &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null    </span>
 </dt>
-<dd>Fetches subject of a first quad having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</dd>
+<dd>Fetches subject of a first quad matching a given filter and subject
+matching dataset node&#039;s node or null otherwise.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/rdfInterface-DatasetNodeInterface.html#method_getSubjectValue">getSubjectValue()</a>
@@ -824,8 +824,7 @@ $includeOther parameter value;</p>
 dataset node's node are removed.</p>
 <p>The $filter can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> meaning &quot;remove all&quot;.</li>
+<li><code class="prettyprint">null</code> meaning &quot;remove all&quot;.</li>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
@@ -1190,8 +1189,7 @@ use the `(new DatasetNodeInterface($node))-&gt;withDataset($dataset).</li>
         <section class="phpdocumentor-description"><p>All quads with subject matching dataset node's node and the $filter parameter are modified.</p>
 <p>The $filter can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> which matches all quads.</li>
+<li><code class="prettyprint">null</code> which matches all quads.</li>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
@@ -1285,12 +1283,12 @@ these changes are shared with the DatasetNodeInterface object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php"><a href="files/vendor-sweetrdf-rdf-interface-src-rdfinterface-datasetnodeinterface.html"><abbr title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php">DatasetNodeInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">571</span>
+    <span class="phpdocumentor-element-found-in__line">570</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches graph of a first quad  having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</p>
+        <p class="phpdocumentor-summary">Fetches graph of a first quad matching a given filter and subject
+matching dataset node&#039;s node or null otherwise.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1335,7 +1333,7 @@ node&#039;s node and a given filter or null otherwise.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php"><a href="files/vendor-sweetrdf-rdf-interface-src-rdfinterface-datasetnodeinterface.html"><abbr title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php">DatasetNodeInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">611</span>
+    <span class="phpdocumentor-element-found-in__line">610</span>
 
     </aside>
 
@@ -1398,8 +1396,7 @@ dataset node&#039;s node and optionally matching a given filter.</p>
     
         <section class="phpdocumentor-description"><p>The $filter can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> matches all quads.</li>
+<li><code class="prettyprint">null</code> matches all quads.</li>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
@@ -1483,12 +1480,12 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php"><a href="files/vendor-sweetrdf-rdf-interface-src-rdfinterface-datasetnodeinterface.html"><abbr title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php">DatasetNodeInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">562</span>
+    <span class="phpdocumentor-element-found-in__line">561</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches object of a first quad  having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</p>
+        <p class="phpdocumentor-summary">Fetches object of a first quad mathing a given filter and subject
+matching dataset node&#039;s node or null otherwise.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1533,7 +1530,7 @@ node&#039;s node and a given filter or null otherwise.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php"><a href="files/vendor-sweetrdf-rdf-interface-src-rdfinterface-datasetnodeinterface.html"><abbr title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php">DatasetNodeInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">601</span>
+    <span class="phpdocumentor-element-found-in__line">600</span>
 
     </aside>
 
@@ -1580,16 +1577,16 @@ or null otherwise.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php"><a href="files/vendor-sweetrdf-rdf-interface-src-rdfinterface-datasetnodeinterface.html"><abbr title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php">DatasetNodeInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">553</span>
+    <span class="phpdocumentor-element-found-in__line">552</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches subject of a first quad having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</p>
+        <p class="phpdocumentor-summary">Fetches predicate of a first quad matching a given filter and subject
+matching dataset node&#039;s node or null otherwise.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1612,7 +1609,7 @@ node&#039;s node and a given filter or null otherwise.</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null</span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-NamedNodeInterface.html"><abbr title="\rdfInterface\NamedNodeInterface">NamedNodeInterface</abbr></a>|null</span>
             </section>
 
 </article>
@@ -1630,7 +1627,7 @@ node&#039;s node and a given filter or null otherwise.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php"><a href="files/vendor-sweetrdf-rdf-interface-src-rdfinterface-datasetnodeinterface.html"><abbr title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php">DatasetNodeInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">591</span>
+    <span class="phpdocumentor-element-found-in__line">590</span>
 
     </aside>
 
@@ -1681,8 +1678,8 @@ or null otherwise.</p>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Fetches subject of a first quad having subject matching dataset
-node&#039;s node and a given filter or null otherwise.</p>
+        <p class="phpdocumentor-summary">Fetches subject of a first quad matching a given filter and subject
+matching dataset node&#039;s node or null otherwise.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -1727,7 +1724,7 @@ node&#039;s node and a given filter or null otherwise.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php"><a href="files/vendor-sweetrdf-rdf-interface-src-rdfinterface-datasetnodeinterface.html"><abbr title="vendor/sweetrdf/rdf-interface/src/rdfInterface/DatasetNodeInterface.php">DatasetNodeInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">581</span>
+    <span class="phpdocumentor-element-found-in__line">580</span>
 
     </aside>
 
@@ -2149,8 +2146,7 @@ which subject matching dataset node&#039;s node.</p>
 signature. Matching quads are the ones for which the callable returns
 <code class="prettyprint">true</code>.
 If more than one quad is matched \UnexpectedValueException must be thrown.</li>
-<li>
-<code class="prettyprint">0</code>. This is a shorthand syntax for checking if the dataset node contains
+<li><code class="prettyprint">0</code>. This is a shorthand syntax for checking if the dataset node contains
 any quad with subject matching dataset node's node.</li>
 </ul>
 <p>If the $offset is specified differently, \UnexpectedValueException is thrown.</p>
@@ -2238,8 +2234,7 @@ node&#039;s node.</p>
 <li>A callable with the <code class="prettyprint">fn(\rdfInterface\Quad, \rdfInterface\Dataset): bool</code>
 signature. Matching quads are the ones for which the callable returns
 <code class="prettyprint">true</code>.</li>
-<li>
-<code class="prettyprint">0</code> Returns any single quad.
+<li><code class="prettyprint">0</code> Returns any single quad.
 The main use case is enabling the <code class="prettyprint">$dataset[0] ?? $defaultQuad</code> syntax
 for &quot;unpacking&quot; a dataset containing one or zero quads.
 As quads within a dataset don't have order, it makes no sense to access
@@ -2330,8 +2325,7 @@ matching dataset node&#039;s node.</p>
         <section class="phpdocumentor-description"><p>The new quad may have a different subject.</p>
 <p>Offset can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> which is just a shorthand to <code class="prettyprint">add($value)</code>. In this case the
+<li><code class="prettyprint">null</code> which is just a shorthand to <code class="prettyprint">add($value)</code>. In this case the
 $value subject does not need to match dataset node's node.</li>
 <li>An object implementing the \rdfInterface\QuadCompare interface.
 If more than one quad is matched \OutOfBoundsException must be thrown.</li>

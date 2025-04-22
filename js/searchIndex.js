@@ -1433,22 +1433,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\rdfInterface\\DatasetNodeInterface\u003A\u003AgetSubject\u0028\u0029",
             "name": "getSubject",
-            "summary": "Fetches\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020having\u0020subject\u0020matching\u0020dataset\nnode\u0027s\u0020node\u0020and\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020otherwise.",
+            "summary": "Fetches\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020and\u0020subject\nmatching\u0020dataset\u0020node\u0027s\u0020node\u0020or\u0020null\u0020otherwise.",
             "url": "classes/rdfInterface-DatasetNodeInterface.html#method_getSubject"
         },                {
             "fqsen": "\\rdfInterface\\DatasetNodeInterface\u003A\u003AgetPredicate\u0028\u0029",
             "name": "getPredicate",
-            "summary": "Fetches\u0020subject\u0020of\u0020a\u0020first\u0020quad\u0020having\u0020subject\u0020matching\u0020dataset\nnode\u0027s\u0020node\u0020and\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020otherwise.",
+            "summary": "Fetches\u0020predicate\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020and\u0020subject\nmatching\u0020dataset\u0020node\u0027s\u0020node\u0020or\u0020null\u0020otherwise.",
             "url": "classes/rdfInterface-DatasetNodeInterface.html#method_getPredicate"
         },                {
             "fqsen": "\\rdfInterface\\DatasetNodeInterface\u003A\u003AgetObject\u0028\u0029",
             "name": "getObject",
-            "summary": "Fetches\u0020object\u0020of\u0020a\u0020first\u0020quad\u0020\u0020having\u0020subject\u0020matching\u0020dataset\nnode\u0027s\u0020node\u0020and\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020otherwise.",
+            "summary": "Fetches\u0020object\u0020of\u0020a\u0020first\u0020quad\u0020mathing\u0020a\u0020given\u0020filter\u0020and\u0020subject\nmatching\u0020dataset\u0020node\u0027s\u0020node\u0020or\u0020null\u0020otherwise.",
             "url": "classes/rdfInterface-DatasetNodeInterface.html#method_getObject"
         },                {
             "fqsen": "\\rdfInterface\\DatasetNodeInterface\u003A\u003AgetGraph\u0028\u0029",
             "name": "getGraph",
-            "summary": "Fetches\u0020graph\u0020of\u0020a\u0020first\u0020quad\u0020\u0020having\u0020subject\u0020matching\u0020dataset\nnode\u0027s\u0020node\u0020and\u0020a\u0020given\u0020filter\u0020or\u0020null\u0020otherwise.",
+            "summary": "Fetches\u0020graph\u0020of\u0020a\u0020first\u0020quad\u0020matching\u0020a\u0020given\u0020filter\u0020and\u0020subject\nmatching\u0020dataset\u0020node\u0027s\u0020node\u0020or\u0020null\u0020otherwise.",
             "url": "classes/rdfInterface-DatasetNodeInterface.html#method_getGraph"
         },                {
             "fqsen": "\\rdfInterface\\DatasetNodeInterface\u003A\u003AgetSubjectValue\u0028\u0029",

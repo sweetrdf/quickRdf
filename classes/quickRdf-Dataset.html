@@ -350,7 +350,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/rdfHelpers-DatasetGettersTrait.html#method_getPredicate">getPredicate()</a>
     <span>
-                                &nbsp;: <a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null    </span>
+                                &nbsp;: <abbr title="\rdfHelpers\NameNodeInterface">NameNodeInterface</abbr>|null    </span>
 </dt>
 <dd>Fetches subject of a first quad matching a given filter or null if no quad matches the filter.</dd>
 
@@ -1445,8 +1445,7 @@ All quads for which the callable returns true are copied.</li>
         <section class="phpdocumentor-description"><p>All quads matching the $filter parameter are modified.</p>
 <p>The $filter can be specified as:</p>
 <ul>
-<li>
-<code class="prettyprint">null</code> which matches all quads.</li>
+<li><code class="prettyprint">null</code> which matches all quads.</li>
 <li>An object implementing the \rdfInterface\QuadCompareInterface
 (e.g. a single quad)</li>
 <li>An object implementing the \rdfInterface\QuadIteratorInterface
@@ -1498,7 +1497,7 @@ modyfying a single quad</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -1547,7 +1546,7 @@ modyfying a single quad</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">149</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -1653,7 +1652,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -1702,7 +1701,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 
     </aside>
 
@@ -1747,7 +1746,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">90</span>
 
     </aside>
 
@@ -1755,7 +1754,7 @@ All quads for which the callable returns true are copied.</li>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null</span></code>
+                    <span class="phpdocumentor-signature__name">getPredicate</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/rdfInterface-QuadCompareInterface.html"><abbr title="\rdfInterface\QuadCompareInterface">QuadCompareInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorInterface.html"><abbr title="\rdfInterface\QuadIteratorInterface">QuadIteratorInterface</abbr></a>|<a href="classes/rdfInterface-QuadIteratorAggregateInterface.html"><abbr title="\rdfInterface\QuadIteratorAggregateInterface">QuadIteratorAggregateInterface</abbr></a>|callable|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$filter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\rdfHelpers\NameNodeInterface">NameNodeInterface</abbr>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1778,7 +1777,7 @@ All quads for which the callable returns true are copied.</li>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a>|null</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\rdfHelpers\NameNodeInterface">NameNodeInterface</abbr>|null</span>
             </section>
 
 </article>
@@ -1796,7 +1795,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -1841,7 +1840,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1890,7 +1889,7 @@ All quads for which the callable returns true are copied.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php"><a href="files/vendor-sweetrdf-rdf-helpers-src-rdfhelpers-datasetgetterstrait.html"><abbr title="vendor/sweetrdf/rdf-helpers/src/rdfHelpers/DatasetGettersTrait.php">DatasetGettersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
