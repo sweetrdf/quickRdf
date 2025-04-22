@@ -111,7 +111,7 @@ class Dataset implements DatasetInterface {
         // $other contained in $this
         foreach ($other as $i) {
             if (!($i->getSubject() instanceof BlankNodeInterface) && !($i->getObject() instanceof BlankNodeInterface)) {
-                if ($i instanceof Quad) {
+                if (!($i instanceof Quad)) {
                     $i = DataFactory::importQuad($i);
                 }
                 if (!isset($this->quads[$i])) {
@@ -131,7 +131,7 @@ class Dataset implements DatasetInterface {
 
     /**
      * 
-     * @param \rdfInterface\QuadInterface|\rdfInterface\QuadIteratorAggregateInterface|\rdfInterface\QuadIteratorInterface|array<\rdfInterface\QuadInterface> $quads
+     * @param QuadInterface|\Traversable<QuadInterface>|array<QuadInterface> $quads
      * @return void
      */
     public function add(QuadInterface | \Traversable | array $quads): void {
@@ -231,7 +231,7 @@ class Dataset implements DatasetInterface {
 
     /**
      *
-     * @param QuadCompareInterface|callable|int<0, max> $offset
+     * @param QuadCompareInterface|callable|int<0, 0> $offset
      * @return bool
      * @throws UnexpectedValueException
      * @throws MultipleQuadsMatchedException
@@ -250,7 +250,7 @@ class Dataset implements DatasetInterface {
 
     /**
      *
-     * @param QuadCompareInterface|callable|int<0, max> $offset
+     * @param QuadCompareInterface|callable|int<0, 0> $offset
      * @return QuadInterface
      * @throws UnexpectedValueException
      * @throws MultipleQuadsMatchedException
@@ -269,7 +269,7 @@ class Dataset implements DatasetInterface {
 
     /**
      *
-     * @param QuadCompareInterface|callable|null|mixed $offset
+     * @param QuadCompareInterface|callable|null $offset
      * @param QuadInterface $value
      * @return void
      * @throws UnexpectedValueException
@@ -299,7 +299,7 @@ class Dataset implements DatasetInterface {
 
     /**
      *
-     * @param QuadCompareInterface|callable|mixed $offset
+     * @param QuadCompareInterface|callable $offset
      * @return void
      * @throws UnexpectedValueException
      * @throws MultipleQuadsMatchedException
@@ -390,7 +390,7 @@ class Dataset implements DatasetInterface {
 
     /**
      *
-     * @param QuadCompareInterface|QuadIteratorInterface|QuadIteratorAggregateInterface|callable|int<0, max>|null $offset
+     * @param QuadCompareInterface|QuadIteratorInterface|QuadIteratorAggregateInterface|callable|int<0, 0>|null $offset
      * @return Generator<QuadInterface>
      * @throws UnexpectedValueException
      */

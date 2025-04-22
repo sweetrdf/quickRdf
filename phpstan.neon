@@ -5,7 +5,7 @@ parameters:
     fileExtensions:
         - php
 
-    level: 4
+    level: 6
 
     paths:
         - src
@@ -14,3 +14,5 @@ parameters:
         maximumNumberOfProcesses: 4
 
     tmpDir: /tmp/phpstan
+
+    treatPhpDocTypesAsCertain: false 

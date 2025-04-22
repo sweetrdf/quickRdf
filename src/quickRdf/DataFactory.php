@@ -178,8 +178,10 @@ class DataFactory implements iDataFactory {
             $graph = $term->getGraph();
             if ($recursive) {
                 $sbj   = self::importTerm($sbj, $recursive);
+                /** @var iQuad */
                 $pred  = self::importTerm($pred, $recursive);
                 $obj   = self::importTerm($obj, $recursive);
+                /** @var iNamedNode|iBlankNode|iDefaultGraph */
                 $graph = self::importTerm($graph, $recursive);
             }
             return self::quad($sbj, $pred, $obj, $graph);
