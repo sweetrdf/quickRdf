@@ -142,7 +142,7 @@ class Dataset implements DatasetInterface {
             if (!($i instanceof Quad)) {
                 $i = DataFactory::importQuad($i);
             }
-            $this->quads->attach($i);
+            $this->quads->offsetSet($i);
             $this->index($i);
         }
     }
@@ -181,7 +181,7 @@ class Dataset implements DatasetInterface {
         $deleted = new Dataset($indexed);
         $quads   = iterator_to_array($this->findMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
         foreach ($quads as $i) {
-            $this->quads->detach($i);
+            $this->quads->offsetUnset($i);
             $this->unindex($i);
             $deleted->add($i);
         }
@@ -193,7 +193,7 @@ class Dataset implements DatasetInterface {
         $deleted = new Dataset($indexed);
         $quads   = iterator_to_array($this->findNotMatchingQuads($filter)); // we need a copy as $this->quads will be modified in-place
         foreach ($quads as $i) {
-            $this->quads->detach($i);
+            $this->quads->offsetUnset($i);
             $this->unindex($i);
             $deleted->add($i);
         }
@@ -206,10 +206,10 @@ class Dataset implements DatasetInterface {
         foreach ($quads as $i) {
             $val = $fn($i, $this);
             if ($val !== $i) {
-                $this->quads->detach($i);
+                $this->quads->offsetUnset($i);
                 $this->unindex($i);
                 if ($val !== null) {
-                    $this->quads->attach($val);
+                    $this->quads->offsetSet($val);
                     $this->index($val);
                 }
             }
@@ -291,7 +291,7 @@ class Dataset implements DatasetInterface {
         $iter  = $this->findMatchingQuads($offset);
         $match = $this->checkIterator($iter, true);
         if ($match !== $value) {
-            $this->quads->detach($match);
+            $this->quads->offsetUnset($match);
             $this->unindex($match);
             $this->add($value);
         }
@@ -315,7 +315,7 @@ class Dataset implements DatasetInterface {
         $iter  = $this->findMatchingQuads($offset);
         $match = $this->checkIterator($iter, false);
         if ($match !== null) {
-            $this->quads->detach($match);
+            $this->quads->offsetUnset($match);
             $this->unindex($match);
         }
     }
@@ -380,8 +380,8 @@ class Dataset implements DatasetInterface {
         $spotted = new SplObjectStorage();
         foreach ($this->findMatchingQuads($filter) as $i) {
             $i = $i->$elementFn();
-            if (!$spotted->contains($i)) {
-                $spotted->attach($i);
+            if (!$spotted->offsetExists($i)) {
+                $spotted->offsetSet($i);
             }
         }
         return new GenericTermIterator($spotted);
@@ -499,7 +499,7 @@ class Dataset implements DatasetInterface {
             $ret2 = new SplObjectStorage();
             foreach ($ret as $quad) {
                 if ($template->equals($quad)) {
-                    $ret2->attach($quad);
+                    $ret2->offsetSet($quad);
                 }
             }
             $ret = $ret2;
@@ -526,7 +526,7 @@ class Dataset implements DatasetInterface {
             yield from $this->quads;
         } elseif ($offset instanceof QuadInterface) {
             $tmp = clone $this->quads;
-            $tmp->detach($offset);
+            $tmp->offsetUnset($offset);
             yield from $tmp;
         } elseif ($offset instanceof QuadCompareInterface && $this->indexed) {
             yield from $this->findByIndices($offset, false);
@@ -549,7 +549,7 @@ class Dataset implements DatasetInterface {
                 if (!($i instanceof Quad)) {
                     $i = DataFactory::importQuad($i);
                 }
-                $tmp->detach($i);
+                $tmp->offsetUnset($i);
             }
             yield from $tmp;
         }
@@ -561,19 +561,19 @@ class Dataset implements DatasetInterface {
             if (!isset($this->subjectIdx[$obj])) {
                 $this->subjectIdx[$obj] = new SplObjectStorage();
             }
-            $this->subjectIdx[$obj]->attach($quad);
+            $this->subjectIdx[$obj]->offsetSet($quad);
 
             $obj = $quad->getPredicate();
             if (!isset($this->predicateIdx[$obj])) {
                 $this->predicateIdx[$obj] = new SplObjectStorage();
             }
-            $this->predicateIdx[$obj]->attach($quad);
+            $this->predicateIdx[$obj]->offsetSet($quad);
 
             $obj = $quad->getObject();
             if (!isset($this->objectIdx[$obj])) {
                 $this->objectIdx[$obj] = new SplObjectStorage();
             }
-            $this->objectIdx[$obj]->attach($quad);
+            $this->objectIdx[$obj]->offsetSet($quad);
 
             $obj = $quad->getGraph();
             // makes no sense to index default graph - all quads belong there
@@ -581,7 +581,7 @@ class Dataset implements DatasetInterface {
                 if (!isset($this->graphIdx[$obj])) {
                     $this->graphIdx[$obj] = new SplObjectStorage();
                 }
-                $this->graphIdx[$obj]->attach($quad);
+                $this->graphIdx[$obj]->offsetSet($quad);
             }
         }
     }
@@ -590,22 +590,22 @@ class Dataset implements DatasetInterface {
         if ($this->indexed) {
             $obj = $quad->getSubject();
             if (isset($this->subjectIdx[$obj])) {
-                $this->subjectIdx[$obj]->detach($quad);
+                $this->subjectIdx[$obj]->offsetUnset($quad);
             }
 
             $obj = $quad->getPredicate();
             if (isset($this->predicateIdx[$obj])) {
-                $this->predicateIdx[$obj]->detach($quad);
+                $this->predicateIdx[$obj]->offsetUnset($quad);
             }
 
             $obj = $quad->getObject();
             if (isset($this->objectIdx[$obj])) {
-                $this->objectIdx[$obj]->detach($quad);
+                $this->objectIdx[$obj]->offsetUnset($quad);
             }
 
             $obj = $quad->getGraph();
             if (isset($this->graphIdx[$obj])) {
-                $this->graphIdx[$obj]->detach($quad);
+                $this->graphIdx[$obj]->offsetUnset($quad);
             }
         }
     }
