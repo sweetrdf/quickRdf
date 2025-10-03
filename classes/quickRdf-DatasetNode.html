@@ -528,14 +528,14 @@ the current one but has another node.</dd>
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                                    "
 >
     <h4 class="phpdocumentor-element__name" id="property_dataset">
         $dataset
         <a href="classes/quickRdf-DatasetNode.html#property_dataset" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
@@ -547,13 +547,15 @@ the current one but has another node.</dd>
     
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a></span>
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/rdfInterface-DatasetInterface.html"><abbr title="\rdfInterface\DatasetInterface">DatasetInterface</abbr></a></span>
     <span class="phpdocumentor-signature__name">$dataset</span>
     </code>
 
     
     
+    
+
     
 
     
@@ -564,14 +566,14 @@ the current one but has another node.</dd>
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                                    "
 >
     <h4 class="phpdocumentor-element__name" id="property_node">
         $node
         <a href="classes/quickRdf-DatasetNode.html#property_node" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/DatasetNode.php"><a href="files/src-quickrdf-datasetnode.html"><abbr title="src/quickRdf/DatasetNode.php">DatasetNode.php</abbr></a></abbr>
@@ -583,13 +585,15 @@ the current one but has another node.</dd>
     
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/rdfInterface-TermInterface.html"><abbr title="\rdfInterface\TermInterface">TermInterface</abbr></a></span>
     <span class="phpdocumentor-signature__name">$node</span>
     </code>
 
     
     
+    
+
     
 
     
@@ -3011,6 +3015,8 @@ node and quads of the $other</li>
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

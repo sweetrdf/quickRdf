@@ -1556,6 +1556,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/rdfInterface-ParserInterface.html#method_parseStream"
         },                {
+            "fqsen": "\\rdfInterface\\ParserInterface\u003A\u003ABLANK_NODES_PRESERVE",
+            "name": "BLANK_NODES_PRESERVE",
+            "summary": "\u0060\u0024baseUri\u0060\u0020value\u0020to\u0020be\u0020used\u0020when\u0020identifiers\u0020of\u0020blanks\u0020nodes\u0020encountered\n\u0020in\u0020the\u0020input\u0020source\u0020should\u0020be\u0020preserved.\u0020If\u0020you\u0020need\u0020it\u0020on\u0020production,\n\u0020think\u0020twice.\u0020It\u0020can\u0020be\u0020a\u0020last\u0020resort\u0020though\u0020in\u0020some\u0020corner\u0020cases\u0020like\n\u0020parsing\u0020reference\u0020test\u0020outputs.",
+            "url": "classes/rdfInterface-ParserInterface.html#constant_BLANK_NODES_PRESERVE"
+        },                {
             "fqsen": "\\rdfInterface\\QuadCompareInterface",
             "name": "QuadCompareInterface",
             "summary": "Interface\u0020allowing\u0020to\u0020compare\u0020Quads.",

@@ -286,14 +286,14 @@ a given value.</dd>
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                                    "
 >
     <h4 class="phpdocumentor-element__name" id="property_datatype">
         $datatype
         <a href="classes/quickRdf-Literal.html#property_datatype" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Literal.php"><a href="files/src-quickrdf-literal.html"><abbr title="src/quickRdf/Literal.php">Literal.php</abbr></a></abbr>
@@ -305,13 +305,15 @@ a given value.</dd>
     
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">$datatype</span>
     </code>
 
     
     
+    
+
     
 
     
@@ -322,14 +324,14 @@ a given value.</dd>
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                                    "
 >
     <h4 class="phpdocumentor-element__name" id="property_lang">
         $lang
         <a href="classes/quickRdf-Literal.html#property_lang" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Literal.php"><a href="files/src-quickrdf-literal.html"><abbr title="src/quickRdf/Literal.php">Literal.php</abbr></a></abbr>
@@ -341,13 +343,15 @@ a given value.</dd>
     
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$lang</span>
     </code>
 
     
     
+    
+
     
 
     
@@ -358,14 +362,14 @@ a given value.</dd>
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                                    "
 >
     <h4 class="phpdocumentor-element__name" id="property_value">
         $value
         <a href="classes/quickRdf-Literal.html#property_value" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                                            </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/quickRdf/Literal.php"><a href="files/src-quickrdf-literal.html"><abbr title="src/quickRdf/Literal.php">Literal.php</abbr></a></abbr>
@@ -377,13 +381,15 @@ a given value.</dd>
     
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int|float|string|bool|<abbr title="\Stringable">Stringable</abbr></span>
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">int|float|string|bool|<abbr title="\Stringable">Stringable</abbr></span>
     <span class="phpdocumentor-signature__name">$value</span>
     </code>
 
     
     
+    
+
     
 
     
@@ -904,6 +910,8 @@ lang tag and datatype are preserved.</p>
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 
